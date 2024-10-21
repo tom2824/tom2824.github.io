@@ -4,19 +4,22 @@
     position: fixed;
     z-index: 1;
     top: 0;
-    left: 0;
+    left: -1%;
     background-color: #111;
     overflow-x: hidden;
     transition: 0.5s;
     padding-top: 60px;
 }
 
-a, .burger-icon {
+.sidenav a, .burger-icon {
     padding: 8px 8px 8px 32px;
-    text-decoration: none;
     font-size: 25px;
-    color: #818181;
     display: block;
+}
+
+a, .burger-icon {
+    color: #818181;
+    text-decoration: none;
     transition: 0.3s;
 }
 
@@ -27,9 +30,8 @@ a:hover, .burger-icon:hover {
 .sidenav .closebtn {
     position: absolute;
     top: 0;
-    right: 25px;
+    right: 1%;
     font-size: 36px;
-    margin-left: 50px;
 }
 
 .burger-icon {
@@ -40,7 +42,7 @@ a:hover, .burger-icon:hover {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 0 20px;
+    padding: 1%;
     background-color: #111;
     color: whitesmoke;
 }
@@ -53,13 +55,22 @@ a:hover, .burger-icon:hover {
 .burger-icon {
     font-size: 30px;
     cursor: pointer;
-    color: whitesmoke;
+    color: 818181;
 }
 
-header {
-    padding: 1%;
+.sidenav a {
+    border-bottom: 1px solid #818181;
 }
 
+.sidenav a:first-child, .sidenav a:last-child {
+    border-bottom: none;
+}
+
+.tabs {
+    display: flex;
+    justify-content: space-around;
+    margin-top: 1%;
+}
 
 html, body {
     height: 100%;
@@ -71,6 +82,7 @@ html, body {
 
 header {
     font-size: 25px;
+    padding: 1%;
 }
 
 header, footer {
@@ -89,14 +101,14 @@ main {
 
 main>h1 {
     font-size: 40px;
-    margin-bottom: -3%;
+    margin-bottom: -5px;
 }
 
 article {
-    margin-top: 5%;
-    margin-bottom: 5%;
+    margin-top: 2%;
+    margin-bottom: 2%;
     display: flex;
-    text-align: center;
+    text-align: justify;
     align-items: center;
     width: 75%;
     background-color: #C9C9C9;
@@ -108,9 +120,10 @@ article>* {
 
 article h1 {
     font-size: 32px;
+    white-space: nowrap;
 }
 
-article p {
+article p, article li {
     font-size: 22px;
 }
 
