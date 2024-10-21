@@ -87,8 +87,9 @@ main {
     flex-direction: column;
 }
 
-main h1 {
+main>h1 {
     font-size: 40px;
+    margin-bottom: -3%;
 }
 
 article {
