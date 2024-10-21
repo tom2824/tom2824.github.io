@@ -1,0 +1,118 @@
+.sidenav {
+    height: 100%;
+    width: 0;
+    position: fixed;
+    z-index: 1;
+    top: 0;
+    left: 0;
+    background-color: #111;
+    overflow-x: hidden;
+    transition: 0.5s;
+    padding-top: 60px;
+}
+
+a, .burger-icon {
+    padding: 8px 8px 8px 32px;
+    text-decoration: none;
+    font-size: 25px;
+    color: #818181;
+    display: block;
+    transition: 0.3s;
+}
+
+a:hover, .burger-icon:hover {
+    color: #f1f1f1;
+}
+
+.sidenav .closebtn {
+    position: absolute;
+    top: 0;
+    right: 25px;
+    font-size: 36px;
+    margin-left: 50px;
+}
+
+.burger-icon {
+    cursor: pointer;
+}
+
+.header-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 20px;
+    background-color: #111;
+    color: whitesmoke;
+}
+
+.header-content h1 {
+    margin: 0 auto;
+    text-align: center;
+}
+
+.burger-icon {
+    font-size: 30px;
+    cursor: pointer;
+    color: whitesmoke;
+}
+
+header {
+    padding: 1%;
+}
+
+
+html, body {
+    height: 100%;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    font-family:Arial, Helvetica, sans-serif;
+}
+
+header {
+    font-size: 25px;
+}
+
+header, footer {
+    text-align: center;
+    background-color: #111;
+    color:whitesmoke;
+    display:inline;
+}
+
+main {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    flex-direction: column;
+}
+
+main h1 {
+    font-size: 40px;
+}
+
+article {
+    margin-top: 5%;
+    margin-bottom: 5%;
+    display: flex;
+    text-align: center;
+    align-items: center;
+    width: 75%;
+    background-color: #C9C9C9;
+}
+
+article>* {
+    padding: 3%;
+}
+
+article h1 {
+    font-size: 32px;
+}
+
+article p {
+    font-size: 22px;
+}
+
+#pp_pro_sanstel {
+    width:100%
+}
