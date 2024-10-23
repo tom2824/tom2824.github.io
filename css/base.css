@@ -1,69 +1,11 @@
-.sidenav {
-    height: 100%;
-    width: 0;
-    position: fixed;
-    z-index: 1;
-    top: 0;
-    left: -1%;
-    background-color: #111;
-    overflow-x: hidden;
-    transition: 0.5s;
-    padding-top: 60px;
-}
-
-.sidenav a, .burger-icon {
-    padding: 8px 8px 8px 32px;
-    font-size: 25px;
-    display: block;
-}
-
-a, .burger-icon {
-    color: #818181;
+a{
+    color: #b3b4bd;
     text-decoration: none;
     transition: 0.3s;
 }
 
-a:hover, .burger-icon:hover {
+a:hover {
     color: #f1f1f1;
-}
-
-.sidenav .closebtn {
-    position: absolute;
-    top: 0;
-    right: 1%;
-    font-size: 36px;
-}
-
-.burger-icon {
-    cursor: pointer;
-}
-
-.header-content {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 1%;
-    background-color: #111;
-    color: whitesmoke;
-}
-
-.header-content h1 {
-    margin: 0 auto;
-    text-align: center;
-}
-
-.burger-icon {
-    font-size: 30px;
-    cursor: pointer;
-    color: 818181;
-}
-
-.sidenav a {
-    border-bottom: 1px solid #818181;
-}
-
-.sidenav a:first-child, .sidenav a:last-child {
-    border-bottom: none;
 }
 
 .tabs {
@@ -87,7 +29,8 @@ header {
 
 header, footer {
     text-align: center;
-    background-color: #111;
+    background-image: url(../assets/images/design.jpg);
+    background-size: cover;
     color:whitesmoke;
     display:inline;
 }
@@ -97,11 +40,12 @@ main {
     justify-content: space-around;
     align-items: center;
     flex-direction: column;
+    margin-bottom: 2%;
+    flex: 1;
 }
 
 main>h1 {
     font-size: 40px;
-    margin-bottom: -5px;
 }
 
 article {
@@ -111,7 +55,8 @@ article {
     text-align: justify;
     align-items: center;
     width: 75%;
-    background-color: #C9C9C9;
+    background-color:#4A6FA5;
+    color:#f1f1f1
 }
 
 article>* {
@@ -128,5 +73,9 @@ article p, article li {
 }
 
 #pp_pro_sanstel {
-    width:100%
+    width: 100%
+}
+
+.active {
+    color:#f1f1f1;
 }
