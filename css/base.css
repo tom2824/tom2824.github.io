@@ -53,6 +53,7 @@ article {
     margin-bottom: 2%;
     display: flex;
     text-align: justify;
+    justify-content: center;
     align-items: center;
     width: 75%;
     background-color:#4A6FA5;
@@ -72,10 +73,31 @@ article p, article li {
     font-size: 22px;
 }
 
+.active {
+    color:#f1f1f1;
+}
+
 #pp_pro_sanstel {
     width: 100%
 }
 
-.active {
-    color:#f1f1f1;
+#email {
+    width: 5%;
+    margin-right: -3%;
+}
+
+.logo {
+    background-color: white;
+}
+
+#linkedin {
+    width: 100%;
+}
+
+#gitlab {
+    width:100%;
+}
+
+#github {
+    width:50%;
 }
