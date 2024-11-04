@@ -40,9 +40,27 @@ main {
     justify-content: space-around;
     align-items: center;
     flex-direction: column;
-    margin-bottom: 2%;
     flex: 1;
+    position: relative;
+    color: #f1f1f1;
 }
+
+main::before {
+    content: '';
+    position: absolute;
+    top: -10px;
+    left: -10px;
+    width: calc(100% + 20px);
+    height: calc(100% + 20px);
+    background-image: url(../assets/images/design.jpg);
+    background-size: cover;
+    background-position: center;
+    filter: brightness(0.5) blur(3px);
+    z-index: -1;
+    pointer-events: none;
+}
+
+
 
 main>h1 {
     font-size: 40px;
@@ -56,9 +74,8 @@ article {
     justify-content: center;
     align-items: center;
     width: 75%;
-    background-color:#4A6FA5;
-    color:#f1f1f1;
-    border-radius: 10%;
+    background-color:#222222;
+    border-radius: 10px;
 }
 
 article>* {
@@ -79,7 +96,8 @@ article p, article li {
 }
 
 #pp_pro_sanstel {
-    width: 100%
+    width: 100%;
+    border-radius: 10px;
 }
 
 #email {
@@ -87,18 +105,21 @@ article p, article li {
     margin-right: -3%;
 }
 
-.logo {
-    background-color: white;
+.logo-container {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
 }
 
-#linkedin {
-    width: 100%;
+.logo {
+    background-color: white;
+    border-radius: 20px;
+    padding-left: 10%;
+    padding-right: 10%;
+    width: 150px;
 }
 
 #gitlab {
-    width:100%;
-}
-
-#github {
-    width:50%;
+    padding-top: 20%;
+    padding-bottom: 20%;
 }
