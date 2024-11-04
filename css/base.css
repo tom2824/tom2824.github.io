@@ -23,15 +23,15 @@ html, body {
 }
 
 header {
-    font-size: 25px;
-    padding: 1%;
+    font-size: 1.5em;
+    padding-bottom: 1%;
 }
 
 header, footer {
     text-align: center;
     background-image: url(../assets/images/design.jpg);
     background-size: cover;
-    color:whitesmoke;
+    color:#f1f1f1;
     display:inline;
 }
 
@@ -60,12 +60,6 @@ main::before {
     pointer-events: none;
 }
 
-
-
-main>h1 {
-    font-size: 40px;
-}
-
 article {
     margin-top: 2%;
     margin-bottom: 2%;
@@ -83,43 +77,19 @@ article>* {
 }
 
 article h1 {
-    font-size: 32px;
+    font-size: 2em;
     white-space: nowrap;
 }
 
-article p, article li {
-    font-size: 22px;
+article li {
+    font-size: 1.6em;
+}
+
+article p {
+    font-size: 1.4em;
+    color:lightgray;
 }
 
 .active {
     color:#f1f1f1;
-}
-
-#pp_pro_sanstel {
-    width: 100%;
-    border-radius: 10px;
-}
-
-#email {
-    width: 5%;
-    margin-right: -3%;
-}
-
-.logo-container {
-    display: flex;
-    justify-content: space-around;
-    align-items: center;
-}
-
-.logo {
-    background-color: white;
-    border-radius: 20px;
-    padding-left: 10%;
-    padding-right: 10%;
-    width: 150px;
-}
-
-#gitlab {
-    padding-top: 20%;
-    padding-bottom: 20%;
 }
