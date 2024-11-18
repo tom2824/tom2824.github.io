@@ -12,16 +12,31 @@
     position: relative;
     margin-bottom: 30px;
     padding-left: 20px;
+    display: flex;
+    align-items: flex-start; /* Align items to the top */
+    justify-content: flex-start; /* Align items to the left */
 }
 
 .timeline-marker {
-    width: 10px;
-    height: 10px;
+    width: 15px; /* Increased size */
+    height: 15px; /* Increased size */
     background-color: #f1f1f1;
     border-radius: 50%;
     position: absolute;
-    left: -6px;
-    top: 5px;
+    left: -10px; /* Adjusted to align with the vertical line */
+    top: 25px; /* Adjusted to move higher */
+    transform: translateY(-50%);
+}
+
+.timeline-date {
+    position: absolute;
+    left: -180px;
+    width: 150px;
+    text-align: right;
+    font-size: 1.1em;
+    color: #f1f1f1;
+    padding-right: 10px;
+    top: 15px; /* Adjusted to move higher */
 }
 
 .timeline-content h3 {
