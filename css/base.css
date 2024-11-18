@@ -100,3 +100,40 @@ div {
     align-items: center;
     flex-direction: column;
 }
+
+.accordion-content {
+    display: none;
+    transition: max-height 0.3s ease-out;
+    overflow: hidden;
+}
+
+.accordion-toggle {
+    cursor: pointer;
+    font-size: 1.5em;
+    text-align: center;
+    transition: transform 0.3s ease, bottom 0.3s ease;
+    background-color: #444;
+    color: #fff;
+    padding: 10px;
+    width: 100%;
+    transition: background-color 0.3s ease;
+    position: relative;
+    bottom: 0;
+}
+
+.accordion-toggle:hover {
+    background-color: #555;
+}
+
+.accordion-toggle .arrow {
+    font-size: 1.5em;
+    transition: transform 0.3s ease;
+}
+
+.accordion-toggle .arrow.open {
+    transform: rotate(180deg);
+}
+
+.accordion-toggle.open {
+    bottom: -10px; /* Adjust this value to ensure the band stays within the article */
+}
