@@ -3,50 +3,78 @@
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Portfolio Tom NGUYEN</title>
-    <link rel="stylesheet" href="css/base.css">
-    <link rel="stylesheet" href="css/accueil.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <script src="js/bootstrap.bundle.min.js" defer></script>
+    
+    <link rel="stylesheet" type="text/css" href="css/style.css">
+    <script src="js/main.js" defer></script>
+
+    <title>Portfolio - Tom NGUYEN</title>
 </head>
 <body>
+
     <header>
 
-        <h1><a href="index.html">Portfolio - Tom NGUYEN</a></h1>
-
-        <nav class="tabs">
-            <a href="index.html" class="active">Accueil</a>
-            <a href="formations.html">Formations</a>
-            <a href="competences.html">Compétences</a>
-            <a href="experiences.html">Expériences</a>
-            <a href="realisations.html">Réalisations</a>
-            <a href="contact.html">Contact</a>
+        <nav id="navbar" class="navbar bg-body-tertiary px-3 mb-3">
+            <a class="navbar-brand" href="#">Portfolio - Tom NGUYEN</a>
+            <ul class="nav nav-pills">
+                <li class="nav-item">
+                  <a class="nav-link" href="#moi">Moi</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="#competences">Compétences</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="#formations">Formation</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="#projets">Projets</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="#experience">Experience</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="#contact">Contact</a>
+                </li>
+            </ul>
         </nav>
     
     </header>
+
+    <main data-bs-spy="scroll" data-bs-target="#navbar">
+
+        <section id="moi">
+
+            <h1>Moi</h1>
+
+            <hr>
+
+            <article>
+                <div>
+                    <h2>Tom NGUYEN</h2>
+                    <img src="images/pp_pro_sanstel.jpg" alt="Photo de Tom NGUYEN"/>
+                </div>
+                <div>
+                    <p>
+                        Passionné d'informatique, je cherche continuellement à enrichir mes compétences et à contribuer à des projets stimulants. Bien que naturellement introverti, j'apprécie le travail en équipe et aspire à intégrer le monde professionnel pour affiner mon expertise et apporter une réelle valeur ajoutée.
+                    </p>
+                    <p>
+                        Je m'appelle Tom NGUYEN, j'ai 20 ans et je suis à la fois étudiant (en 2e année de BUT informatique) et auto entrepreneur.
+                    </p>
+                </div>
+            </article>
+
+            <hr>
     
-
-    <main>
-
-        <article>
-            <div>
-                <h1>Tom NGUYEN</h1>
-                <img src="assets/images/pp_pro_sanstel.jpg" alt="Photo de Tom NGUYEN" id="pp_pro_sanstel"/>
-            </div>
-            <div>
-                <p>Passionné d'informatique, je cherche continuellement à enrichir mes compétences et à contribuer à des projets stimulants. Bien que naturellement introverti, j'apprécie le travail en équipe et aspire à intégrer le monde professionnel pour affiner mon expertise et apporter une réelle valeur ajoutée.</p>
-                <p>Je m'appelle Tom NGUYEN, j'ai 20 ans et je suis à la fois étudiant (en 2e année de BUT informatique) et auto entrepreneur.</p>
-            </div>
-        </article>
-
-        <article>
-            <div>
-                <h1>Qui suis-je ?</h1>
-                <p>
-                    J'ai toujours été attiré par la technologie, c'est donc naturellement que je me suis dirigé vers un profil scientifique dès le BAC. 
-                    Après le Lycée, j'ai fait une année de BUT GEII que j'ai validée mais je me suis rendu compte que ce que je j'avais une vraie passion pour l'informatique. 
-                    Je me suis donc réorienté en BUT Informatique où je peux m'épanouir en travaillant sur des projets stimulants.
-                </p>
-                <div class="accordion-content">
+            <article>
+                <div>
+                    <h2>Qui suis-je ?</h2>
+                    <p>
+                        J'ai toujours été attiré par la technologie, c'est donc naturellement que je me suis dirigé vers un profil scientifique dès le BAC. 
+                        Après le Lycée, j'ai fait une année de BUT GEII que j'ai validée mais je me suis rendu compte que ce que je j'avais une vraie passion pour l'informatique. 
+                        Je me suis donc réorienté en BUT Informatique où je peux m'épanouir en travaillant sur des projets stimulants.
+                    </p>
                     <p>
                         Plus j'apprends, plus j'ai envie d'apprendre, mais plus que mes projets universitaires, j'ai hâte d'acquérir de l'expérience professionnelle et de me lancer dans le monde du travail. 
                         En dehors de l'informatique j'ai déjà eu 2 emplois saisonniers au CHU qui m'ont enseigné l'autonomie, l'importance de la communication et qui m'ont aidé à vaincre ma timidité.
@@ -63,31 +91,252 @@
                         Je suis content d'avoir réussi à construire une belle machine, au delà des performances pour le jeu vidéo, ça peut me servir pour des projets futurs, rien que par le fait que j'ai maintenant une carte graphique assez puissante pour faire tourner un petit modèle d'Intelligence Artificelle localement.
                     </p>
                 </div>
-                <div class="accordion-toggle" onclick="toggleAccordion()">
-                    <span class="arrow">&#9660;</span>
-                </div>
-            </div>
-        </article>
+            </article>
 
-        <article>
-            <div>
-                <h1>Centres d'intérêt</h1>
-                <ul>
-                    <li>Jeux vidéos</li>
-                    <li>Musculation</li>
-                    <li>Informatique / Technologie</li>
-                </ul>
-            </div>
-            <div>
-                <img src="assets/images/pc_build.jpg" alt="Photo de mon pc pendant que j'etais encore entrain de le build" id="build"/>
-            </div>
-        </article>
+            <hr>
+    
+            <article>
+                <div>
+                    <h2>Centres d'intérêt</h2>
+                    <ul>
+                        <li>Jeux vidéos</li>
+                        <li>Musculation</li>
+                        <li>Informatique / Technologie</li>
+                    </ul>
+                </div>
+                <div>
+                    <img src="images/pc_build.jpg" alt="Photo de mon pc pendant que j'etais encore entrain de le build"/>
+                </div>
+            </article>
+        </section>
+
+        <section id="competences">
+
+            <h1>Compétences</h1>
+
+            <hr>
+
+            <article>
+                <div>
+                    <h2>Compétences techniques</h2>
+                    <ul>
+                        <li>Java</li>
+                        <li>JavaFX, Scenebuilder</li>
+                        <li>SQL, PostgreSQL</li>
+                        <li>C</li>
+                        <li>HTML/CSS</li>
+                        <li>FXML</li>
+                        <li>Git</li>
+                        <li>Framework Scrum</li>
+                    </ul>
+                </div>
+            </article>
+
+            <hr>
+
+            <article>
+                <div>
+                    <h2>Savoir-être</h2>
+                    <ul>
+                        <li>Adaptabilité</li>
+                        <li>Autonomie</li>
+                        <li>Discipline</li>
+                        <li>Esprit d'équipe</li>
+                        <li>Pensée critique</li>
+                        <li>Communication</li>
+                    </ul>
+                </div>
+            </article>
+
+            <hr>
+
+            <article>
+                <div>
+                    <h2>Compétences linguistiques</h2>
+                    <ul>
+                        <li>Anglais (Niveau C1)</li>
+                    </ul>
+                </div>
+                <div>
+                    <p>
+                        Ayant toujours trainé sur internet, j'ai passé beaucoup de temps à échanger en anglais avec d'autres personnes venant de partout dans le monde. 
+                        Cela m'a forgé un anglais solide, j'ai donc naturellement choisi l'option Anglais Euro au Lycée où j'ai aussi passé la certification Cambridge au niveau C1. 
+                    </p>
+                </div>
+            </article>
+
+        </section>
+
+        <section id="formations">
+
+            <h1>Formations</h1>
+
+            <hr>
+
+            <article>
+                <div>
+                    <h2>BUT Informatique</h2>
+                    <h3>IUT de Lille - Université de Lille</h3>
+                    <h3>2023 - 2026</h3>
+                    <p>
+                        Parcours réalisation d'applications : conception, développement, validation et maintenance de logiciels.
+                    </p>
+                </div>
+            </article>
+
+            <hr>
+
+            <article>
+                <div>
+                    <h2>BUT Informatique</h2>
+                    <h3>IUT de Lille - Université de Lille</h3>
+                    <h3>2022 - 2023</h3>
+                    <p>
+                        Année validée mais réorientation
+                    </p>
+                </div>
+            </article>
+
+            <hr>
+
+            <article>
+                <div>
+                    <h2>BAC Général</h2>
+                    <h3>Lycée Faidherbe</h3>
+                    <h3>2019 - 2022</h3>
+                    <ul>
+                        <li>Numérique & Sciences Informatiques + Mathématiques</li>
+                        <li>Physique Chimie (en 1ère)</li>
+                        <li>Section Anglais Euro</li>
+                        <li>Mention Très Bien</li>
+                    </ul>
+                </div>
+            </article>
+
+        </section>
+
+        <section id="projets">
+
+            <h1>Projets</h1>
+
+            <hr>
+
+            <article>
+                <div>
+                    <h2>Application de classification</h2>
+                    <p>
+                        Technologies utilisées : 
+                        Java, JavaFX, Scenebuilder, CSS
+                    </p>
+                    <div>
+                        <a href="https://gitlab.univ-lille.fr/sae302/2024/G3_SAE3.3">Lien Gitlab du projet</a>
+                    </div>
+                </div>
+                <div>
+                    <p>
+                        Dans le contexte des projets universitaires (appelés "SAÉ"), 
+                        moi ainsi que mes 3 camarades Gaspard, <a href="https://goniix.github.io/">Gabriel</a>, Cyprien
+                        avons réalisé une application de classification de données en Java lors du semestre 3 
+                        de notre BUT. 
+                    </p>
+                    <p>
+                        C'était une très bonne expérience car nous avons tous travaillé dessus et le 
+                        résultat en témoigne. Programmer une application de A à Z est très formateur et nous
+                        permet d'appliquer ce que l'on voit en cours ce qui est assez stimulant.
+                    </p>
+                    <p>
+                        C'était intéressant notamment au niveau de la gestion de git que l'on peut essayer de nous
+                        enseigner en cours mais qui ne s'apprend vraiment qu'avec la pratique. Au niveau technique
+                        on s'est beaucoup améliorés, surtout en JavaFX. Et on a pu s'entrainer au clean code en 
+                        essayant au maximum de respecter les conventions de codage.
+                    </p>
+                </div>
+            </article>
+
+            <hr>
+
+            <article>
+                <div>
+                    <h2>Ce site !</h2>
+                    <p>
+                        Technologies utilisées : 
+                        HTML, CSS, un peu de Javascript
+                    </p>
+                </div>
+                <div>
+                    <p>
+                        Même si c'est dans le cadre d'un travail universitaire, ce site est une opportunité pour moi à la fois au niveau technique pour m'exercer aux technologies web, mais aussi au niveau personnel puisque ça me permet de faire de l'introspection pour analyser mes compétences et me projeter dans l'avenir.
+                    </p>
+                </div>  
+            </article>
+
+        </section>
+
+        <section id="experience">
+
+            <h1>Expérience</h1>
+
+            <hr>
+
+            <article>
+                <div>
+                    <h2>Services Informatique</h2>
+                    <h3>Depuis Octobre 2024</h3>
+                    <p>
+                        J'ai récemment été contacté par une entreprise qui avait besoin d'un renfort pour s'occuper de leur système, je me suis donc déclaré micro entreprise et je leur effectue chaque semaine des prestations. 
+                        Il s'agit d'un système de scrapping qui utilise tout un tas de technologies : C#, SQL, Javascript, FXML... 
+                        Mon travail consiste entre autre à vérifier l'intégrité des données et à vérifier le bon déroulement des processus pour corriger les problèmes si j'en trouve.
+                    </p>
+                </div>
+            </article>
+
+            <hr>
+    
+            <article>
+                <div>
+                    <h2>Agent d'Entretien Qualifié (Logistique, Stérilisation)</h2>
+                    <h3>CHU de Lille, Août 2024</h3>
+                    <p>
+                        Durant le mois d'août 2024, j'ai travaillé en tant qu'AEQ dans le service de stérilisation de l'hôpital Roger Salengro. De nature un peu introverti, cette expérience m'a forgé et aidé à enfin me débarasser de ma timidé lorsque je travaille avec de nouvelles personnes. J'ai appris l'importance de la cohésion d'équipe qui pouvait réellement nous rendre plus efficace au travail et j'en suis très content. J'ai hâte de découvrir de nouvelles personnes et de travailler avec eux à l'avenir.
+                    </p>
+                    <img src="images/salengro.jpg" alt="Photo de l'hopital Roger Salengro" id="salengro"/>
+                </div>
+            </article>
+
+            <hr>
+    
+            <article>
+                <div>
+                    <h2>Agent des Services Hospitaliers (Bio-nettoyage)</h2>
+                    <h3>CHU de Lille, Août 2023</h3>
+                    <p>
+                        Durant le mois d'août 2024, j'ai travaillé en tant qu'ASH à l'hôpital Claude Huriez. C'était ma première expérience professionnelle, j'ai appris l'importance de la communication quand on travaille en équipe et à m'intégrer au fur et à mesure. J'en garde un bon souvenir et je suis content de cette première expérience dans le monde du travail, même si ce n'était pas dans le domaine de l'informatique.
+                    </p>
+                    <img src="images/huriez.jpg" alt="Photo de l'hopital Claude Huriez" id="huriez"/>
+                </div>
+            </article>
+
+        </section>
+
+        <section id="contact">
+
+            <h1>Contact</h1>
+
+            <hr>
+    
+            <article>
+                <p>
+                    <img src="images/email.png" alt="Icone de mail"/>
+                    nguyen.tom.2824@gmail.com
+                </p>
+            </article>
+
+        </section>
 
     </main>
 
     <footer>
         <p>© 2024 Portfolio Tom NGUYEN Tous droits réservés.</p>
     </footer>
-    <script src="js/accueil.js"></script>
 </body>
 </html>

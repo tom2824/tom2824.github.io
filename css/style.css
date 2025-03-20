@@ -1,0 +1,96 @@
+* {
+    color: rgb(200, 200, 200);
+}
+
+header {
+    position: sticky;
+    top:0;
+    z-index: 1000;
+}
+
+body {
+    background-color: rgb(20, 20, 20);
+}
+
+p {
+    margin: 0;
+}
+
+main {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 50px 0;
+}
+
+section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 80%;
+    max-width: 1000px;
+    padding: 40px;
+    margin: 20px 0;
+    background: linear-gradient(rgb(50, 50, 50), rgb(10, 10, 10));
+    border-radius: 10px;
+}
+
+article {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+    width: 100%;
+}
+
+article>* {
+    padding: 10px;
+    margin:0;
+}
+
+h1 {
+    border-style: inset;
+    border-width: 10px;
+    padding: 10px;
+    width: 80%;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+hr {
+    border: 0;
+    border-radius: 100%;
+    height: 5px;
+    background: rgb(200, 200, 200);
+    margin: 20px 0;
+    width: 90%;
+}
+
+div {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    width: 100%;
+}
+
+div>* {
+    margin: 10px 0;
+}
+
+h2, h3 {
+    text-align: center;
+}
+
+
+h3 {
+    font-size: 1.2em;
+}
+
+.navbar {
+    background-color: rgb(50, 50, 50) !important;
+}
+
+.navbar-brand {
+    color: rgb(200, 200, 200);
+}
