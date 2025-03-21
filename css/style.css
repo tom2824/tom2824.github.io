@@ -1,5 +1,5 @@
 * {
-    color: rgb(200, 200, 200);
+    color: rgb(220, 220, 220);
 }
 
 header {
@@ -9,7 +9,15 @@ header {
 }
 
 body {
-    background-color: rgb(20, 20, 20);
+    background-color: rgb(10, 10, 10);
+}
+
+.section-background0 {
+    background: linear-gradient(rgb(10, 10, 10), rgb(100, 100, 100));
+}
+
+.section-background1 {
+    background: linear-gradient(rgb(100, 100, 100), rgb(10, 10, 10));
 }
 
 p {
@@ -31,8 +39,18 @@ section {
     max-width: 1000px;
     padding: 40px;
     margin: 20px 0;
-    background: linear-gradient(rgb(50, 50, 50), rgb(10, 10, 10));
     border-radius: 10px;
+    border-style: solid;
+    border-color: rgb(30, 30, 30);
+    border-width: 5px;
+}
+
+section.background0 {
+    background: linear-gradient(rgb(50, 50, 50), rgb(10, 10, 10));
+}
+
+section.background1 {
+    background: linear-gradient(rgb(10, 10, 10), rgb(50, 50, 50));
 }
 
 article {
@@ -61,7 +79,7 @@ hr {
     border: 0;
     border-radius: 100%;
     height: 5px;
-    background: rgb(200, 200, 200);
+    background: rgb(220, 220, 220);
     margin: 20px 0;
     width: 90%;
 }
@@ -93,10 +111,31 @@ h3 {
 
 .navbar-brand {
     color: rgb(200, 200, 200);
+    font-weight: bold;
 }
 
 .navbar-brand:hover {
+    color: rgb(230, 230, 230);
+}
+
+.navbar-brand:focus {
     color: white;
+}
+
+.nav-link.active {
+    background-color: rgb(0, 150, 255) !important;
+}
+
+.nav-link.active:hover {
+    background-color: rgb(0, 200, 255) !important;
+}
+
+.nav-link:active {
+    color: rgb(0, 240, 255) !important;
+}
+
+.nav-link:hover {
+    color: rgb(0, 200, 255);
 }
 
 footer {
@@ -105,21 +144,27 @@ footer {
 }
 
 a>img {
+    transition: 0.5s;
     border-style: outset;
     border-width: 7px;
-    padding: 20px;
     border-color: rgb(200, 200, 200);
     background-color: rgb(150, 150, 150);
+    width: 100px;
+    padding: 15px;
 }
 
 a>img:hover {
     transition: 0.5s;
     border-color: white;
     background-color: rgb(200, 200, 200);
+    padding: 10px;
 }
 
 img {
-    border-radius: 10%;
+    border-radius: 10px;
+    border-style: solid;
+    border-color: white;
+    border-width: 2px;
 }
 
 .logo-container {
@@ -136,5 +181,19 @@ img {
         border-radius: 10%;
         width: 100px;
         height: 100px;
+        border-style: solid;
+        border-width: 2px;
+        border-color: black;
     }
+}
+
+a {
+    color:rgb(0, 150, 255);
+}
+
+a:hover {
+    color: rgb(0, 200, 255);
+}
+a:active {
+    color: rgb(0, 240, 255);
 }
