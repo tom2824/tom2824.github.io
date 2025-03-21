@@ -36,7 +36,7 @@ section {
     flex-direction: column;
     align-items: center;
     width: 80%;
-    max-width: 1000px;
+    max-width: 1200px;
     padding: 40px;
     margin: 20px 0;
     border-radius: 10px;
@@ -62,7 +62,7 @@ article {
 }
 
 article>* {
-    padding: 10px;
+    padding: 0;
     margin:0;
 }
 
@@ -169,10 +169,11 @@ img {
 
 .logo-container {
     display: flex;
+    flex-direction: row;
     flex-wrap: wrap;
     justify-content: center;
     align-items: center;
-    max-height: 400px;
+    max-width: 100%;
 
     img {
         padding: 5px;
