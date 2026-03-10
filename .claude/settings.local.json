@@ -1,0 +1,8 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(ls \"C:/Users/sun28/Desktop/tom2824.github.io/src/\" 2>/dev/null && ls \"C:/Users/sun28/Desktop/tom2824.github.io/dist/\" 2>/dev/null && ls \"C:/Users/sun28/Desktop/tom2824.github.io/.vite/\" 2>/dev/null && ls \"C:/Users/sun28/Desktop/tom2824.github.io/.github/\" 2>/dev/null && cat \"C:/Users/sun28/Desktop/tom2824.github.io/.github/\"* 2>/dev/null)",
+      "Bash(ls \"C:/Users/sun28/Desktop/tom2824.github.io/\" | grep -v -E \"^\\\\.\\(git|claude\\)$\" | grep -v -E \"^\\(images|css|js|index\\\\.html\\)$\")"
+    ]
+  }
+}
