@@ -1,3 +1,12 @@
+// ========== Age calculation ==========
+const birthDate = new Date(2004, 7, 2); // 2 août 2004
+const today = new Date();
+let age = today.getFullYear() - birthDate.getFullYear();
+if (today.getMonth() < birthDate.getMonth() || (today.getMonth() === birthDate.getMonth() && today.getDate() < birthDate.getDate())) {
+    age--;
+}
+document.getElementById('age').textContent = age;
+
 // ========== Scroll Reveal ==========
 const reveals = document.querySelectorAll('.reveal');
 const revealObserver = new IntersectionObserver((entries) => {
