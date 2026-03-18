@@ -18,6 +18,8 @@
     --border: #2e2924;
     --font-body: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
     --font-display: 'Playfair Display', Georgia, serif;
+    --featured-bg: linear-gradient(135deg, rgba(200, 149, 108, 0.06) 0%, transparent 60%), var(--bg-card);
+    --featured-bg-edu: linear-gradient(135deg, rgba(108, 160, 200, 0.06) 0%, transparent 60%), var(--bg-card);
 }
 
 html {
@@ -309,18 +311,18 @@ section {
 /* ========== ABOUT ========== */
 .about-grid {
     display: grid;
-    grid-template-columns: 1.2fr 1fr;
+    grid-template-columns: 1fr 0.7fr;
     gap: 3rem;
-    align-items: start;
+    align-items: center;
 }
 
-.about-text p {
+.about-text {
     color: var(--text-muted);
-    margin-bottom: 1.25rem;
+    margin-bottom: 1.5rem;
     font-size: 1.02rem;
 }
 
-.about-interests h3 {
+.about-interests-title {
     font-family: var(--font-display);
     font-size: 1.25rem;
     margin-bottom: 1rem;
@@ -330,7 +332,6 @@ section {
     display: flex;
     flex-wrap: wrap;
     gap: 0.5rem;
-    margin-bottom: 1.5rem;
 }
 
 .tag {
@@ -495,33 +496,52 @@ section {
     border-radius: 3px;
 }
 
-/* ========== PROJECTS CAROUSEL ========== */
-.carousel-container {
-    width: 100%;
-}
-
-.carousel {
-    overflow: hidden;
-    border-radius: 16px;
-}
-
-.carousel-track {
-    display: flex;
-    transition: transform 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-}
-
+/* ========== PROJECTS ========== */
 .project-card {
-    flex: 0 0 100%;
-    min-width: 0;
     background: var(--bg-card);
     border: 1px solid var(--border);
     border-radius: 16px;
-    padding: 2.5rem;
-    transition: border-color 0.3s;
+    padding: 2rem;
+    transition: border-color 0.3s, transform 0.3s;
 }
 
 .project-card:hover {
     border-color: var(--accent-dim);
+    transform: translateY(-4px);
+}
+
+/* Featured project */
+.project-card.featured {
+    position: relative;
+    padding: 2.5rem;
+    margin-bottom: 1.5rem;
+    border-color: var(--accent-dim);
+    background: var(--featured-bg);
+}
+
+.project-card.featured .card-header h3 {
+    font-size: 1.6rem;
+}
+
+.featured-badge {
+    display: inline-block;
+    padding: 0.25rem 0.75rem;
+    background: rgba(200, 149, 108, 0.15);
+    border: 1px solid var(--accent-dim);
+    border-radius: 100px;
+    font-size: 0.72rem;
+    font-weight: 600;
+    color: var(--accent);
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    margin-bottom: 1rem;
+}
+
+/* Projects grid */
+.projects-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.5rem;
 }
 
 .card-header {
@@ -533,27 +553,8 @@ section {
 
 .card-header h3 {
     font-family: var(--font-display);
-    font-size: 1.4rem;
+    font-size: 1.25rem;
     font-weight: 600;
-}
-
-.card-link {
-    flex-shrink: 0;
-}
-
-.card-link-icon {
-    width: 36px;
-    height: 36px;
-    padding: 6px;
-    background: var(--bg-dark);
-    border: 1px solid var(--border);
-    border-radius: 8px;
-    transition: all 0.3s;
-}
-
-.card-link:hover .card-link-icon {
-    border-color: var(--accent-dim);
-    background: var(--bg-card-hover);
 }
 
 .card-tags {
@@ -564,6 +565,9 @@ section {
 }
 
 .card-tags span {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
     padding: 0.25rem 0.7rem;
     background: rgba(200, 149, 108, 0.1);
     border: 1px solid rgba(200, 149, 108, 0.2);
@@ -573,9 +577,16 @@ section {
     font-weight: 500;
 }
 
+.card-tags span img {
+    width: 16px;
+    height: 16px;
+    object-fit: contain;
+    border-radius: 2px;
+}
+
 .project-card p {
     color: var(--text-muted);
-    font-size: 0.95rem;
+    font-size: 0.92rem;
     margin-bottom: 1rem;
     line-height: 1.7;
 }
@@ -585,54 +596,36 @@ section {
     color: var(--text-dim);
 }
 
-.carousel-controls {
-    display: flex;
+.card-action {
+    display: inline-flex;
     align-items: center;
-    justify-content: center;
-    gap: 1.5rem;
-    margin-top: 1.5rem;
-}
-
-.carousel-btn {
-    width: 44px;
-    height: 44px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background: var(--bg-card);
-    border: 1px solid var(--border);
-    border-radius: 50%;
-    color: var(--text);
-    font-size: 1.1rem;
-    cursor: pointer;
-    transition: all 0.3s;
-}
-
-.carousel-btn:hover {
-    border-color: var(--accent-dim);
-    color: var(--accent);
-    background: var(--bg-card-hover);
-}
-
-.carousel-dots {
-    display: flex;
     gap: 0.5rem;
+    margin-top: 1rem;
+    padding: 0.6rem 1.4rem;
+    background: rgba(200, 149, 108, 0.12);
+    border: 1.5px solid var(--accent-dim);
+    border-radius: 8px;
+    color: var(--accent);
+    font-size: 0.88rem;
+    font-weight: 600;
+    letter-spacing: 0.02em;
+    transition: all 0.3s ease;
 }
 
-.carousel-dot {
-    width: 8px;
-    height: 8px;
-    border-radius: 50%;
-    background: var(--border);
-    border: none;
-    cursor: pointer;
-    transition: all 0.3s;
-}
-
-.carousel-dot.active {
+.card-action:hover {
     background: var(--accent);
-    width: 24px;
-    border-radius: 4px;
+    border-color: var(--accent);
+    color: var(--bg-dark);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(200, 149, 108, 0.25);
+}
+
+.card-action .card-action-arrow {
+    transition: transform 0.3s;
+}
+
+.card-action:hover .card-action-arrow {
+    transform: translateX(3px);
 }
 
 /* ========== TIMELINE ========== */
@@ -677,12 +670,14 @@ section {
     border-color: rgba(108, 160, 200, 0.5);
 }
 
-.timeline-item:hover .timeline-marker {
+.timeline-item:hover .timeline-marker,
+.timeline-item.featured .timeline-marker {
     border-color: var(--accent);
     box-shadow: 0 0 12px rgba(200, 149, 108, 0.3);
 }
 
-.timeline-item:hover .timeline-marker.edu {
+.timeline-item:hover .timeline-marker.edu,
+.timeline-item.featured .timeline-marker.edu {
     border-color: #6ca0c8;
     box-shadow: 0 0 12px rgba(108, 160, 200, 0.3);
 }
@@ -725,6 +720,23 @@ section {
     color: #6ca0c8;
 }
 
+.timeline-badge.current {
+    background: rgba(76, 175, 80, 0.15);
+    color: #66bb6a;
+    border: 1px solid rgba(76, 175, 80, 0.3);
+}
+
+/* Featured timeline items */
+.timeline-item.featured .timeline-content {
+    border-color: var(--accent-dim);
+    background: var(--featured-bg);
+}
+
+#education .timeline-item.featured .timeline-content {
+    border-color: rgba(108, 160, 200, 0.4);
+    background: var(--featured-bg-edu);
+}
+
 .timeline-content h3 {
     font-family: var(--font-display);
     font-size: 1.15rem;
@@ -735,6 +747,10 @@ section {
     font-size: 0.85rem;
     color: var(--text-dim);
     display: block;
+    margin-bottom: 0.75rem;
+}
+
+.timeline-content .card-tags {
     margin-bottom: 0.75rem;
 }
 
@@ -870,6 +886,10 @@ footer p {
 
     section {
         padding: 4rem 1.25rem;
+    }
+
+    .projects-grid {
+        grid-template-columns: 1fr;
     }
 
     .project-card {

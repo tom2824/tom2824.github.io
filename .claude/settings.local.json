@@ -2,7 +2,33 @@
   "permissions": {
     "allow": [
       "Bash(ls \"C:/Users/sun28/Desktop/tom2824.github.io/src/\" 2>/dev/null && ls \"C:/Users/sun28/Desktop/tom2824.github.io/dist/\" 2>/dev/null && ls \"C:/Users/sun28/Desktop/tom2824.github.io/.vite/\" 2>/dev/null && ls \"C:/Users/sun28/Desktop/tom2824.github.io/.github/\" 2>/dev/null && cat \"C:/Users/sun28/Desktop/tom2824.github.io/.github/\"* 2>/dev/null)",
-      "Bash(ls \"C:/Users/sun28/Desktop/tom2824.github.io/\" | grep -v -E \"^\\\\.\\(git|claude\\)$\" | grep -v -E \"^\\(images|css|js|index\\\\.html\\)$\")"
+      "Bash(ls \"C:/Users/sun28/Desktop/tom2824.github.io/\" | grep -v -E \"^\\\\.\\(git|claude\\)$\" | grep -v -E \"^\\(images|css|js|index\\\\.html\\)$\")",
+      "WebSearch",
+      "WebFetch(domain:techicons.dev)",
+      "Bash(curl -L -o \"C:/Users/sun28/Desktop/tom2824.github.io/images/csharp.svg\" \"https://icon.icepanel.io/Technology/svg/C%23-%28CSharp%29.svg\")",
+      "Bash(curl -L -o \"C:/Users/sun28/Desktop/tom2824.github.io/images/xml.svg\" \"https://icon.icepanel.io/Technology/svg/XML.svg\")",
+      "Bash(curl -L -o \"C:/Users/sun28/Desktop/tom2824.github.io/images/snowflake.svg\" \"https://icon.icepanel.io/Technology/svg/Snowflake.svg\")",
+      "WebFetch(domain:github.com)",
+      "Bash(curl -L -o \"C:/Users/sun28/Desktop/tom2824.github.io/images/snowflake.svg\" \"https://cdn.worldvectorlogo.com/logos/snowflake.svg\")",
+      "WebFetch(domain:uxwing.com)",
+      "Bash(curl -L -o \"C:/Users/sun28/Desktop/tom2824.github.io/images/snowflake.svg\" \"https://uxwing.com/wp-content/themes/uxwing/download/brands-and-social-media/snowflake-data-cloud-icon.svg\")",
+      "Bash(for f:*)",
+      "Bash(do head:*)",
+      "Bash(echo \" => $f\")",
+      "Bash(done)",
+      "Bash(ls:*)",
+      "Bash(curl -sfL -o mongodb.svg \"https://icon.icepanel.io/Technology/svg/MongoDB.svg\")",
+      "Bash(curl -sfL -o redis.svg \"https://icon.icepanel.io/Technology/svg/Redis.svg\")",
+      "Bash(curl -sfL -o python.svg \"https://icon.icepanel.io/Technology/svg/Python.svg\")",
+      "Bash(curl -sfL -o typescript.svg \"https://icon.icepanel.io/Technology/svg/TypeScript.svg\")",
+      "Bash(curl -sfL -o react.svg \"https://icon.icepanel.io/Technology/svg/React.svg\")",
+      "Bash(curl -sfL -o \"C:/Users/sun28/Desktop/tom2824.github.io/images/couchdb.svg\" \"https://icon.icepanel.io/Technology/svg/CouchDB.svg\")",
+      "Bash(curl -sfL -o \"C:/Users/sun28/Desktop/tom2824.github.io/images/cassandra.svg\" \"https://icon.icepanel.io/Technology/svg/Apache-Cassandra.svg\")",
+      "Bash(curl -sfL -o podman.svg \"https://icon.icepanel.io/Technology/svg/Podman.svg\")",
+      "Bash(curl -sfL -o spring.svg \"https://icon.icepanel.io/Technology/svg/Spring-Boot.svg\")",
+      "Bash(curl -sfL -o tailwind.svg \"https://icon.icepanel.io/Technology/svg/Tailwind-CSS.svg\")",
+      "Bash(curl -sfL -o matplotlib.svg \"https://icon.icepanel.io/Technology/svg/Matplotlib.svg\")",
+      "Bash(curl -sfL -o \"C:/Users/sun28/Desktop/tom2824.github.io/images/spring.svg\" \"https://icon.icepanel.io/Technology/svg/Spring.svg\")"
     ]
   }
 }

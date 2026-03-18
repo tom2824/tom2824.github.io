@@ -61,15 +61,13 @@
             <div class="section-line"></div>
         </div>
         <div class="about-grid">
-            <div class="about-text reveal">
-                <p>
-                    J'aime la musculation qui m'a enseignée la discipline, les jeux vidéos qui nourrissent ma créativité et mon esprit compétitif, mais surtout, je suis passionné par l'informatique. 
-                    C'est toujours un plaisir pour moi de découvrir, d'apprendre et de développer mes compétences. 
+            <div class="about-content reveal">
+                <p class="about-text">
+                    J'aime la musculation qui m'a enseignée la discipline, les jeux vidéos qui nourrissent ma créativité et mon esprit compétitif, mais surtout, je suis passionné par l'informatique.
+                    C'est toujours un plaisir pour moi de découvrir, d'apprendre et de développer mes compétences.
                     J'apprécie travailler en équipe et apporter de la valeur ajoutée aux projets auxquels je contribue.
-                <p>
-            </div>
-            <div class="about-interests reveal">
-                <h3>Centres d'intérêt</h3>
+                </p>
+                <h3 class="about-interests-title">Centres d'intérêt</h3>
                 <div class="interest-tags">
                     <span class="tag">Jeux vidéo</span>
                     <span class="tag">Musculation</span>
@@ -78,9 +76,9 @@
                     <span class="tag">Data Science</span>
                     <span class="tag">Intelligence Artificelle</span>
                 </div>
-                <div class="about-image-wrapper">
-                    <img src="images/pc_build.jpg" alt="Mon PC custom build">
-                </div>
+            </div>
+            <div class="about-image-wrapper reveal">
+                <img src="images/pc_build.jpg" alt="Mon PC custom build">
             </div>
         </div>
     </section>
@@ -98,36 +96,79 @@
         </div>
         <div class="skills-grid reveal">
             <div class="skill-category">
-                <h4>Langages & Frameworks</h4>
+                <h4>POO & Programmation Fonctionnelle</h4>
                 <div class="skill-tags">
+                    <span class="skill-tag" data-icon="images/csharp.svg">C#</span>
                     <span class="skill-tag" data-icon="images/java.png">Java</span>
-                    <span class="skill-tag" data-icon="images/js.png">JavaScript</span>
-                    <span class="skill-tag" data-icon="images/nodejs.png">Node.js</span>
-                    <span class="skill-tag" data-icon="images/c.png">C</span>
-                    <span class="skill-tag" data-icon="images/html.png">HTML</span>
-                    <span class="skill-tag" data-icon="images/css.png">CSS</span>
-                    <span class="skill-tag" data-icon="images/bootstrap.png">Bootstrap</span>
+                    <span class="skill-tag" data-icon="images/kotlin.svg">Kotlin</span>
                 </div>
             </div>
             <div class="skill-category">
-                <h4>Outils & Technologies</h4>
+                <h4>IHM</h4>
+                <div class="skill-tags">
+                    <span class="skill-tag">JavaFX</span>
+                    <span class="skill-tag" data-icon="images/sb.png">SceneBuilder</span>
+                </div>
+            </div>
+            <div class="skill-category">
+                <h4>SQL</h4>
+                <div class="skill-tags">
+                    <span class="skill-tag" data-icon="images/psql.png">PostgreSQL</span>
+                    <span class="skill-tag" data-icon="images/SSMS.png">MSSQL</span>
+                    <span class="skill-tag" data-icon="images/snowflake.svg">Snowflake</span>
+                </div>
+            </div>
+            <div class="skill-category">
+                <h4>NoSQL</h4>
+                <div class="skill-tags">
+                    <span class="skill-tag" data-icon="images/mongodb.svg">MongoDB</span>
+                    <span class="skill-tag" data-icon="images/redis.svg">Redis</span>
+                    <span class="skill-tag" data-icon="images/couchdb.svg">CouchDB</span>
+                    <span class="skill-tag" data-icon="images/cassandra.svg">Cassandra</span>
+                </div>
+            </div>
+            <div class="skill-category">
+                <h4>Data Science</h4>
+                <div class="skill-tags">
+                    <span class="skill-tag" data-icon="images/python.svg">Python</span>
+                    <span class="skill-tag" data-icon="images/numpy.svg">Numpy</span>
+                    <span class="skill-tag" data-icon="images/pandas.svg">Pandas</span>
+                    <span class="skill-tag">Seaborn</span>
+                    <span class="skill-tag" data-icon="images/matplotlib.svg">Matplotlib</span>
+                    <span class="skill-tag" data-icon="images/scikitlearn.svg">sklearn</span>
+                </div>
+            </div>
+            <div class="skill-category">
+                <h4>Dev Web</h4>
+                <div class="skill-tags">
+                    <span class="skill-tag" data-icon="images/html.png">HTML/CSS</span>
+                    <span class="skill-tag" data-icon="images/js.png">JavaScript</span>
+                    <span class="skill-tag" data-icon="images/webpack.png">Webpack</span>
+                    <span class="skill-tag" data-icon="images/typescript.svg">TypeScript</span>
+                    <span class="skill-tag" data-icon="images/react.svg">React</span>
+                    <span class="skill-tag" data-icon="images/spring.svg">Spring Boot</span>
+                    <span class="skill-tag" data-icon="images/tailwind.svg">Tailwind CSS</span>
+                </div>
+            </div>
+            <div class="skill-category">
+                <h4>DevOps</h4>
                 <div class="skill-tags">
                     <span class="skill-tag" data-icon="images/git.png">Git</span>
-                    <span class="skill-tag" data-icon="images/podman.png">Podman</span>
-                    <span class="skill-tag" data-icon="images/bash.png">Shell/Bash</span>
-                    <span class="skill-tag" data-icon="images/webpack.png">Webpack</span>
-                    <span class="skill-tag" data-icon="images/babel.png">Babel</span>
-                    <span class="skill-tag" data-icon="images/psql.png">PostgreSQL</span>
-                    <span class="skill-tag" data-icon="images/tomcat.png">Tomcat</span>
+                    <span class="skill-tag">Pipelines CI/CD</span>
+                    <span class="skill-tag" data-icon="images/bash.png">Bash</span>
+                    <span class="skill-tag">Crontab</span>
+                    <span class="skill-tag" data-icon="images/docker.svg">Docker</span>
+                    <span class="skill-tag" data-icon="images/podman.svg">Podman</span>
+                    <span class="skill-tag" data-icon="images/terraform.svg">Terraform</span>
                 </div>
             </div>
             <div class="skill-category">
-                <h4>Environnements</h4>
+                <h4>Gestion de projets & Agilité</h4>
                 <div class="skill-tags">
-                    <span class="skill-tag" data-icon="images/vscode.png">VS Code</span>
-                    <span class="skill-tag" data-icon="images/intellij.png">IntelliJ</span>
-                    <span class="skill-tag" data-icon="images/SSMS.png">SSMS</span>
-                    <span class="skill-tag" data-icon="images/filezilla.png">FileZilla</span>
+                    <span class="skill-tag">Scrum</span>
+                    <span class="skill-tag">Kanban</span>
+                    <span class="skill-tag" data-icon="images/jira.svg">Jira</span>
+                    <span class="skill-tag">GANTT</span>
                 </div>
             </div>
         </div>
@@ -136,24 +177,27 @@
 
         <div class="skills-section-label reveal">
             <span class="skills-label-icon">&#9733;</span>
-            <h3>Savoir-être & Langues</h3>
+            <h3>Compétences douces & Langues</h3>
         </div>
         <div class="skills-grid soft reveal">
             <div class="skill-category soft">
                 <h4>Qualités personnelles</h4>
                 <div class="skill-tags soft-skills">
                     <span class="skill-tag soft">Adaptabilité</span>
-                    <span class="skill-tag soft">Autonomie</span>
-                    <span class="skill-tag soft">Discipline</span>
                     <span class="skill-tag soft">Esprit d'équipe</span>
                     <span class="skill-tag soft">Pensée critique</span>
+                    <span class="skill-tag soft">Assertivité</span>
+                    <span class="skill-tag soft">Empathie</span>
+                    <span class="skill-tag soft">Autonomie</span>
                     <span class="skill-tag soft">Communication</span>
+                    <span class="skill-tag soft">Curiosité</span>
                 </div>
             </div>
             <div class="skill-category soft">
                 <h4>Langues</h4>
                 <div class="skill-tags soft-skills">
                     <span class="skill-tag soft">Anglais — Niveau C1 (Cambridge)</span>
+                    <span class="skill-tag soft">Espagnol — Niveau A2</span>
                 </div>
                 <p class="skill-detail">
                     Certification Cambridge niveau C1, forgée par des années d'échanges
@@ -169,103 +213,117 @@
             <h2>Projets</h2>
             <div class="section-line"></div>
         </div>
-        <div class="carousel-container reveal">
-            <div class="carousel">
-                <div class="carousel-track">
+        <!-- Featured project -->
+        <div class="project-card featured reveal">
+            <div class="featured-badge">Projet récent</div>
+            <div class="card-header">
+                <h3>Deal Express</h3>
+            </div>
+            <div class="card-tags">
+                <span data-icon="images/java.png">Java</span>
+                <span>Spring</span>
+                <span>React</span>
+                <span>Tailwind</span>
+            </div>
+            <p>
+                Deal Express est un projet réalisé en 1 semaine par 5 étudiants de BUT3 (1 s'est occupé du backend, 2 dont moi du frontend et 2 du déploiement).
+                C'est un jeu qui consiste à avancer dans une histoire ensemble et à faire des choix pour explorer les différentes fins possibles.
+                L'intérêt de ce jeu est de découvrir les différents modes de décisions possibles, et dans quelles situations est-ce que chaque mode de décision est le plus adapté.
+            </p>
+            <a href="https://dealexpress.betteragile.fr/" class="card-action" target="_blank" rel="noopener">
+                Voir le projet <span class="card-action-arrow">&#8594;</span>
+            </a>
+        </div>
 
-                    <div class="project-card">
-                        <div class="card-header">
-                            <h3>Jeu en JavaScript</h3>
-                            <a href="https://gitlab.univ-lille.fr/jsae/projets-2024-2025/groupe-g/equipe-6" class="card-link" target="_blank" rel="noopener">
-                                <img src="images/gitlab.png" alt="GitLab" class="card-link-icon">
-                            </a>
-                        </div>
-                        <div class="card-tags">
-                            <span>JavaScript</span>
-                            <span>HTML/CSS</span>
-                            <span>Babel</span>
-                            <span>Webpack</span>
-                        </div>
-                        <p>
-                            Jeu original développé en équipe de 3 dans le cadre d'un projet universitaire.
-                            Sujet respecté en intégralité avec un résultat fonctionnel malgré des délais courts.
-                            Utilisation efficace des issues Git pour la gestion du projet.
-                        </p>
-                        <div class="card-collaborators">
-                            Avec <a href="https://goniix.github.io/" target="_blank" rel="noopener">Gabriel R.I.</a> et Julien D.
-                        </div>
-                    </div>
+        <!-- Other projects -->
+        <div class="projects-grid">
 
-                    <div class="project-card">
-                        <div class="card-header">
-                            <h3>Application de messagerie</h3>
-                            <a href="https://gitlab.univ-lille.fr/gabriel.redouin-innecco.etu/Matterlast" class="card-link" target="_blank" rel="noopener">
-                                <img src="images/gitlab.png" alt="GitLab" class="card-link-icon">
-                            </a>
-                        </div>
-                        <div class="card-tags">
-                            <span>Java</span>
-                            <span>Jakarta/JEE</span>
-                            <span>PostgreSQL</span>
-                            <span>JavaScript</span>
-                            <span>Maven</span>
-                        </div>
-                        <p>
-                            Application client/serveur de messagerie. Architecture complète avec backend Java,
-                            base de données PostgreSQL et frontend web. J'ai principalement géré la partie
-                            BDD et backend. Ce projet universitaire nous a permis d'appliquer le pattern MVC dans un projet concret.
-                        </p>
-                        <div class="card-collaborators">
-                            Avec <a href="https://goniix.github.io/" target="_blank" rel="noopener">Gabriel R.I.</a>
-                        </div>
-                    </div>
-
-                    <div class="project-card">
-                        <div class="card-header">
-                            <h3>Application de classification</h3>
-                            <a href="https://gitlab.univ-lille.fr/sae302/2024/G3_SAE3.3" class="card-link" target="_blank" rel="noopener">
-                                <img src="images/gitlab.png" alt="GitLab" class="card-link-icon">
-                            </a>
-                        </div>
-                        <div class="card-tags">
-                            <span>Java</span>
-                            <span>JavaFX</span>
-                            <span>SceneBuilder</span>
-                            <span>CSS</span>
-                        </div>
-                        <p>
-                            Application de classification de données développée en équipe de 4.
-                            Ce projet universitaire nous a permis de pratiquer le clean code
-                            et la gestion de Git en conditions réelles.
-                        </p>
-                        <div class="card-collaborators">
-                            Avec <a href="https://gaspard4i.github.io/" target="_blank" rel="noopener">Gaspard C.</a>,
-                            <a href="https://goniix.github.io/" target="_blank" rel="noopener">Gabriel R.I.</a> et Cyprien F.
-                        </div>
-                    </div>
-
-                    <div class="project-card">
-                        <div class="card-header">
-                            <h3>Ce portfolio</h3>
-                        </div>
-                        <div class="card-tags">
-                            <span>HTML</span>
-                            <span>CSS</span>
-                            <span>JavaScript</span>
-                        </div>
-                        <p>
-                            Mon portfolio c'est pour moi une petite opportunité de m'exercer aux technos webs.
-                            C'est l'un des premiers projets concrets que j'ai réalisé.
-                        </p>
-                    </div>
-
+            <div class="project-card reveal">
+                <div class="card-header">
+                    <h3>Jeu en JavaScript</h3>
                 </div>
+                <div class="card-tags">
+                    <span data-icon="images/js.png">JavaScript</span>
+                    <span data-icon="images/html.png">HTML/CSS</span>
+                    <span data-icon="images/babel.png">Babel</span>
+                    <span data-icon="images/webpack.png">Webpack</span>
+                </div>
+                <p>
+                    Jeu original développé en équipe de 3 dans le cadre d'un projet universitaire.
+                    Sujet respecté en intégralité avec un résultat fonctionnel malgré des délais courts.
+                    Utilisation efficace des issues Git pour la gestion du projet.
+                </p>
+                <div class="card-collaborators">
+                    Avec <a href="https://goniix.github.io/" target="_blank" rel="noopener">Gabriel R.I.</a> et Julien D.
+                </div>
+                <a href="https://gitlab.univ-lille.fr/jsae/projets-2024-2025/groupe-g/equipe-6" class="card-action" target="_blank" rel="noopener">
+                    Voir le projet <span class="card-action-arrow">&#8594;</span>
+                </a>
             </div>
-            <div class="carousel-controls">
-                <button class="carousel-btn prev" aria-label="Projet précédent">&#8592;</button>
-                <div class="carousel-dots"></div>
-                <button class="carousel-btn next" aria-label="Projet suivant">&#8594;</button>
+
+            <div class="project-card reveal">
+                <div class="card-header">
+                    <h3>Application de messagerie</h3>
+                </div>
+                <div class="card-tags">
+                    <span data-icon="images/java.png">Java</span>
+                    <span>Jakarta/JEE</span>
+                    <span data-icon="images/psql.png">PostgreSQL</span>
+                    <span data-icon="images/js.png">JavaScript</span>
+                    <span>Maven</span>
+                </div>
+                <p>
+                    Application client/serveur de messagerie. Architecture complète avec backend Java,
+                    base de données PostgreSQL et frontend web. J'ai principalement géré la partie
+                    BDD et backend. Ce projet universitaire nous a permis d'appliquer le pattern MVC dans un projet concret.
+                </p>
+                <div class="card-collaborators">
+                    Avec <a href="https://goniix.github.io/" target="_blank" rel="noopener">Gabriel R.I.</a>
+                </div>
+                <a href="https://gitlab.univ-lille.fr/gabriel.redouin-innecco.etu/Matterlast" class="card-action" target="_blank" rel="noopener">
+                    Voir le projet <span class="card-action-arrow">&#8594;</span>
+                </a>
             </div>
+
+            <div class="project-card reveal">
+                <div class="card-header">
+                    <h3>Application de classification</h3>
+                </div>
+                <div class="card-tags">
+                    <span data-icon="images/java.png">Java</span>
+                    <span>JavaFX</span>
+                    <span data-icon="images/sb.png">SceneBuilder</span>
+                    <span data-icon="images/css.png">CSS</span>
+                </div>
+                <p>
+                    Application de classification de données développée en équipe de 4.
+                    Ce projet universitaire nous a permis de pratiquer le clean code
+                    et la gestion de Git en conditions réelles.
+                </p>
+                <div class="card-collaborators">
+                    Avec <a href="https://gaspard4i.github.io/" target="_blank" rel="noopener">Gaspard C.</a>,
+                    <a href="https://goniix.github.io/" target="_blank" rel="noopener">Gabriel R.I.</a> et Cyprien F.
+                </div>
+                <a href="https://gitlab.univ-lille.fr/sae302/2024/G3_SAE3.3" class="card-action" target="_blank" rel="noopener">
+                    Voir le projet <span class="card-action-arrow">&#8594;</span>
+                </a>
+            </div>
+
+            <div class="project-card reveal">
+                <div class="card-header">
+                    <h3>Ce portfolio</h3>
+                </div>
+                <div class="card-tags">
+                    <span data-icon="images/html.png">HTML</span>
+                    <span data-icon="images/css.png">CSS</span>
+                    <span data-icon="images/js.png">JavaScript</span>
+                </div>
+                <p>
+                    Mon portfolio c'est pour moi une petite opportunité de m'exercer aux technos webs.
+                    C'est l'un des premiers projets concrets que j'ai réalisé.
+                </p>
+            </div>
+
         </div>
     </section>
 
@@ -277,16 +335,25 @@
         </div>
         <div class="timeline">
 
-            <div class="timeline-item reveal">
+            <div class="timeline-item featured reveal">
                 <div class="timeline-marker"></div>
                 <div class="timeline-content">
                     <span class="timeline-badge work">Alternance</span>
+                    <span class="timeline-badge current">En cours</span>
                     <h3>Alternance Équipe Pricing Norauto International</h3>
                     <span class="timeline-date">Septembre 2025 - Août 2026</span>
+                    <div class="card-tags">
+                        <span data-icon="images/csharp.svg">C#</span>
+                        <span data-icon="images/SSMS.png">MSSQL</span>
+                        <span data-icon="images/js.png">JavaScript</span>
+                        <span data-icon="images/xml.svg">XML</span>
+                        <span data-icon="images/bash.png">Bash</span>
+                        <span data-icon="images/snowflake.svg">Snowflake</span>
+                    </div>
                     <p>
-                        Développement et maintenance d'un système de scraping. (C#, MSSQL, JavaScript, XML)
-                        Maintenance de proxys (Bash).
-                        Mise en place de processus de traitement de données. (Snowflake)
+                        Développement et maintenance d'un système de scraping.
+                        Maintenance de proxys.
+                        Mise en place de processus de traitement de données.
                     </p>
                 </div>
             </div>
@@ -297,9 +364,16 @@
                     <span class="timeline-badge work">Stage</span>
                     <h3>Équipe Pricing — Mobivia (Move Factory)</h3>
                     <span class="timeline-date">Avril — Mai 2025</span>
+                    <div class="card-tags">
+                        <span data-icon="images/csharp.svg">C#</span>
+                        <span data-icon="images/SSMS.png">MSSQL</span>
+                        <span data-icon="images/js.png">JavaScript</span>
+                        <span data-icon="images/xml.svg">XML</span>
+                        <span data-icon="images/bash.png">Bash</span>
+                    </div>
                     <p>
-                        Maintenance d'un système de scrapping. (C#, MSSQL, JavaScript, XML).
-                        Développement et maintenance de proxys (Bash).
+                        Maintenance d'un système de scraping.
+                        Développement et maintenance de proxys.
                         Première immersion en entreprise.
                     </p>
                 </div>
@@ -311,9 +385,16 @@
                     <span class="timeline-badge work">Auto-entrepreneur</span>
                     <h3>Services Informatiques - Mobivia</h3>
                     <span class="timeline-date">Octobre 2024 - Septembre 2025</span>
+                    <div class="card-tags">
+                        <span data-icon="images/csharp.svg">C#</span>
+                        <span data-icon="images/SSMS.png">MSSQL</span>
+                        <span data-icon="images/js.png">JavaScript</span>
+                        <span data-icon="images/xml.svg">XML</span>
+                        <span data-icon="images/bash.png">Bash</span>
+                    </div>
                     <p>
-                        Maintenance d'un système de scraping (C#, MSSQL, JavaScript, XML).
-                        Maintenance de proxys (Bash).
+                        Maintenance d'un système de scraping.
+                        Maintenance de proxys.
                         Vérification de l'intégrité des données et bon déroulement des processus.
                     </p>
                 </div>
@@ -356,10 +437,11 @@
         </div>
         <div class="timeline">
 
-            <div class="timeline-item reveal">
+            <div class="timeline-item featured reveal">
                 <div class="timeline-marker edu"></div>
                 <div class="timeline-content">
-                    <span class="timeline-badge edu">En cours</span>
+                    <span class="timeline-badge edu">Formation</span>
+                    <span class="timeline-badge current">En cours</span>
                     <h3>BUT Informatique — IUT de Lille</h3>
                     <span class="timeline-date">2023 — 2026</span>
                     <p>
