@@ -28,7 +28,9 @@
       "Bash(curl -sfL -o spring.svg \"https://icon.icepanel.io/Technology/svg/Spring-Boot.svg\")",
       "Bash(curl -sfL -o tailwind.svg \"https://icon.icepanel.io/Technology/svg/Tailwind-CSS.svg\")",
       "Bash(curl -sfL -o matplotlib.svg \"https://icon.icepanel.io/Technology/svg/Matplotlib.svg\")",
-      "Bash(curl -sfL -o \"C:/Users/sun28/Desktop/tom2824.github.io/images/spring.svg\" \"https://icon.icepanel.io/Technology/svg/Spring.svg\")"
+      "Bash(curl -sfL -o \"C:/Users/sun28/Desktop/tom2824.github.io/images/spring.svg\" \"https://icon.icepanel.io/Technology/svg/Spring.svg\")",
+      "Bash(grep -oE 'images/[^\"\"\"\"''''\\)` ]+')",
+      "Bash(cd:*)"
     ]
   }
 }
