@@ -900,6 +900,10 @@ footer p {
         padding-left: 2.5rem;
     }
 
+    .timeline-marker {
+        left: -2.5rem;
+    }
+
     .contact-card {
         padding: 1.5rem 2rem;
     }
