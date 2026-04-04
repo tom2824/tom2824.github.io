@@ -496,7 +496,15 @@ section {
     border-radius: 3px;
 }
 
-.skill-tag img[src*="astro.svg"] {
+/* SVGs monochrome noirs → inverser pour thème sombre */
+.skill-tag img[src*="astro.svg"],
+.skill-tag img[src*="androidstudio.svg"],
+.skill-tag img[src*="gradle.svg"],
+.skill-tag img[src*="maven.svg"],
+.skill-tag img[src*="xml.svg"],
+.card-tags span img[src*="astro.svg"],
+.card-tags span img[src*="maven.svg"],
+.card-tags span img[src*="xml.svg"] {
     filter: brightness(0) invert(1);
 }
 

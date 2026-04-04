@@ -26,7 +26,7 @@ export const PROJECTS: Project[] = [
     date: '2026-03',
     tags: [
       { label: 'Java', icon: 'images/java.png' },
-      { label: 'Spring' },
+      { label: 'Spring', icon: 'images/spring.svg' },
       { label: 'React', icon: 'images/react.svg' },
       { label: 'Tailwind', icon: 'images/tailwind.svg' },
     ],
@@ -59,7 +59,7 @@ export const PROJECTS: Project[] = [
       { label: 'Jakarta/JEE' },
       { label: 'PostgreSQL', icon: 'images/psql.png' },
       { label: 'JavaScript', icon: 'images/js.png' },
-      { label: 'Maven' },
+      { label: 'Maven', icon: 'images/maven.svg' },
     ],
     description:
       "Application client/serveur de messagerie. Architecture complète avec backend Java, base de données PostgreSQL et frontend web. J'ai principalement géré la partie BDD et backend. Ce projet universitaire nous a permis d'appliquer le pattern MVC dans un projet concret.",
@@ -94,7 +94,7 @@ export const PROJECTS: Project[] = [
       { label: 'HTML', icon: 'images/html.png' },
       { label: 'CSS', icon: 'images/css.png' },
       { label: 'JavaScript', icon: 'images/js.png' },
-      { label: 'Astro' },
+      { label: 'Astro', icon: 'images/astro.svg' },
     ],
     description:
       "Mon portfolio est pour moi une petite opportunité de m'exercer aux technos webs. C'est l'un des premiers projets concrets que j'ai réalisé, en constante évolution. Il a beaucoup changé au fil du temps, il a eu plusieurs refontes et je continue de le maintenir activement pour le mettre à jour en ajoutant tous mes nouveaux projets.",
