@@ -496,6 +496,10 @@ section {
     border-radius: 3px;
 }
 
+.skill-tag img[src*="astro.svg"] {
+    filter: brightness(0) invert(1);
+}
+
 /* ========== PROJECTS ========== */
 .project-card {
     background: var(--bg-card);
