@@ -36,7 +36,10 @@
       "Bash(npm init:*)",
       "Bash(npm install:*)",
       "Bash(npm run:*)",
-      "Bash(mkdir:*)"
+      "Bash(mkdir:*)",
+      "Bash(git push:*)",
+      "Bash(curl -s \"https://raw.githubusercontent.com/simple-icons/simple-icons/develop/icons/github.svg\" -o /c/Users/sun28/Desktop/tom2824.github.io/public/images/github.svg)",
+      "Bash(curl -s \"https://raw.githubusercontent.com/simple-icons/simple-icons/develop/icons/astro.svg\" -o /c/Users/sun28/Desktop/tom2824.github.io/public/images/astro.svg)"
     ]
   }
 }

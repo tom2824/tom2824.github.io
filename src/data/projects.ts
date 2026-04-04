@@ -18,7 +18,7 @@ export const PROJECTS: Project[] = [
       { label: 'WebExtensions API' },
     ],
     description:
-      "Extension navigateur (Edge / Chrome) qui ferme automatiquement les onglets de doomscrolling après une limite de temps configurable. Dispose d'un mode Focus qui bloque instantanément tous les sites définis, d'un suivi journalier, d'un dark mode et d'une interface FR/EN.",
+      "Extension navigateur (Edge / Chrome) qui regarde l'URL actuelle, et selon les paramètres, ferme ou redirige l'onglet ouvert après une limite de temps configurable. Dispose d'un mode Focus qui bloque instantanément tous les sites définis, d'un dark mode et d'une interface FR/EN.",
     link: 'https://github.com/tom2824/stop-doomscrolling',
   },
   {
@@ -97,6 +97,6 @@ export const PROJECTS: Project[] = [
       { label: 'Astro' },
     ],
     description:
-      "Mon portfolio est pour moi une petite opportunité de m'exercer aux technos webs. C'est l'un des premiers projets concrets que j'ai réalisé, en constante évolution.",
+      "Mon portfolio est pour moi une petite opportunité de m'exercer aux technos webs. C'est l'un des premiers projets concrets que j'ai réalisé, en constante évolution. Il a beaucoup changé au fil du temps, il a eu plusieurs refontes et je continue de le maintenir activement pour le mettre à jour en ajoutant tous mes nouveaux projets.",
   },
 ];
