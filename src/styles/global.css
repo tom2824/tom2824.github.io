@@ -846,6 +846,10 @@ section {
     transition: opacity 0.3s;
 }
 
+.contact-card img[src$=".svg"] {
+    filter: brightness(0) invert(1);
+}
+
 .contact-card:hover img {
     opacity: 1;
 }
