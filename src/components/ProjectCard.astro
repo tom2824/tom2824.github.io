@@ -1,0 +1,59 @@
+---
+import type { Project } from '../data/projects';
+
+interface Props {
+  project: Project;
+}
+const { project } = Astro.props;
+
+// Badge "Projet récent" si date < 12 mois
+const [year, month] = project.date.split('-').map(Number);
+const projectDate = new Date(year, (month || 1) - 1, 1);
+const oneYearAgo = new Date();
+oneYearAgo.setFullYear(oneYearAgo.getFullYear() - 1);
+const isRecent = projectDate >= oneYearAgo;
+
+// Formatage de la date en français
+const monthNames = ['Jan.', 'Fév.', 'Mars', 'Avr.', 'Mai', 'Juin', 'Juil.', 'Août', 'Sep.', 'Oct.', 'Nov.', 'Déc.'];
+let displayDate: string;
+if (project.ongoing) {
+  displayDate = `${year} — présent`;
+} else if (month) {
+  displayDate = `${monthNames[month - 1]} ${year}`;
+} else {
+  displayDate = String(year);
+}
+---
+
+<div class="project-card reveal" data-date={project.date} data-title={project.title}>
+  {isRecent && <div class="featured-badge">Projet récent</div>}
+  <div class="card-header">
+    <h3>{project.title}</h3>
+    <span class="card-date">{displayDate}</span>
+  </div>
+  <div class="card-tags">
+    {project.tags.map(tag => (
+      <span>
+        {tag.icon && <img src={`/${tag.icon}`} alt="" loading="lazy" />}
+        {tag.label}
+      </span>
+    ))}
+  </div>
+  <p>{project.description}</p>
+  {project.collaborators && (
+    <div class="card-collaborators">
+      Avec{' '}
+      {project.collaborators.map((c, i) => (
+        <>
+          {c.url ? <a href={c.url} target="_blank" rel="noopener">{c.name}</a> : c.name}
+          {i < project.collaborators!.length - 2 ? ', ' : i === project.collaborators!.length - 2 ? ' et ' : ''}
+        </>
+      ))}
+    </div>
+  )}
+  {project.link && (
+    <a href={project.link} class="card-action" target="_blank" rel="noopener">
+      Voir le projet <span class="card-action-arrow">&#8594;</span>
+    </a>
+  )}
+</div>

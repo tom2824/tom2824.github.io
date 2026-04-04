@@ -1,0 +1,57 @@
+---
+import { PROJECTS } from '../data/projects';
+import ProjectCard from './ProjectCard.astro';
+
+// Tri initial : plus récent en premier
+const sorted = [...PROJECTS].sort((a, b) => b.date.localeCompare(a.date));
+---
+
+<section id="projects">
+  <div class="section-header reveal">
+    <h2>Projets</h2>
+    <div class="section-line"></div>
+    <div class="sort-controls">
+      <button class="sort-btn active" data-sort="recent">Récent</button>
+      <button class="sort-btn" data-sort="oldest">Ancien</button>
+      <button class="sort-btn" data-sort="az">A→Z</button>
+      <button class="sort-btn" data-sort="za">Z→A</button>
+    </div>
+  </div>
+
+  <div class="projects-container" id="projects-container">
+    {sorted.map(project => <ProjectCard project={project} />)}
+  </div>
+</section>
+
+<script>
+  const container = document.getElementById('projects-container')!;
+  const buttons = document.querySelectorAll<HTMLButtonElement>('.sort-btn');
+
+  function getCards() {
+    return Array.from(container.querySelectorAll<HTMLElement>('.project-card'));
+  }
+
+  function sortCards(type: string) {
+    const cards = getCards();
+    cards.sort((a, b) => {
+      const dateA = a.dataset.date ?? '';
+      const dateB = b.dataset.date ?? '';
+      const titleA = a.dataset.title ?? '';
+      const titleB = b.dataset.title ?? '';
+      if (type === 'recent') return dateB.localeCompare(dateA);
+      if (type === 'oldest') return dateA.localeCompare(dateB);
+      if (type === 'az') return titleA.localeCompare(titleB, 'fr');
+      if (type === 'za') return titleB.localeCompare(titleA, 'fr');
+      return 0;
+    });
+    cards.forEach(card => container.appendChild(card));
+  }
+
+  buttons.forEach(btn => {
+    btn.addEventListener('click', () => {
+      buttons.forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      sortCards(btn.dataset.sort ?? 'recent');
+    });
+  });
+</script>

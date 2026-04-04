@@ -1,0 +1,76 @@
+---
+interface Props {
+  title?: string;
+}
+const { title = 'Tom NGUYEN — Portfolio' } = Astro.props;
+---
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{title}</title>
+    <link rel="stylesheet" href="/styles/global.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <slot />
+    <script>
+        // ========== Age calculation ==========
+        const birthDate = new Date(2004, 7, 2);
+        const today = new Date();
+        let age = today.getFullYear() - birthDate.getFullYear();
+        if (today.getMonth() < birthDate.getMonth() || (today.getMonth() === birthDate.getMonth() && today.getDate() < birthDate.getDate())) {
+            age--;
+        }
+        const ageEl = document.getElementById('age');
+        if (ageEl) ageEl.textContent = String(age);
+
+        // ========== Scroll Reveal ==========
+        const reveals = document.querySelectorAll('.reveal');
+        const revealObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) entry.target.classList.add('visible');
+            });
+        }, { threshold: 0.15, rootMargin: '0px 0px -40px 0px' });
+        reveals.forEach(el => revealObserver.observe(el));
+
+        // ========== Navbar scroll effect & active nav link ==========
+        const navbar = document.getElementById('navbar');
+        const sections = document.querySelectorAll('section[id]:not(#hero)');
+        const navLinks = document.querySelectorAll('.nav-link');
+
+        function onScroll() {
+            if (navbar) navbar.classList.toggle('scrolled', window.scrollY > 40);
+            const scrollY = window.scrollY + 120;
+            let current = '';
+            sections.forEach(section => {
+                const top = (section as HTMLElement).offsetTop;
+                const height = (section as HTMLElement).offsetHeight;
+                if (scrollY >= top && scrollY < top + height) current = section.id;
+            });
+            navLinks.forEach(link => {
+                link.classList.toggle('active', link.getAttribute('href') === `#${current}`);
+            });
+        }
+        window.addEventListener('scroll', onScroll, { passive: true });
+        onScroll();
+
+        // ========== Mobile nav toggle ==========
+        const navToggle = document.querySelector('.nav-toggle');
+        const navLinksContainer = document.querySelector('.nav-links');
+        navToggle?.addEventListener('click', () => {
+            navToggle.classList.toggle('open');
+            navLinksContainer?.classList.toggle('open');
+        });
+        navLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                navToggle?.classList.remove('open');
+                navLinksContainer?.classList.remove('open');
+            });
+        });
+    </script>
+</body>
+</html>

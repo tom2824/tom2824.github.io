@@ -510,19 +510,6 @@ section {
     transform: translateY(-4px);
 }
 
-/* Featured project */
-.project-card.featured {
-    position: relative;
-    padding: 2.5rem;
-    margin-bottom: 1.5rem;
-    border-color: var(--accent-dim);
-    background: var(--featured-bg);
-}
-
-.project-card.featured .card-header h3 {
-    font-size: 1.6rem;
-}
-
 .featured-badge {
     display: inline-block;
     padding: 0.25rem 0.75rem;
@@ -537,11 +524,62 @@ section {
     margin-bottom: 1rem;
 }
 
-/* Projects grid */
-.projects-grid {
+/* Projects container — premier élément toujours full-width et mis en avant */
+.projects-container {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     gap: 1.5rem;
+}
+
+.projects-container > .project-card:first-child {
+    grid-column: 1 / -1;
+    position: relative;
+    padding: 2.5rem;
+    border-color: var(--accent-dim);
+    background: var(--featured-bg);
+}
+
+.projects-container > .project-card:first-child .card-header h3 {
+    font-size: 1.6rem;
+}
+
+/* Sort controls */
+#projects .section-header {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+    flex-wrap: wrap;
+}
+
+.sort-controls {
+    display: flex;
+    gap: 0.4rem;
+    margin-left: auto;
+}
+
+.sort-btn {
+    padding: 0.25rem 0.75rem;
+    border-radius: 100px;
+    border: 1px solid var(--border);
+    background: transparent;
+    color: var(--text-muted);
+    font-size: 0.75rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: border-color 0.2s, color 0.2s, background 0.2s;
+    font-family: var(--font-body);
+}
+
+.sort-btn:hover {
+    border-color: var(--accent-dim);
+    color: var(--text);
+}
+
+.sort-btn.active {
+    border-color: var(--accent-dim);
+    background: rgba(200, 149, 108, 0.12);
+    color: var(--accent);
 }
 
 .card-header {
@@ -549,6 +587,14 @@ section {
     align-items: center;
     justify-content: space-between;
     margin-bottom: 1rem;
+}
+
+.card-date {
+    font-size: 0.75rem;
+    color: var(--text-muted);
+    font-weight: 500;
+    white-space: nowrap;
+    margin-left: 0.75rem;
 }
 
 .card-header h3 {
@@ -888,8 +934,12 @@ footer p {
         padding: 4rem 1.25rem;
     }
 
-    .projects-grid {
+    .projects-container {
         grid-template-columns: 1fr;
+    }
+
+    .projects-container > .project-card:first-child {
+        padding: 1.75rem;
     }
 
     .project-card {

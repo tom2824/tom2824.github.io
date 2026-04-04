@@ -1,0 +1,28 @@
+{
+  "name": "tom2824.github.io",
+  "version": "1.0.0",
+  "main": "index.js",
+  "directories": {
+    "doc": "docs"
+  },
+  "scripts": {
+    "dev": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/tom2824/tom2824.github.io.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/tom2824/tom2824.github.io/issues"
+  },
+  "homepage": "https://github.com/tom2824/tom2824.github.io#readme",
+  "description": "",
+  "dependencies": {
+    "astro": "^6.1.3"
+  }
+}

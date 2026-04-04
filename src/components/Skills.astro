@@ -1,0 +1,141 @@
+---
+const techSkills = [
+  {
+    title: 'POO & Programmation Fonctionnelle',
+    tags: [
+      { label: 'C#', icon: '/images/csharp.svg' },
+      { label: 'Java', icon: '/images/java.png' },
+      { label: 'Kotlin', icon: '/images/kotlin.svg' },
+    ],
+  },
+  {
+    title: 'IHM',
+    tags: [
+      { label: 'JavaFX' },
+      { label: 'SceneBuilder', icon: '/images/sb.png' },
+    ],
+  },
+  {
+    title: 'SQL',
+    tags: [
+      { label: 'PostgreSQL', icon: '/images/psql.png' },
+      { label: 'MSSQL', icon: '/images/SSMS.png' },
+      { label: 'Snowflake', icon: '/images/snowflake.svg' },
+    ],
+  },
+  {
+    title: 'NoSQL',
+    tags: [
+      { label: 'MongoDB', icon: '/images/mongodb.svg' },
+      { label: 'Redis', icon: '/images/redis.svg' },
+      { label: 'CouchDB', icon: '/images/couchdb.svg' },
+      { label: 'Cassandra', icon: '/images/cassandra.svg' },
+    ],
+  },
+  {
+    title: 'Data Science',
+    tags: [
+      { label: 'Python', icon: '/images/python.svg' },
+      { label: 'Numpy', icon: '/images/numpy.svg' },
+      { label: 'Pandas', icon: '/images/pandas.svg' },
+      { label: 'Seaborn' },
+      { label: 'Matplotlib', icon: '/images/matplotlib.svg' },
+      { label: 'sklearn', icon: '/images/scikitlearn.svg' },
+    ],
+  },
+  {
+    title: 'Dev Web',
+    tags: [
+      { label: 'HTML/CSS', icon: '/images/html.png' },
+      { label: 'JavaScript', icon: '/images/js.png' },
+      { label: 'Webpack', icon: '/images/webpack.png' },
+      { label: 'TypeScript', icon: '/images/typescript.svg' },
+      { label: 'React', icon: '/images/react.svg' },
+      { label: 'Spring Boot', icon: '/images/spring.svg' },
+      { label: 'Tailwind CSS', icon: '/images/tailwind.svg' },
+      { label: 'Astro' },
+    ],
+  },
+  {
+    title: 'DevOps',
+    tags: [
+      { label: 'Git', icon: '/images/git.png' },
+      { label: 'Pipelines CI/CD' },
+      { label: 'Bash', icon: '/images/bash.png' },
+      { label: 'Crontab' },
+      { label: 'Docker', icon: '/images/docker.svg' },
+      { label: 'Podman', icon: '/images/podman.svg' },
+      { label: 'Terraform', icon: '/images/terraform.svg' },
+    ],
+  },
+  {
+    title: 'Gestion de projets & Agilité',
+    tags: [
+      { label: 'Scrum' },
+      { label: 'Kanban' },
+      { label: 'Jira', icon: '/images/jira.svg' },
+      { label: 'GANTT' },
+    ],
+  },
+];
+---
+
+<section id="skills">
+    <div class="section-header reveal">
+        <h2>Compétences</h2>
+        <div class="section-line"></div>
+    </div>
+
+    <div class="skills-section-label reveal">
+        <span class="skills-label-icon">&#9881;</span>
+        <h3>Compétences techniques</h3>
+    </div>
+    <div class="skills-grid reveal">
+        {techSkills.map(cat => (
+            <div class="skill-category">
+                <h4>{cat.title}</h4>
+                <div class="skill-tags">
+                    {cat.tags.map(tag => (
+                        <span class="skill-tag">
+                            {tag.icon && <img src={tag.icon} alt="" loading="lazy" />}
+                            {tag.label}
+                        </span>
+                    ))}
+                </div>
+            </div>
+        ))}
+    </div>
+
+    <div class="skills-divider"></div>
+
+    <div class="skills-section-label reveal">
+        <span class="skills-label-icon">&#9733;</span>
+        <h3>Compétences douces & Langues</h3>
+    </div>
+    <div class="skills-grid soft reveal">
+        <div class="skill-category soft">
+            <h4>Qualités personnelles</h4>
+            <div class="skill-tags soft-skills">
+                <span class="skill-tag soft">Adaptabilité</span>
+                <span class="skill-tag soft">Esprit d'équipe</span>
+                <span class="skill-tag soft">Pensée critique</span>
+                <span class="skill-tag soft">Assertivité</span>
+                <span class="skill-tag soft">Empathie</span>
+                <span class="skill-tag soft">Autonomie</span>
+                <span class="skill-tag soft">Communication</span>
+                <span class="skill-tag soft">Curiosité</span>
+            </div>
+        </div>
+        <div class="skill-category soft">
+            <h4>Langues</h4>
+            <div class="skill-tags soft-skills">
+                <span class="skill-tag soft">Anglais — Niveau C1 (Cambridge)</span>
+                <span class="skill-tag soft">Espagnol — Niveau A2</span>
+            </div>
+            <p class="skill-detail">
+                Certification Cambridge niveau C1, forgée par des années d'échanges
+                en anglais en ligne et une section Anglais Euro au Lycée.
+            </p>
+        </div>
+    </div>
+</section>
