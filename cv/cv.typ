@@ -43,7 +43,7 @@
     #v(-6pt)
     #text(size: 12pt, fill: accent, weight: "semibold")[Développeur junior · Diplômé BUT Informatique]
     #v(-3pt)
-    #text(fill: muted)[22 ans · Lille]
+    #text(fill: muted)[22 ans · Ronchin, métropole lilloise]
     #v(2pt)
     #text(size: 9pt)[
       Email : #link("mailto:nguyen.tom.2824@gmail.com")[nguyen.tom.2824\@gmail.com] \
@@ -65,7 +65,7 @@ Je recherche un premier poste de *développeur back-end, full-stack ou data* sur
 #section("Expérience professionnelle")
 
 #entry("Développeur alternant, équipe Pricing", "Norauto International", "Sept. 2025 – Août 2026")[
-  Équipe de 7 personnes en charge de la veille tarifaire concurrentielle pour les business units France, Espagne, Italie et Portugal.
+  Veille tarifaire concurrentielle pour les business units France, Belgique, Espagne, Italie et Portugal (équipe de 7).
   - Conception et maintenance de pipelines de web scraping pour le monitoring des prix concurrents (C\#, XML, XPath, JavaScript, TypeScript)
   - Nettoyage et traitement des données via procédures stockées SQL Server : détection de deltas et d'anomalies, analyse temporelle
   - Migration progressive des flux de données vers Snowflake (DBT) ; fiabilisation de la collecte via un parc de proxies et VPN (Bash, crontab)
@@ -115,7 +115,7 @@ Je recherche un premier poste de *développeur back-end, full-stack ou data* sur
   Conception, développement et maintenance de logiciels. Troisième année en alternance chez Norauto International.
 ]
 #entry("BUT GEII, première année validée puis réorientation vers l'informatique", "IUT de Lille", "2022 – 2023")[]
-#entry("Baccalauréat général, mention Très Bien, spécialités NSI et Mathématiques", "Lycée Faidherbe, Lille", "2019 – 2022")[]
+#entry("Bac général, mention Très Bien, spécialités NSI et Maths, section euro anglais", "Lycée Faidherbe, Lille", "2019 – 2022")[]
 
 // ================= LANGUES & INTÉRÊTS =================
 #section("Langues et centres d'intérêt")
