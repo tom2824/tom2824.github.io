@@ -46,7 +46,6 @@
     #text(fill: muted)[22 ans · Lille]
     #v(2pt)
     #text(size: 9pt)[
-      Téléphone : 07 67 04 31 15 #h(8pt)
       Email : #link("mailto:nguyen.tom.2824@gmail.com")[nguyen.tom.2824\@gmail.com] \
       Portfolio : #link("https://tom2824.github.io")[tom2824.github.io] #h(8pt)
       GitHub : #link("https://github.com/tom2824")[github.com/tom2824] #h(8pt)
