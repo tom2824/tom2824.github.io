@@ -120,4 +120,4 @@ Je recherche un premier poste de *développeur back-end, full-stack ou data* sur
 // ================= LANGUES & INTÉRÊTS =================
 #section("Langues et centres d'intérêt")
 #skill("Langues", [Français (langue maternelle), Anglais C1 (certification Cambridge), Espagnol A2])
-#skill("Centres d'intérêt", [Musculation, jeux vidéo, philosophie, montage et hardware PC])
+#skill("Centres d'intérêt", [Musculation, jeux vidéo, jeu de rôle, philosophie])
