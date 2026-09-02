@@ -76,7 +76,7 @@ Je recherche un premier poste de *développeur back-end, full-stack ou data* sur
   - Maintenance des scripts de web scraping et de l'infrastructure de proxies au sein d'une équipe data
 ]
 
-#entry("Prestataire informatique (auto-entrepreneur)", "Mobivia", "Oct. 2024 – Sept. 2025")[
+#entry("Prestataire informatique (auto-entrepreneur)", "Norauto International", "Oct. 2024 – Sept. 2025")[
   - Maintenance du système de collecte et des proxies, contrôle d'intégrité des données et suivi des traitements
 ]
 
