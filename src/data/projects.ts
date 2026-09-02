@@ -10,7 +10,7 @@ export interface Project {
 
 export const PROJECTS: Project[] = [
   {
-    title: 'Stop Doomscrolling',
+    title: 'Focus Up!',
     date: '2026-04',
     tags: [
       { label: 'JavaScript', icon: 'images/js.png' },

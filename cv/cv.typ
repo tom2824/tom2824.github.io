@@ -87,7 +87,7 @@ Je recherche un premier poste de *développeur back-end, full-stack ou data* sur
 // ================= PROJETS =================
 #section("Projets")
 
-#entry("Stop Doomscrolling", "extension navigateur, projet personnel", "2026")[
+#entry("Focus Up!", "extension navigateur, projet personnel", "2026")[
   - Extension Edge / Chrome (JavaScript, WebExtensions API) limitant le temps passé sur des sites configurés, mode Focus, interface FR/EN — #link("https://github.com/tom2824/stop-doomscrolling")[github.com/tom2824/stop-doomscrolling]
 ]
 
