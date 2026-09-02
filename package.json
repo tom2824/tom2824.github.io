@@ -9,7 +9,7 @@
     "dev": "astro dev",
     "build": "astro build",
     "preview": "astro preview",
-    "cv": "typst compile cv/cv.typ public/CV_Tom_NGUYEN.pdf"
+    "cv": "node cv/build.mjs"
   },
   "repository": {
     "type": "git",
