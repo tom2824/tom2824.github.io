@@ -5,7 +5,22 @@
 #let accent = rgb("#8b5e3c")
 #let muted = rgb("#5a5048")
 
-#set page(paper: "a4", margin: (x: 1.4cm, top: 1.0cm, bottom: 0.9cm))
+// Version et date injectées par cv/build.mjs (--input), voir cv/CHANGELOG.md
+#let version = sys.inputs.at("version", default: "dev")
+#let vdate = sys.inputs.at("date", default: "")
+
+#set document(
+  title: "CV Tom NGUYEN — v" + version,
+  author: "Tom NGUYEN",
+  keywords: ("CV", "développeur", "Lille", "version " + version, vdate),
+)
+#set page(
+  paper: "a4",
+  margin: (x: 1.4cm, top: 1.0cm, bottom: 0.9cm),
+  footer: align(right, text(size: 6.5pt, fill: muted.lighten(35%))[
+    CV v#version #if vdate != "" [· #vdate] · tom2824.github.io
+  ]),
+)
 #set text(font: ("Lato", "Carlito", "DejaVu Sans"), size: 9.2pt, lang: "fr", hyphenate: false)
 #set par(leading: 0.5em, justify: false)
 #show link: it => text(fill: accent, it)

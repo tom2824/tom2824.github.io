@@ -9,7 +9,8 @@
     "dev": "astro dev",
     "build": "astro build",
     "preview": "astro preview",
-    "cv": "node cv/build.mjs"
+    "cv": "node cv/build.mjs",
+    "cv:bump": "node cv/build.mjs --bump"
   },
   "repository": {
     "type": "git",
