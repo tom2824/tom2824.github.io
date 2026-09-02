@@ -50,7 +50,7 @@
       Email : #link("mailto:nguyen.tom.2824@gmail.com")[nguyen.tom.2824\@gmail.com] \
       Portfolio : #link("https://tom2824.github.io")[tom2824.github.io] #h(8pt)
       GitHub : #link("https://github.com/tom2824")[github.com/tom2824] #h(8pt)
-      LinkedIn : #link("https://www.linkedin.com/in/tom-nguyen-318b13299/")[tom-nguyen-318b13299]
+      LinkedIn : #link("https://www.linkedin.com/in/tom2824/")[linkedin.com/in/tom2824]
     ]
   ],
   box(clip: true, radius: 50%, width: 2.6cm, height: 2.6cm, stroke: 1pt + accent,
