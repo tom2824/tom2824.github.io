@@ -1206,3 +1206,55 @@ footer p {
     text-transform: uppercase;
     letter-spacing: 0.05em;
 }
+
+/* ========== PAGE CV ========== */
+.cv-page {
+    padding-top: 7rem;
+    max-width: 1000px;
+}
+
+.cv-toolbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+}
+
+.cv-version {
+    color: var(--text-muted);
+    font-size: 0.95rem;
+}
+
+.cv-actions {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+}
+
+.cv-viewer {
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    overflow: hidden;
+    background: #ffffff;
+    box-shadow: 0 0 40px rgba(200, 149, 108, 0.08);
+}
+
+.cv-viewer object {
+    display: block;
+    width: 100%;
+    height: min(1250px, 135vh);
+}
+
+.cv-fallback {
+    padding: 2.5rem 1.5rem;
+    color: #333333;
+    text-align: center;
+}
+
+@media (max-width: 768px) {
+    .cv-viewer object {
+        height: 80vh;
+    }
+}

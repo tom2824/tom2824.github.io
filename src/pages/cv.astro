@@ -1,0 +1,37 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Navbar from '../components/Navbar.astro';
+import Footer from '../components/Footer.astro';
+import cv from '../data/cv.json';
+
+const [y, m, d] = cv.date.split('-');
+const dateFr = `${d}/${m}/${y}`;
+const fileName = cv.file.slice(1);
+---
+<Layout title="Tom NGUYEN — CV">
+    <Navbar />
+    <section id="cv" class="cv-page">
+        <div class="section-header reveal">
+            <h2>Mon CV</h2>
+            <div class="section-line"></div>
+        </div>
+        <div class="cv-toolbar reveal">
+            <p class="cv-version">
+                Version {cv.version} · mise à jour le {dateFr} · une page, format PDF
+            </p>
+            <div class="cv-actions">
+                <a href={cv.file} download={fileName} class="btn btn-primary">Télécharger le PDF</a>
+                <a href={cv.file} target="_blank" rel="noopener" class="btn btn-outline">Ouvrir dans un onglet</a>
+            </div>
+        </div>
+        <div class="cv-viewer reveal">
+            <object data={`${cv.file}#view=FitH&navpanes=0`} type="application/pdf" aria-label="Aperçu du CV de Tom NGUYEN">
+                <p class="cv-fallback">
+                    L'aperçu ne s'affiche pas sur ce navigateur.
+                    <a href={cv.file} download={fileName}>Téléchargez le PDF</a> pour le consulter.
+                </p>
+            </object>
+        </div>
+    </section>
+    <Footer />
+</Layout>

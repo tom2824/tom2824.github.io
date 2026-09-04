@@ -54,7 +54,9 @@ const { title = 'Tom NGUYEN — Portfolio' } = Astro.props;
                 if (scrollY >= top && scrollY < top + height) current = section.id;
             });
             navLinks.forEach(link => {
-                link.classList.toggle('active', link.getAttribute('href') === `#${current}`);
+                const href = link.getAttribute('href') ?? '';
+                if (!href.includes('#')) return; // liens vers d'autres pages (ex. /cv) : état géré côté serveur
+                link.classList.toggle('active', href.endsWith(`#${current}`) && current !== '');
             });
         }
         window.addEventListener('scroll', onScroll, { passive: true });
