@@ -1,8 +1,15 @@
 ---
+import { DEFAULT_LANG, t, type Lang } from '../i18n';
+
+interface Props {
+  lang?: Lang;
+}
+const { lang = DEFAULT_LANG } = Astro.props;
+const dict = t(lang).contact;
 ---
 <section id="contact">
     <div class="section-header reveal">
-        <h2>Réseaux & Contact</h2>
+        <h2>{dict.title}</h2>
         <div class="section-line"></div>
     </div>
     <div class="contact-grid reveal">

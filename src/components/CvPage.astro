@@ -1,0 +1,50 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Navbar from './Navbar.astro';
+import Footer from './Footer.astro';
+import cv from '../data/cv.json';
+import { t, type Lang } from '../i18n';
+
+interface Props {
+  lang: Lang;
+}
+const { lang } = Astro.props;
+const dict = t(lang);
+
+// Le CV existe dans les deux langues : chaque page propose le sien et un lien vers l'autre.
+const files: Record<Lang, string> = { fr: cv.file, en: cv.fileEn };
+const file = files[lang];
+const other = files[lang === 'fr' ? 'en' : 'fr'];
+const fileName = file.slice(1);
+const [y, m, d] = cv.date.split('-');
+const dateText = lang === 'fr' ? `${d}/${m}/${y}` : `${y}-${m}-${d}`;
+---
+<Layout lang={lang} title={dict.layout.cvTitle} path="/cv">
+    <Navbar lang={lang} />
+    <section id="cv" class="cv-page">
+        <div class="section-header reveal">
+            <h2>{dict.cv.title}</h2>
+            <div class="section-line"></div>
+        </div>
+        <div class="cv-toolbar reveal">
+            <p class="cv-version">
+                {dict.cv.version(cv.version, dateText)}
+                <br>
+                <span class="cv-other">{dict.cv.otherLanguage} <a href={other} download={other.slice(1)}>{dict.cv.otherLanguageLink}</a></span>
+            </p>
+            <div class="cv-actions">
+                <a href={file} download={fileName} class="btn btn-primary">{dict.cv.download}</a>
+                <a href={file} target="_blank" rel="noopener" class="btn btn-outline">{dict.cv.open}</a>
+            </div>
+        </div>
+        <div class="cv-viewer reveal">
+            <object data={`${file}#view=FitH&navpanes=0`} type="application/pdf" aria-label={dict.cv.previewAlt}>
+                <p class="cv-fallback">
+                    {dict.cv.fallback}
+                    <a href={file} download={fileName}>{dict.cv.fallbackLink}</a>{dict.cv.fallbackEnd}
+                </p>
+            </object>
+        </div>
+    </section>
+    <Footer lang={lang} />
+</Layout>

@@ -1,5 +1,11 @@
 ---
+import { DEFAULT_LANG, t, type Lang } from '../i18n';
+
+interface Props {
+  lang?: Lang;
+}
+const { lang = DEFAULT_LANG } = Astro.props;
 ---
 <footer>
-    <p>&copy; 2026 Tom NGUYEN</p>
+    <p>{t(lang).footer.copyright}</p>
 </footer>

@@ -1,112 +1,53 @@
 ---
+import { DEFAULT_LANG, t, type Lang } from '../i18n';
+
+interface Props {
+  lang?: Lang;
+}
+const { lang = DEFAULT_LANG } = Astro.props;
+const dict = t(lang).experience;
+
+const ICONS: Record<string, string> = {
+  'C#': '/images/csharp.svg',
+  MSSQL: '/images/SSMS.png',
+  JavaScript: '/images/js.png',
+  XML: '/images/xml.svg',
+  Bash: '/images/bash.png',
+  Snowflake: '/images/snowflake.svg',
+};
 ---
 <section id="experience">
     <div class="section-header reveal">
-        <h2>Expérience</h2>
+        <h2>{dict.title}</h2>
         <div class="section-line"></div>
     </div>
     <div class="timeline">
-
-        <div class="timeline-item featured reveal">
-            <div class="timeline-marker"></div>
-            <div class="timeline-content">
-                <span class="timeline-badge work">Alternance</span>
-                <h3>Alternant Équipe Pricing — Norauto International</h3>
-                <span class="timeline-date">Septembre 2025 — Août 2026</span>
-                <div class="card-tags">
-                    <span><img src="/images/csharp.svg" alt="" loading="lazy" />C#</span>
-                    <span><img src="/images/SSMS.png" alt="" loading="lazy" />MSSQL</span>
-                    <span><img src="/images/js.png" alt="" loading="lazy" />JavaScript</span>
-                    <span><img src="/images/xml.svg" alt="" loading="lazy" />XML</span>
-                    <span><img src="/images/bash.png" alt="" loading="lazy" />Bash</span>
-                    <span><img src="/images/snowflake.svg" alt="" loading="lazy" />Snowflake</span>
+        {dict.entries.map((entry, index) => (
+            <div class:list={['timeline-item', 'reveal', { featured: index === 0 }]}>
+                <div class="timeline-marker"></div>
+                <div class="timeline-content">
+                    <span class="timeline-badge work">{entry.badge}</span>
+                    <h3>{entry.title}</h3>
+                    <span class="timeline-date">{entry.date}</span>
+                    {'tags' in entry && entry.tags && (
+                        <div class="card-tags">
+                            {entry.tags.map((tag) => (
+                                <span>{ICONS[tag] && <img src={ICONS[tag]} alt="" loading="lazy" />}{tag}</span>
+                            ))}
+                        </div>
+                    )}
+                    {'context' in entry && entry.context && <p class="experience-context">{entry.context}</p>}
+                    {'missions' in entry && entry.missions && (
+                        <ul class="experience-missions">
+                            {entry.missions.map((mission) => <li>{mission}</li>)}
+                        </ul>
+                    )}
+                    {'autonomy' in entry && entry.autonomy && (
+                        <p class="experience-autonomy"><strong>{dict.autonomyLabel}</strong> {entry.autonomy}</p>
+                    )}
+                    {'text' in entry && entry.text && <p>{entry.text}</p>}
                 </div>
-                <p class="experience-context">
-                    Équipe de 7 personnes réalisant de la veille concurrentielle pour plusieurs business units internationales (France, Belgique, Espagne, Italie, Portugal).
-                    L'équipe fournit les données nécessaires à la prise de décision tarifaire sur les produits et prestations.
-                </p>
-                <ul class="experience-missions">
-                    <li>Conception et maintenance de pipelines de web scraping pour le monitoring de prix concurrentiels (C#, XML, XPath)</li>
-                    <li>Nettoyage et traitement des données collectées via procédures stockées SQL Server (détection de deltas)</li>
-                    <li>Migration progressive des flux de données vers Snowflake et analyse temporelle / détection d'anomalies</li>
-                    <li>Automatisation et fiabilisation de la collecte : scripts de gestion VPN/proxies et automatisation navigateur</li>
-                </ul>
-                <p class="experience-autonomy">
-                    <strong>Autonomie :</strong> gestion autonome de mes priorités au quotidien, avec un focus sur le maintien opérationnel (run) avant les nouveaux développements. Points réguliers avec ma manager, qui jouait le rôle de Product Owner.
-                    Échanges directs avec les business units, notamment sous forme de tickets.
-                </p>
             </div>
-        </div>
-
-        <div class="timeline-item reveal">
-            <div class="timeline-marker"></div>
-            <div class="timeline-content">
-                <span class="timeline-badge work">Stage</span>
-                <h3>Stagiaire Équipe Pricing — Norauto International</h3>
-                <span class="timeline-date">Avril — Mai 2025</span>
-                <div class="card-tags">
-                    <span><img src="/images/csharp.svg" alt="" loading="lazy" />C#</span>
-                    <span><img src="/images/SSMS.png" alt="" loading="lazy" />MSSQL</span>
-                    <span><img src="/images/js.png" alt="" loading="lazy" />JavaScript</span>
-                    <span><img src="/images/xml.svg" alt="" loading="lazy" />XML</span>
-                    <span><img src="/images/bash.png" alt="" loading="lazy" />Bash</span>
-                </div>
-                <p class="experience-context">
-                    Équipe de 3 personnes au sein du pôle Pricing. Première immersion en environnement professionnel dans le domaine de la data.
-                </p>
-                <ul class="experience-missions">
-                    <li>Maintenance du système de collecte de données web existant</li>
-                    <li>Développement et maintenance de proxys</li>
-                    <li>Découverte du fonctionnement d'une équipe data en entreprise</li>
-                </ul>
-            </div>
-        </div>
-
-        <div class="timeline-item reveal">
-            <div class="timeline-marker"></div>
-            <div class="timeline-content">
-                <span class="timeline-badge work">Auto-entrepreneur</span>
-                <h3>Prestataire Informatique — Norauto International</h3>
-                <span class="timeline-date">Octobre 2024 — Septembre 2025</span>
-                <div class="card-tags">
-                    <span><img src="/images/csharp.svg" alt="" loading="lazy" />C#</span>
-                    <span><img src="/images/SSMS.png" alt="" loading="lazy" />MSSQL</span>
-                    <span><img src="/images/js.png" alt="" loading="lazy" />JavaScript</span>
-                    <span><img src="/images/xml.svg" alt="" loading="lazy" />XML</span>
-                    <span><img src="/images/bash.png" alt="" loading="lazy" />Bash</span>
-                </div>
-                <ul class="experience-missions">
-                    <li>Maintenance du système de collecte de données et des proxys</li>
-                    <li>Vérification de l'intégrité des données et suivi du bon déroulement des processus</li>
-                </ul>
-            </div>
-        </div>
-
-        <div class="timeline-item reveal">
-            <div class="timeline-marker"></div>
-            <div class="timeline-content">
-                <span class="timeline-badge work">Emploi saisonnier</span>
-                <h3>Agent d'Entretien Qualifié — CHU de Lille (Salengro)</h3>
-                <span class="timeline-date">Août 2024</span>
-                <p>
-                    Service de stérilisation. Expérience formatrice sur la cohésion d'équipe
-                    et le travail avec de nouvelles personnes.
-                </p>
-            </div>
-        </div>
-
-        <div class="timeline-item reveal">
-            <div class="timeline-marker"></div>
-            <div class="timeline-content">
-                <span class="timeline-badge work">Emploi saisonnier</span>
-                <h3>Agent des Services Hospitaliers — CHU de Lille (Huriez)</h3>
-                <span class="timeline-date">Août 2023</span>
-                <p>
-                    Première expérience professionnelle. Apprentissage de la communication
-                    en équipe et de l'intégration progressive.
-                </p>
-            </div>
-        </div>
-
+        ))}
     </div>
 </section>

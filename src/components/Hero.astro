@@ -1,5 +1,12 @@
 ---
 import cv from '../data/cv.json';
+import { DEFAULT_LANG, localized, t, type Lang } from '../i18n';
+
+interface Props {
+  lang?: Lang;
+}
+const { lang = DEFAULT_LANG } = Astro.props;
+const dict = t(lang).hero;
 ---
 <section id="hero">
     <div class="hero-content">
@@ -7,22 +14,16 @@ import cv from '../data/cv.json';
             <img src="/images/pp_pro_2026.jpg" alt="Tom NGUYEN" class="hero-image">
         </div>
         <h1 class="hero-title reveal">
-            <span class="hero-greeting">Salut ! Moi c'est</span>
+            <span class="hero-greeting">{dict.greeting}</span>
             <span class="hero-name">Tom NGUYEN</span>
         </h1>
-        <p class="hero-subtitle reveal"><span id="age"></span> ans · Développeur junior · Diplômé BUT Informatique</p>
-        <p class="hero-status reveal">Disponible immédiatement</p>
-        <p class="hero-description reveal">
-            Diplômé du BUT Informatique et fort d'un an d'alternance dans l'équipe Pricing de Norauto International,
-            je cherche aujourd'hui un premier poste de développeur pour continuer à apprendre au contact d'une équipe
-            et gagner en expérience sur des projets concrets.
-            Attiré par la data et l'automatisation, je suis à l'aise aussi bien sur le back-end (C#, Java, SQL)
-            que sur le traitement de données (SQL Server, Snowflake).
-        </p>
+        <p class="hero-subtitle reveal"><span id="age"></span> {dict.subtitle}</p>
+        <p class="hero-status reveal">{dict.status}</p>
+        <p class="hero-description reveal">{dict.description}</p>
         <div class="hero-cta reveal">
-            <a href="#projects" class="btn btn-primary">Voir mes projets</a>
-            <a href="#contact" class="btn btn-outline">Me contacter</a>
-            <a href="/cv" class="btn btn-outline" title={`CV version ${cv.version} du ${cv.date}`}>Voir mon CV</a>
+            <a href="#projects" class="btn btn-primary">{dict.projects}</a>
+            <a href="#contact" class="btn btn-outline">{dict.contact}</a>
+            <a href={localized('/cv', lang)} class="btn btn-outline" title={dict.cvTitle(cv.version, cv.date)}>{dict.cv}</a>
         </div>
     </div>
     <div class="scroll-indicator">

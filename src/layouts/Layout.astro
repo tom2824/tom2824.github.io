@@ -1,18 +1,27 @@
 ---
 import '../styles/global.css';
+import { DEFAULT_LANG, LANGS, localized, t, type Lang } from '../i18n';
 
 interface Props {
+  lang?: Lang;
   title?: string;
+  /** Chemin sans préfixe de langue (ex. « /cv »), pour les liens hreflang vers l'autre version. */
+  path?: string;
 }
-const { title = 'Tom NGUYEN — Portfolio' } = Astro.props;
+const { lang = DEFAULT_LANG, path = '/' } = Astro.props;
+const dict = t(lang);
+const title = Astro.props.title ?? dict.layout.title;
+const site = Astro.site?.toString().replace(/\/$/, '') ?? '';
 ---
 <!DOCTYPE html>
-<html lang="fr">
+<html lang={lang}>
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{title}</title>
-    <meta name="description" content="Tom Nguyen, développeur junior diplômé du BUT Informatique (IUT de Lille), un an d'alternance chez Norauto International. En recherche d'un premier poste de développeur back-end, full-stack ou data sur Lille.">
+    <meta name="description" content={dict.layout.description}>
+    {LANGS.map((l) => <link rel="alternate" hreflang={l} href={`${site}${localized(path, l)}`} />)}
+    <link rel="alternate" hreflang="x-default" href={`${site}${localized(path, DEFAULT_LANG)}`} />
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@400;500;600;700&display=swap" rel="stylesheet">

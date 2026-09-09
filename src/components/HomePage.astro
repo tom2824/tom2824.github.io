@@ -1,0 +1,31 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Navbar from './Navbar.astro';
+import Hero from './Hero.astro';
+import About from './About.astro';
+import Skills from './Skills.astro';
+import ProjectsSection from './ProjectsSection.astro';
+import Experience from './Experience.astro';
+import Reflexive from './Reflexive.astro';
+import Education from './Education.astro';
+import Contact from './Contact.astro';
+import Footer from './Footer.astro';
+import type { Lang } from '../i18n';
+
+interface Props {
+  lang: Lang;
+}
+const { lang } = Astro.props;
+---
+<Layout lang={lang} path="/">
+    <Navbar lang={lang} />
+    <Hero lang={lang} />
+    <About lang={lang} />
+    <Skills lang={lang} />
+    <ProjectsSection lang={lang} />
+    <Experience lang={lang} />
+    <Reflexive lang={lang} />
+    <Education lang={lang} />
+    <Contact lang={lang} />
+    <Footer lang={lang} />
+</Layout>

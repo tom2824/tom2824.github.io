@@ -1,7 +1,15 @@
 ---
+import { DEFAULT_LANG, t, type Lang } from '../i18n';
+
+interface Props {
+  lang?: Lang;
+}
+const { lang = DEFAULT_LANG } = Astro.props;
+const dict = t(lang).skills;
+
 const techSkills = [
   {
-    title: 'POO & Programmation Fonctionnelle',
+    title: dict.categories.oop,
     tags: [
       { label: 'C#', icon: '/images/csharp.svg' },
       { label: 'Java', icon: '/images/java.png' },
@@ -9,22 +17,23 @@ const techSkills = [
     ],
   },
   {
-    title: 'IHM',
+    title: dict.categories.ui,
     tags: [
       { label: 'JavaFX' },
       { label: 'SceneBuilder', icon: '/images/sb.png' },
     ],
   },
   {
-    title: 'SQL',
+    title: dict.categories.sql,
     tags: [
       { label: 'PostgreSQL', icon: '/images/psql.png' },
+      { label: 'Supabase', icon: '/images/supabase.svg' },
       { label: 'MSSQL', icon: '/images/SSMS.png' },
       { label: 'Snowflake', icon: '/images/snowflake.svg' },
     ],
   },
   {
-    title: 'NoSQL',
+    title: dict.categories.nosql,
     tags: [
       { label: 'MongoDB', icon: '/images/mongodb.svg' },
       { label: 'Redis', icon: '/images/redis.svg' },
@@ -33,7 +42,7 @@ const techSkills = [
     ],
   },
   {
-    title: 'Data Science',
+    title: dict.categories.data,
     tags: [
       { label: 'Python', icon: '/images/python.svg' },
       { label: 'Numpy', icon: '/images/numpy.svg' },
@@ -44,7 +53,7 @@ const techSkills = [
     ],
   },
   {
-    title: 'Dev Web',
+    title: dict.categories.web,
     tags: [
       { label: 'HTML/CSS', icon: '/images/html.png' },
       { label: 'JavaScript', icon: '/images/js.png' },
@@ -58,7 +67,7 @@ const techSkills = [
     ],
   },
   {
-    title: 'Mobile',
+    title: dict.categories.mobile,
     tags: [
       { label: 'React Native', icon: '/images/reactnative.svg' },
       { label: 'Expo', icon: '/images/expo.svg' },
@@ -67,10 +76,10 @@ const techSkills = [
     ],
   },
   {
-    title: 'DevOps',
+    title: dict.categories.devops,
     tags: [
       { label: 'Git', icon: '/images/git.png' },
-      { label: 'Pipelines CI/CD' },
+      { label: dict.tags.cicd },
       { label: 'Bash', icon: '/images/bash.png' },
       { label: 'Maven', icon: '/images/maven.svg' },
       { label: 'Docker', icon: '/images/docker.svg' },
@@ -79,7 +88,7 @@ const techSkills = [
     ],
   },
   {
-    title: 'Gestion de projets & Agilité',
+    title: dict.categories.agile,
     tags: [
       { label: 'Scrum' },
       { label: 'Kanban' },
@@ -92,13 +101,13 @@ const techSkills = [
 
 <section id="skills">
     <div class="section-header reveal">
-        <h2>Compétences</h2>
+        <h2>{dict.title}</h2>
         <div class="section-line"></div>
     </div>
 
     <div class="skills-section-label reveal">
         <span class="skills-label-icon">&#9881;</span>
-        <h3>Compétences techniques</h3>
+        <h3>{dict.techLabel}</h3>
     </div>
     <div class="skills-grid reveal">
         {techSkills.map(cat => (
@@ -120,93 +129,35 @@ const techSkills = [
 
     <div class="skills-section-label reveal">
         <span class="skills-label-icon">&#9733;</span>
-        <h3>Compétences comportementales</h3>
+        <h3>{dict.softLabel}</h3>
     </div>
 
     <div class="soft-skills-detailed reveal">
-
-        <div class="soft-skill-block">
-            <h4>Manière d'être</h4>
-
-            <div class="soft-skill-card">
-                <h5>Adaptabilité & gestion des priorités</h5>
-                <p>
-                    Chez Norauto, les sites que nous collections évoluaient en permanence : changements de structure, nouvelles mesures anti-bots, captchas inédits.
-                    Chaque matin pouvait apporter son lot d'aspirations bloquées à corriger en urgence, car nous livrions quotidiennement.
-                    J'ai appris à prioriser rapidement les tâches critiques et à prendre des décisions sous contrainte de temps, sans me laisser déborder.
-                </p>
+        {dict.softBlocks.map((block) => (
+            <div class="soft-skill-block">
+                <h4>{block.title}</h4>
+                {block.cards.map((card) => (
+                    <div class="soft-skill-card">
+                        <h5>{card.title}</h5>
+                        <p>{card.text}</p>
+                    </div>
+                ))}
             </div>
-
-            <div class="soft-skill-card">
-                <h5>Sang-froid & rigueur</h5>
-                <p>
-                    De nature calme, je ne panique pas face aux imprévus. Je prends le temps de me poser, d'analyser la situation et de prendre la bonne décision plutôt que de me précipiter.
-                    Étant conscient de ma tendance à être tête en l'air, j'ai mis en place un système de notes systématique pour tout ce que je fais, ce qui me permet de rester organisé et de ne rien laisser passer.
-                </p>
-            </div>
-
-            <div class="soft-skill-card">
-                <h5>Autonomie & confiance en soi</h5>
-                <p>
-                    En alternance, je gérais mes priorités de manière autonome au quotidien : le maintien opérationnel d'abord, les nouveaux développements ensuite.
-                    Je faisais des points réguliers avec ma manager pour rendre compte de mon avancement, mais l'organisation de mon travail m'appartenait.
-                    Cette responsabilité m'a appris que je suis plus capable que ce que je pensais, à condition de me faire confiance et d'utiliser mon bon sens.
-                </p>
-            </div>
-        </div>
-
-        <div class="soft-skill-block">
-            <h4>Manière de communiquer</h4>
-
-            <div class="soft-skill-card">
-                <h5>Compréhension du besoin & écoute</h5>
-                <p>
-                    Lors de la mise en place de nouvelles aspirations, je devais comprendre précisément le besoin des business units : quels produits cibler, quelles caractéristiques aspirer pour permettre la comparaison concurrentielle.
-                    Ma manager, en tant que Product Owner, servait d'intermédiaire, mais je pouvais aussi échanger directement avec les BU, notamment via des tickets.
-                    Je m'assurais de bien reformuler le besoin pour éviter les malentendus.
-                </p>
-            </div>
-
-            <div class="soft-skill-card">
-                <h5>Savoir demander de l'aide</h5>
-                <p>
-                    Quand j'ai des doutes, je n'hésite pas à solliciter les bonnes personnes. Chez Norauto : mon tech lead pour les questions techniques, ma manager (PO) pour les attentes métier, ou mon collègue senior pour les aspects liés à la solution.
-                    J'ai compris que poser des questions n'est pas un signe de faiblesse mais une compétence essentielle pour avancer efficacement.
-                </p>
-            </div>
-        </div>
-
-        <div class="soft-skill-block">
-            <h4>Manière de travailler avec les autres</h4>
-
-            <div class="soft-skill-card">
-                <h5>Travail en équipe & collaboration</h5>
-                <p>
-                    Bien que j'aie été autonome dans mon travail, la mise en place de nouvelles aspirations nécessitait une forte collaboration.
-                    Je m'appuyais sur les expertises de chacun : mon tech lead pour les spécificités produit, mon collègue senior pour la connaissance approfondie de la solution, et mes collègues en contact direct avec les BU France, Belgique, Espagne, Italie et Portugal pour les informations sur les chaînes de production.
-                    Avant de démarrer un nouveau développement, je prenais connaissance de l'existant auprès de l'équipe pour capitaliser sur ce qui avait déjà été fait.
-                </p>
-            </div>
-        </div>
-
+        ))}
     </div>
 
     <div class="skills-divider"></div>
 
     <div class="skills-section-label reveal">
         <span class="skills-label-icon">&#127760;</span>
-        <h3>Langues</h3>
+        <h3>{dict.languagesLabel}</h3>
     </div>
     <div class="skills-grid soft reveal">
         <div class="skill-category soft">
             <div class="skill-tags soft-skills">
-                <span class="skill-tag soft">Anglais — Niveau C1 (Cambridge)</span>
-                <span class="skill-tag soft">Espagnol — Niveau A2</span>
+                {dict.languages.map((language) => <span class="skill-tag soft">{language}</span>)}
             </div>
-            <p class="skill-detail">
-                Certification Cambridge niveau C1, forgée par des années d'échanges
-                en anglais en ligne et une section Anglais Euro au Lycée.
-            </p>
+            <p class="skill-detail">{dict.languagesDetail}</p>
         </div>
     </div>
 </section>
