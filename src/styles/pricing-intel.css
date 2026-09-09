@@ -42,7 +42,7 @@
     flex-wrap: wrap;
     font-size: 0.85rem;
     color: var(--text-muted);
-    margin-bottom: 2.5rem;
+    margin-bottom: 0;
     text-align: center;
 }
 
@@ -72,6 +72,13 @@
 }
 
 /* Onglets de vue */
+.pi-sep {
+    border: 0;
+    border-top: 1px solid var(--border);
+    max-width: 640px;
+    margin: 2.75rem auto;
+}
+
 .pi-tabs {
     display: flex;
     justify-content: center;
