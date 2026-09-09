@@ -1,0 +1,169 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Navbar from './Navbar.astro';
+import Footer from './Footer.astro';
+import '../styles/pricing-intel.css';
+import { t, type Lang } from '../i18n';
+
+interface Props {
+  lang: Lang;
+}
+const { lang } = Astro.props;
+const dict = t(lang);
+const p = dict.pricing;
+const how = p.how;
+const repo = 'https://github.com/tom2824/pricing-intel';
+---
+<Layout lang={lang} title={dict.layout.pricingTitle} path="/pricing-intel">
+    <Navbar lang={lang} />
+    <section id="pricing-intel" class="pi-page">
+        <div class="section-header reveal">
+            <h2>Pricing Intel</h2>
+            <div class="section-line"></div>
+        </div>
+
+        <div class="pi-intro reveal">
+            <p>{p.intro}</p>
+            <p class="pi-intro-links">
+                <a href={repo} target="_blank" rel="noopener">{p.links.code}</a>
+                <span aria-hidden="true">·</span>
+                <a href={`${repo}/tree/main/docs/adr`} target="_blank" rel="noopener">{p.links.adr}</a>
+                <span aria-hidden="true">·</span>
+                <a href={`${repo}/blob/main/docs/philosophie.md`} target="_blank" rel="noopener">{p.links.philosophy}</a>
+            </p>
+            <p class="pi-disclaimer">{p.disclaimer}</p>
+        </div>
+
+        <div id="pi-status" class="pi-status reveal">{p.loading}</div>
+        <div id="pi-error" class="pi-error" hidden></div>
+
+        <div class="pi-tabs reveal" role="tablist">
+            <button type="button" class="pi-tab active" role="tab" data-view="matrix" aria-selected="true">{p.tabs.matrix}</button>
+            <button type="button" class="pi-tab" role="tab" data-view="summary" aria-selected="false">{p.tabs.summary}</button>
+            <button type="button" class="pi-tab" role="tab" data-view="how" aria-selected="false">{p.tabs.how}</button>
+        </div>
+
+        <div class="pi-view pi-how" data-view="how" role="tabpanel" hidden>
+            <svg class="pi-diagram" viewBox="0 0 1000 360" role="img" aria-labelledby="pi-diagram-title">
+                <title id="pi-diagram-title">{how.diagramTitle}</title>
+                <defs>
+                    <marker id="pi-arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
+                        <path d="M0,1 L9,5 L0,9 z" class="pi-d-arrowhead" />
+                    </marker>
+                </defs>
+
+                <g class="pi-d-node">
+                    <rect x="20" y="70" width="170" height="120" rx="12" />
+                    <text x="105" y="98" class="pi-d-title" text-anchor="middle">{how.retailers.title}</text>
+                    <text x="105" y="122" class="pi-d-line" text-anchor="middle">{how.retailers.l1}</text>
+                    <text x="105" y="140" class="pi-d-line" text-anchor="middle">{how.retailers.l2}</text>
+                    <text x="105" y="166" class="pi-d-note" text-anchor="middle">{how.retailers.note}</text>
+                </g>
+
+                <g class="pi-d-node">
+                    <rect x="240" y="55" width="200" height="150" rx="12" />
+                    <text x="340" y="83" class="pi-d-title" text-anchor="middle">{how.collect.title}</text>
+                    <text x="340" y="107" class="pi-d-line" text-anchor="middle">{how.collect.l1}</text>
+                    <text x="340" y="125" class="pi-d-line" text-anchor="middle">{how.collect.l2}</text>
+                    <text x="340" y="151" class="pi-d-note" text-anchor="middle">{how.collect.n1}</text>
+                    <text x="340" y="167" class="pi-d-note" text-anchor="middle">{how.collect.n2}</text>
+                    <text x="340" y="183" class="pi-d-note" text-anchor="middle">{how.collect.n3}</text>
+                </g>
+
+                <g class="pi-d-node is-store">
+                    <rect x="490" y="55" width="200" height="150" rx="12" />
+                    <text x="590" y="83" class="pi-d-title" text-anchor="middle">{how.store.title}</text>
+                    <text x="590" y="107" class="pi-d-line" text-anchor="middle">{how.store.l1}</text>
+                    <text x="590" y="133" class="pi-d-note" text-anchor="middle">{how.store.n1}</text>
+                    <text x="590" y="149" class="pi-d-note" text-anchor="middle">{how.store.n2}</text>
+                    <text x="590" y="165" class="pi-d-note" text-anchor="middle">{how.store.n3}</text>
+                    <text x="590" y="181" class="pi-d-note" text-anchor="middle">{how.store.n4}</text>
+                </g>
+
+                <g class="pi-d-node is-front">
+                    <rect x="800" y="70" width="180" height="120" rx="12" />
+                    <text x="890" y="98" class="pi-d-title" text-anchor="middle">{how.front.title}</text>
+                    <text x="890" y="122" class="pi-d-line" text-anchor="middle">{how.front.l1}</text>
+                    <text x="890" y="140" class="pi-d-line" text-anchor="middle">{how.front.l2}</text>
+                    <text x="890" y="166" class="pi-d-note" text-anchor="middle">{how.front.note}</text>
+                </g>
+
+                <g class="pi-d-node is-engine">
+                    <rect x="460" y="245" width="260" height="102" rx="12" />
+                    <text x="590" y="272" class="pi-d-title" text-anchor="middle">{how.engine.title}</text>
+                    <text x="590" y="294" class="pi-d-line" text-anchor="middle">{how.engine.l1}</text>
+                    <text x="590" y="316" class="pi-d-note" text-anchor="middle">{how.engine.n1}</text>
+                    <text x="590" y="332" class="pi-d-note" text-anchor="middle">{how.engine.n2}</text>
+                </g>
+
+                <g class="pi-d-edges">
+                    <line x1="190" y1="130" x2="238" y2="130" marker-end="url(#pi-arrow)" />
+                    <text x="214" y="118" class="pi-d-edge" text-anchor="middle">{how.edges.http}</text>
+                    <line x1="440" y1="130" x2="488" y2="130" marker-end="url(#pi-arrow)" />
+                    <text x="464" y="118" class="pi-d-edge" text-anchor="middle">{how.edges.snapshots}</text>
+                    <line x1="690" y1="130" x2="798" y2="130" marker-end="url(#pi-arrow)" />
+                    <text x="744" y="118" class="pi-d-edge" text-anchor="middle">{how.edges.api}</text>
+                    <text x="744" y="148" class="pi-d-edge" text-anchor="middle">{how.edges.readOnly}</text>
+                    <line x1="560" y1="243" x2="560" y2="207" marker-end="url(#pi-arrow)" />
+                    <line x1="620" y1="207" x2="620" y2="243" marker-end="url(#pi-arrow)" />
+                    <text x="545" y="230" class="pi-d-edge" text-anchor="end">{how.edges.recommendations}</text>
+                    <text x="635" y="230" class="pi-d-edge" text-anchor="start">{how.edges.market}</text>
+                </g>
+            </svg>
+
+            <ol class="pi-steps-how">
+                {how.steps.map((step) => <li><strong>{step.title}</strong> {step.text}</li>)}
+            </ol>
+
+            <p class="pi-how-arch">
+                {how.archA}<a href={`${repo}/tree/main/docs/adr`} target="_blank" rel="noopener">{how.archLink}</a>{how.archB}
+            </p>
+        </div>
+
+        <div class="pi-view" data-view="matrix" role="tabpanel">
+            <div class="pi-toolbar">
+                <fieldset class="pi-scope">
+                    <legend>{p.matrix.rows}</legend>
+                    <label><input type="radio" name="pi-matrix-scope" value="strict" checked> {p.matrix.strict}</label>
+                    <label><input type="radio" name="pi-matrix-scope" value="segment"> {p.matrix.segment}</label>
+                </fieldset>
+                <label class="pi-check">
+                    <input type="checkbox" id="pi-hide-marketplace">
+                    {p.matrix.hideMarketplace}
+                </label>
+            </div>
+            <div id="pi-matrix" class="pi-table-wrap" aria-live="polite"></div>
+        </div>
+
+        <div class="pi-view" data-view="summary" role="tabpanel" hidden>
+            <div class="pi-toolbar">
+                <label class="pi-select">
+                    <span>{p.summary.rules}</span>
+                    <select id="pi-profile"></select>
+                </label>
+                <fieldset class="pi-scope">
+                    <legend>{p.summary.market}</legend>
+                    <label><input type="radio" name="pi-scope" value="strict" checked> {p.summary.strict}</label>
+                    <label><input type="radio" name="pi-scope" value="segment"> {p.summary.segment}</label>
+                </fieldset>
+                <p class="pi-hint">{p.summary.hint}</p>
+            </div>
+            <div id="pi-summary" class="pi-table-wrap" aria-live="polite"></div>
+        </div>
+
+        <dialog id="pi-dialog" class="pi-dialog" aria-labelledby="pi-dialog-title">
+            <div class="pi-dialog-inner">
+                <div class="pi-dialog-head">
+                    <h3 id="pi-dialog-title">{p.dialog.title}</h3>
+                    <button type="button" id="pi-dialog-close" class="pi-dialog-close" aria-label={p.dialog.close}>×</button>
+                </div>
+                <div id="pi-dialog-body" class="pi-dialog-body"></div>
+            </div>
+        </dialog>
+    </section>
+    <Footer lang={lang} />
+</Layout>
+
+<script>
+    import '../scripts/pricing-intel/main';
+</script>
