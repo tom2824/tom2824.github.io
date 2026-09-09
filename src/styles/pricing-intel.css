@@ -368,7 +368,7 @@
 .pi-which {
     color: var(--text-dim);
     font-size: 0.68rem;
-    max-width: 6rem;
+    max-width: 5.5rem;
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
@@ -862,8 +862,8 @@
 .pi-matrix.is-segment thead th,
 .pi-matrix.is-segment tbody td,
 .pi-matrix.is-segment tbody th.pi-col-product {
-    padding-left: 0.55rem;
-    padding-right: 0.55rem;
+    padding-left: 0.45rem;
+    padding-right: 0.45rem;
 }
 
 .pi-matrix.is-segment .pi-col-product {
@@ -871,8 +871,8 @@
 }
 
 .pi-matrix.is-segment .pi-price {
-    padding-left: 0.4rem;
-    padding-right: 0.4rem;
+    padding-left: 0.3rem;
+    padding-right: 0.3rem;
 }
 
 /* Posé par le script quand le tableau déborde malgré tout : on défile plutôt que de couper des colonnes. */
@@ -880,9 +880,19 @@
     overflow-x: auto;
 }
 
+/* Un cadre qui défile est un conteneur de défilement : l'en-tête collant s'y positionne par rapport
+   au cadre, plus par rapport à la fenêtre. Avec top: 64px il s'affichait 64px sous le haut du tableau. */
+.pi-table-wrap.pi-scroll .pi-table thead th {
+    top: 0;
+}
+
 @media (max-width: 1100px) {
     .pi-table-wrap {
         overflow-x: auto;
+    }
+
+    .pi-table thead th {
+        top: 0;
     }
 }
 
