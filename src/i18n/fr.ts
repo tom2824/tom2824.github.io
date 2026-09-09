@@ -263,7 +263,7 @@ export const fr = {
     dialog: { title: 'Historique', close: 'Fermer' },
     how: {
       diagramTitle: 'Flux de Pricing Intel : enseignes, collecte, base de données, moteur de prix, portfolio',
-      retailers: { title: 'Enseignes', l1: 'LDLC · TopAchat · Materiel.net', l2: 'Cybertek · 1fodiscount · Alternate', note: 'fiches produit publiques' },
+      retailers: { title: 'Enseignes', l1: 'LDLC · TopAchat', l2: 'Materiel.net · Cybertek', l3: '1fodiscount · Alternate', note: 'fiches produit publiques' },
       collect: { title: 'Collecte', l1: 'batch Java, chaque matin', l2: 'exécuté par GitHub Actions', n1: 'robots.txt, cadence, User-Agent', n2: 'JSON-LD → JSON embarqué → CSS', n3: 'un relevé par annonce et par jour' },
       store: { title: 'Base de données', l1: 'PostgreSQL sur Supabase (Paris)', n1: 'catalogue et annonces', n2: 'relevés, échecs, quarantaine', n3: 'recommandations expliquées', n4: 'vues de lecture (schéma api)' },
       front: { title: 'Cette page', l1: 'Astro, site statique', l2: 'GitHub Pages', note: 'aucun serveur applicatif' },

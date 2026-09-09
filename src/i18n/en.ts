@@ -265,7 +265,7 @@ export const en: Dictionary = {
     dialog: { title: 'History', close: 'Close' },
     how: {
       diagramTitle: 'Pricing Intel flow: retailers, collection, database, pricing engine, portfolio',
-      retailers: { title: 'Retailers', l1: 'LDLC · TopAchat · Materiel.net', l2: 'Cybertek · 1fodiscount · Alternate', note: 'public product pages' },
+      retailers: { title: 'Retailers', l1: 'LDLC · TopAchat', l2: 'Materiel.net · Cybertek', l3: '1fodiscount · Alternate', note: 'public product pages' },
       collect: { title: 'Collection', l1: 'Java batch, every morning', l2: 'run by GitHub Actions', n1: 'robots.txt, pacing, User-Agent', n2: 'JSON-LD → embedded JSON → CSS', n3: 'one reading per listing per day' },
       store: { title: 'Database', l1: 'PostgreSQL on Supabase (Paris)', n1: 'catalogue and listings', n2: 'readings, failures, quarantine', n3: 'explained recommendations', n4: 'read views (api schema)' },
       front: { title: 'This page', l1: 'Astro, static site', l2: 'GitHub Pages', note: 'no application server' },
