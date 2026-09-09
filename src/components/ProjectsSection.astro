@@ -1,6 +1,13 @@
 ---
 import { PROJECTS } from '../data/projects';
 import ProjectCard from './ProjectCard.astro';
+import { DEFAULT_LANG, t, type Lang } from '../i18n';
+
+interface Props {
+  lang?: Lang;
+}
+const { lang = DEFAULT_LANG } = Astro.props;
+const dict = t(lang).projects;
 
 // Tri initial : plus récent en premier
 const sorted = [...PROJECTS].sort((a, b) => b.date.localeCompare(a.date));
@@ -8,24 +15,25 @@ const sorted = [...PROJECTS].sort((a, b) => b.date.localeCompare(a.date));
 
 <section id="projects">
   <div class="section-header reveal">
-    <h2>Projets</h2>
+    <h2>{dict.title}</h2>
     <div class="section-line"></div>
     <div class="sort-controls">
-      <button class="sort-btn active" data-sort="recent">Récent</button>
-      <button class="sort-btn" data-sort="oldest">Ancien</button>
-      <button class="sort-btn" data-sort="az">A→Z</button>
-      <button class="sort-btn" data-sort="za">Z→A</button>
+      <button class="sort-btn active" data-sort="recent">{dict.sort.recent}</button>
+      <button class="sort-btn" data-sort="oldest">{dict.sort.oldest}</button>
+      <button class="sort-btn" data-sort="az">{dict.sort.az}</button>
+      <button class="sort-btn" data-sort="za">{dict.sort.za}</button>
     </div>
   </div>
 
   <div class="projects-container" id="projects-container">
-    {sorted.map(project => <ProjectCard project={project} />)}
+    {sorted.map(project => <ProjectCard project={project} lang={lang} />)}
   </div>
 </section>
 
 <script>
   const container = document.getElementById('projects-container')!;
   const buttons = document.querySelectorAll<HTMLButtonElement>('.sort-btn');
+  const locale = document.documentElement.lang || 'fr';
 
   function getCards() {
     return Array.from(container.querySelectorAll<HTMLElement>('.project-card'));
@@ -40,8 +48,8 @@ const sorted = [...PROJECTS].sort((a, b) => b.date.localeCompare(a.date));
       const titleB = b.dataset.title ?? '';
       if (type === 'recent') return dateB.localeCompare(dateA);
       if (type === 'oldest') return dateA.localeCompare(dateB);
-      if (type === 'az') return titleA.localeCompare(titleB, 'fr');
-      if (type === 'za') return titleB.localeCompare(titleA, 'fr');
+      if (type === 'az') return titleA.localeCompare(titleB, locale);
+      if (type === 'za') return titleB.localeCompare(titleA, locale);
       return 0;
     });
     cards.forEach(card => container.appendChild(card));

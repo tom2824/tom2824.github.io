@@ -1,19 +1,35 @@
 ---
-const onCvPage = Astro.url.pathname.replace(/\/$/, '') === '/cv';
+// Deux familles de liens : les sections de la page d'accueil (ancres, défilement) et les pages à part entière
+// (CV, démo Pricing Intel), séparées et habillées en pastilles. À droite, la bascule de langue.
+import { DEFAULT_LANG, localized, switched, t, type Lang } from '../i18n';
+
+interface Props {
+  lang?: Lang;
+}
+const { lang = DEFAULT_LANG } = Astro.props;
+const dict = t(lang).nav;
+const home = localized('/', lang);
+const anchor = (id: string) => `${home === '/' ? '' : home}/#${id}`;
+const path = Astro.url.pathname.replace(/\/$/, '');
+const bare = path.replace(/^\/en(?=\/|$)/, '');
+const other = switched(Astro.url.pathname, lang);
 ---
 <nav id="navbar">
-    <a href="/" class="nav-logo">TN</a>
+    <a href={home} class="nav-logo">TN</a>
     <div class="nav-links">
-        <a href="/#about" class="nav-link">À propos</a>
-        <a href="/#skills" class="nav-link">Compétences</a>
-        <a href="/#projects" class="nav-link">Projets</a>
-        <a href="/#experience" class="nav-link">Expérience</a>
-        <a href="/#reflexive" class="nav-link">Réflexion</a>
-        <a href="/#education" class="nav-link">Formation</a>
-        <a href="/#contact" class="nav-link">Réseaux</a>
-        <a href="/cv" class:list={['nav-link', 'nav-link-cv', { active: onCvPage }]}>CV</a>
+        <a href={anchor('about')} class="nav-link">{dict.about}</a>
+        <a href={anchor('skills')} class="nav-link">{dict.skills}</a>
+        <a href={anchor('projects')} class="nav-link">{dict.projects}</a>
+        <a href={anchor('experience')} class="nav-link">{dict.experience}</a>
+        <a href={anchor('reflexive')} class="nav-link">{dict.reflexive}</a>
+        <a href={anchor('education')} class="nav-link">{dict.education}</a>
+        <a href={anchor('contact')} class="nav-link">{dict.contact}</a>
+        <span class="nav-sep" aria-hidden="true"></span>
+        <a href={localized('/pricing-intel', lang)} class:list={['nav-link', 'nav-page', { active: bare === '/pricing-intel' }]}>{dict.demo}</a>
+        <a href={localized('/cv', lang)} class:list={['nav-link', 'nav-page', { active: bare === '/cv' }]}>{dict.cv}</a>
+        <a href={other.href} class="nav-link nav-page nav-lang" hreflang={other.lang} lang={other.lang} title={dict.switchTitle}>{dict.switch}</a>
     </div>
-    <button class="nav-toggle" aria-label="Menu">
+    <button class="nav-toggle" aria-label={dict.menu}>
         <span></span>
         <span></span>
         <span></span>

@@ -119,6 +119,36 @@ img {
     width: 100%;
 }
 
+/* Pages à part entière (CV, démo) : séparées des ancres et présentées en pastilles */
+.nav-sep {
+    width: 1px;
+    height: 18px;
+    background: var(--border);
+    align-self: center;
+    margin: 0 0.25rem;
+}
+
+.nav-link.nav-page {
+    padding: 0.3rem 0.85rem;
+    border: 1px solid var(--border);
+    border-radius: 100px;
+    text-transform: none;
+    letter-spacing: 0.01em;
+    font-size: 0.8rem;
+    transition: border-color 0.3s, background 0.3s, color 0.3s;
+}
+
+.nav-link.nav-page::after {
+    display: none;
+}
+
+.nav-link.nav-page:hover,
+.nav-link.nav-page.active {
+    border-color: var(--accent-dim);
+    background: rgba(200, 149, 108, 0.12);
+    color: var(--accent) !important;
+}
+
 .nav-toggle {
     display: none;
     flex-direction: column;
@@ -727,6 +757,26 @@ section {
     transition: transform 0.3s;
 }
 
+/* Deux actions sur une carte : la démo en avant, le code en retrait */
+.card-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.6rem;
+}
+
+.card-action.secondary {
+    background: transparent;
+    border-color: var(--border);
+    color: var(--text-muted);
+}
+
+.card-action.secondary:hover {
+    background: transparent;
+    border-color: var(--accent-dim);
+    color: var(--accent);
+    box-shadow: none;
+}
+
 .card-action:hover .card-action-arrow {
     transform: translateX(3px);
 }
@@ -1072,6 +1122,12 @@ footer p {
         display: flex;
     }
 
+    .nav-sep {
+        width: 48px;
+        height: 1px;
+        margin: 0;
+    }
+
     .nav-toggle.open span:nth-child(1) {
         transform: rotate(45deg) translate(5px, 5px);
     }
@@ -1257,4 +1313,18 @@ footer p {
     .cv-viewer object {
         height: 80vh;
     }
+}
+
+/* Bascule de langue : une pastille comme les pages, plus discrète */
+.nav-link.nav-lang {
+    padding: 0.3rem 0.6rem;
+    font-weight: 600;
+    letter-spacing: 0.06em;
+}
+
+.cv-other {
+    display: inline-block;
+    margin-top: 0.3rem;
+    font-size: 0.85rem;
+    color: var(--text-dim);
 }
