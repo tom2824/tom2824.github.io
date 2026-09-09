@@ -2,10 +2,14 @@
 
 Une entrée par version, la plus récente en haut. Le numéro et la date sont
 imprimés en pied de page du PDF, dans ses métadonnées et dans le nom du fichier
-servi par le site (`CV_Tom_NGUYEN_v1.2.pdf`). Pour savoir quelle version tu as
+servi par le site (`CV_Tom_NGUYEN_v1.3.pdf`, `CV_Tom_NGUYEN_EN_v1.3.pdf` en anglais). Pour savoir quelle version tu as
 sous les yeux, regarde le nom du fichier ou le pied de page.
 
 Nouvelle version : `npm run cv:bump "ce qui a changé"` (puis commit).
+
+## v1.3 — 2026-09-09
+- Version anglaise du CV (CV_Tom_NGUYEN_EN), même numéro de version que la française
+- Projet Pricing Intel ajouté aux projets, application de messagerie retirée pour tenir sur une page
 
 ## v1.2 — 2026-09-02
 - Ronchin, métropole lilloise, à la place de Lille

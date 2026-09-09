@@ -16,12 +16,12 @@
 )
 #set page(
   paper: "a4",
-  margin: (x: 1.4cm, top: 1.0cm, bottom: 0.9cm),
+  margin: (x: 1.4cm, top: 0.9cm, bottom: 0.75cm),
   footer: align(right, text(size: 6.5pt, fill: muted.lighten(35%))[
     CV v#version #if vdate != "" [· #vdate] · tom2824.github.io
   ]),
 )
-#set text(font: ("Lato", "Carlito", "DejaVu Sans"), size: 9.2pt, lang: "fr", hyphenate: false)
+#set text(font: ("Lato", "Carlito", "DejaVu Sans"), size: 9.0pt, lang: "fr", hyphenate: false)
 #set par(leading: 0.5em, justify: false)
 #show link: it => text(fill: accent, it)
 #set list(indent: 0.6em, body-indent: 0.5em, marker: text(fill: accent)[•])
@@ -102,6 +102,10 @@ Je recherche un premier poste de *développeur back-end, full-stack ou data* sur
 // ================= PROJETS =================
 #section("Projets")
 
+#entry("Pricing Intel", "projet personnel, en cours", "2026")[
+  - Veille tarifaire sur composants PC : collecte Java quotidienne, PostgreSQL, moteur de stratégies expliquées, démo en direct (Spring Boot, hexagonale, ADR) — #link("https://github.com/tom2824/pricing-intel")[github.com/tom2824/pricing-intel]
+]
+
 #entry("Focus Up!", "extension navigateur, projet personnel", "2026")[
   - Extension Edge / Chrome (JavaScript, WebExtensions API) limitant le temps passé sur des sites configurés, mode Focus, interface FR/EN — #link("https://github.com/tom2824/stop-doomscrolling")[github.com/tom2824/stop-doomscrolling]
 ]
@@ -110,9 +114,6 @@ Je recherche un premier poste de *développeur back-end, full-stack ou data* sur
   - Jeu narratif à choix multiples réalisé en une semaine (Java, Spring, React, Tailwind CSS) — #link("https://dealexpress.betteragile.fr/")[dealexpress.betteragile.fr]
 ]
 
-#entry("Application de messagerie client / serveur", "projet universitaire", "2025")[
-  - Backend Java (Jakarta EE, Maven) et base PostgreSQL en architecture MVC ; en charge de la base de données et du backend
-]
 
 
 // ================= COMPÉTENCES =================
