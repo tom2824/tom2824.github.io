@@ -94,6 +94,7 @@ function drawMatrix() {
     segmentLabels: data.segmentLabels,
     onSelect: openDetail,
   }));
+  fitTable(matrixEl);
 }
 document.querySelectorAll<HTMLInputElement>('input[name="pi-matrix-scope"]').forEach((radio) => radio.addEventListener('change', drawMatrix));
 
@@ -101,7 +102,25 @@ function drawSummary() {
   if (!data) return;
   clear(summaryEl);
   summaryEl.append(renderSummary(data.products, data.recommendations, currentScope(), profileSelect.value, data.segmentLabels));
+  fitTable(summaryEl);
 }
+
+// Un tableau plus large que son cadre défile horizontalement (au prix de l'en-tête collant) ;
+// sinon le cadre reste clippé, ce qui garde l'en-tête collant au défilement vertical de la page.
+function fitTable(wrap: HTMLElement) {
+  const table = wrap.querySelector('table');
+  wrap.classList.toggle('pi-scroll', table !== null && table.scrollWidth > wrap.clientWidth + 1);
+}
+let fitPending = false;
+window.addEventListener('resize', () => {
+  if (fitPending) return;
+  fitPending = true;
+  requestAnimationFrame(() => {
+    fitPending = false;
+    fitTable(matrixEl);
+    fitTable(summaryEl);
+  });
+});
 
 hideMarketplace.addEventListener('change', drawMatrix);
 profileSelect.addEventListener('change', drawSummary);

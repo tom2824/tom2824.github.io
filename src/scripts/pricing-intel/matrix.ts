@@ -231,7 +231,7 @@ export function renderMatrix(
     }
   }
 
-  const table = el('table', { class: 'pi-table pi-matrix' }, [el('thead', {}, [head]), body]);
+  const table = el('table', { class: scope === 'segment' ? 'pi-table pi-matrix is-segment' : 'pi-table pi-matrix' }, [el('thead', {}, [head]), body]);
   // Pas de légende permanente : les rangs se lisent seuls. Seuls les repères rares sont expliqués, quand ils sont là.
   const legendItems = [
     allCells.some((c) => c.is_marketplace)
