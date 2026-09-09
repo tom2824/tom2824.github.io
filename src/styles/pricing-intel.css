@@ -116,12 +116,6 @@
     color: var(--text-muted);
 }
 
-.pi-hint {
-    color: var(--text-dim);
-    font-size: 0.8rem;
-    margin-left: auto;
-}
-
 .pi-check {
     display: inline-flex;
     align-items: center;
@@ -866,10 +860,6 @@
 @media (max-width: 768px) {
     .pi-page {
         padding-top: 6rem;
-    }
-
-    .pi-hint {
-        margin-left: 0;
     }
 
     .pi-col-product {

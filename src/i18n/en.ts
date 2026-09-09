@@ -260,7 +260,6 @@ export const en: Dictionary = {
       market: 'Observed market',
       strict: 'Strict: this product\'s listings only',
       segment: 'Segment: equivalent products too',
-      hint: 'A row expands to show how the recommended price was built.',
     },
     dialog: { title: 'History', close: 'Close' },
     how: {

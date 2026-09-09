@@ -258,7 +258,6 @@ export const fr = {
       market: 'Marché observé',
       strict: 'Strict : les annonces de ce produit',
       segment: 'Segment : les produits équivalents aussi',
-      hint: 'Une ligne se déplie pour montrer comment le prix conseillé a été construit.',
     },
     dialog: { title: 'Historique', close: 'Fermer' },
     how: {
