@@ -1,6 +1,9 @@
 import { lang, locale, T } from './i18n';
 
 const eur = new Intl.NumberFormat(locale, { style: 'currency', currency: 'EUR' });
+const eurWhole = new Intl.NumberFormat(locale, {
+  style: 'currency', currency: 'EUR', minimumFractionDigits: 0, maximumFractionDigits: 0,
+});
 const dateShort = new Intl.DateTimeFormat(locale, { day: '2-digit', month: '2-digit' });
 const dateLong = new Intl.DateTimeFormat(locale, { day: 'numeric', month: 'long', year: 'numeric' });
 const dateTime = new Intl.DateTimeFormat(locale, {
@@ -11,6 +14,15 @@ const decimal = lang === 'fr' ? ',' : '.';
 export function money(value: number | string | null | undefined): string {
   if (value === null || value === undefined || value === '') return '—';
   return eur.format(Number(value));
+}
+
+/**
+ * Un montant arrondi à l'euro, dans la locale de la page (« 1 200 € », « €1,200 ») : pour les graduations
+ * d'axe, où les centimes n'apportent rien.
+ */
+export function moneyWhole(value: number | string | null | undefined): string {
+  if (value === null || value === undefined || value === '') return '—';
+  return eurWhole.format(Number(value));
 }
 
 export function percent(value: number | null | undefined, digits = 1): string {
@@ -24,16 +36,21 @@ export function index(value: number | null | undefined): string {
   return value.toFixed(1).replace('.', decimal);
 }
 
-/** Une date ISO « AAAA-MM-JJ » lue sans passer par le fuseau local. */
+/** Une date ISO « AAAA-MM-JJ » lue sans passer par le fuseau local. Une entrée douteuse donne une date invalide. */
 export function isoDate(date: string): Date {
   const [y, m, d] = date.split('-').map(Number);
   return new Date(Date.UTC(y, m - 1, d));
 }
 
+/** Intl jette un RangeError sur une date invalide : mieux vaut un tiret qu'un rendu qui s'arrête. */
+function safe(format: Intl.DateTimeFormat, date: Date): string {
+  return Number.isNaN(date.getTime()) ? '—' : format.format(date);
+}
+
 export const fmt = {
-  dayMonth: (date: string) => dateShort.format(isoDate(date)),
-  long: (date: string) => dateLong.format(isoDate(date)),
-  dateTime: (iso: string) => dateTime.format(new Date(iso)),
+  dayMonth: (date: string) => safe(dateShort, isoDate(date)),
+  long: (date: string) => safe(dateLong, isoDate(date)),
+  dateTime: (iso: string) => safe(dateTime, new Date(iso)),
 };
 
 export const AVAILABILITY_LABEL: Record<string, string> = T.availability;

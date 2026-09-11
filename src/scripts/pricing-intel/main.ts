@@ -13,6 +13,11 @@ function byId<E extends HTMLElement>(id: string): E {
   return node as E;
 }
 
+/** Le message d'une erreur, quelle que soit la valeur jetée. */
+function messageOf(error: unknown): string {
+  return error instanceof Error ? error.message : String(error);
+}
+
 const statusEl = byId<HTMLDivElement>('pi-status');
 const errorEl = byId<HTMLDivElement>('pi-error');
 const matrixEl = byId<HTMLDivElement>('pi-matrix');
@@ -135,8 +140,18 @@ function seriesFor(sources: Source[], codes: Set<string>): Series[] {
     .filter((s) => codes.has(s.code));
 }
 
+/**
+ * L'ouverture en cours. Cliquer vite sur deux produits afficherait sinon l'historique du premier sous le titre
+ * du second : chaque ouverture, et la fermeture de la fenêtre, annulent la précédente.
+ */
+let detailRequest: AbortController | undefined;
+
 async function openDetail(productId: number, sourceCode: string) {
   if (!data) return;
+  detailRequest?.abort();
+  const request = new AbortController();
+  detailRequest = request;
+
   const product = data.products.find((p) => p.product_id === productId);
   dialogTitle.textContent = product?.product_name ?? T.main.product(productId);
   clear(dialogBody);
@@ -145,8 +160,11 @@ async function openDetail(productId: number, sourceCode: string) {
 
   try {
     const [history, failures, ourPriceHistory] = await Promise.all([
-      api.history(productId), api.failures(productId), api.ourPriceHistory(productId),
+      api.history(productId, request.signal),
+      api.failures(productId, request.signal),
+      api.ourPriceHistory(productId, request.signal),
     ]);
+    if (detailRequest !== request) return;
     const codes = new Set(history.map((h) => h.source_code));
     const series = seriesFor(data.sources, codes);
     let highlighted: string | undefined = codes.has(sourceCode) ? sourceCode : undefined;
@@ -238,28 +256,64 @@ async function openDetail(productId: number, sourceCode: string) {
       ]));
     }
   } catch (error) {
+    if (detailRequest !== request) return;
     clear(dialogBody);
-    dialogBody.append(el('p', { class: 'pi-error', text: T.main.historyError((error as Error).message) }));
+    dialogBody.append(el('p', { class: 'pi-error', text: T.main.historyError(messageOf(error)) }));
   }
 }
 
 dialog.addEventListener('click', (event) => {
   if (event.target === dialog) dialog.close();
 });
+dialog.addEventListener('close', () => {
+  detailRequest?.abort();
+  detailRequest = undefined;
+});
 byId<HTMLButtonElement>('pi-dialog-close').addEventListener('click', () => dialog.close());
 
 // ---------------------------------------------------------------------------------------------------------
 // Chargement
 // ---------------------------------------------------------------------------------------------------------
+function showLoadError(error: unknown): void {
+  statusEl.textContent = '';
+  errorEl.hidden = false;
+  clear(errorEl);
+  errorEl.append(
+    el('p', {}, [
+      el('strong', { text: T.main.unavailable }),
+      T.main.apiSaid(messageOf(error)),
+      T.main.stillOn,
+      el('a', { href: REPO_URL, target: '_blank', rel: 'noopener', text: 'GitHub' }),
+      '.',
+    ]),
+  );
+}
+
 async function load() {
+  // allSettled plutôt que all : une vue accessoire qui tombe ne doit pas emporter toute la page.
+  const [sourcesR, productsR, cellsR, recommendationsR, runsR, familiesR, productRowsR] = await Promise.allSettled([
+    api.sources(), api.summary(), api.matrix(), api.recommendations(), api.lastRun(), api.families(), api.products(),
+  ]);
+
+  // Sans l'une de ces quatre vues il n'y a rien à montrer : écran d'erreur.
+  if (sourcesR.status === 'rejected') return showLoadError(sourcesR.reason);
+  if (productsR.status === 'rejected') return showLoadError(productsR.reason);
+  if (cellsR.status === 'rejected') return showLoadError(cellsR.reason);
+  if (recommendationsR.status === 'rejected') return showLoadError(recommendationsR.reason);
+
+  const { value: sources } = sourcesR;
+  const { value: products } = productsR;
+  const { value: cells } = cellsR;
+  const { value: recommendations } = recommendationsR;
+  // Accessoires : sans familles ni attributs, la matrice se rabat sur la clé d'équivalence (voir matrix.ts).
+  const families = familiesR.status === 'fulfilled' ? familiesR.value : [];
+  const productRows = productRowsR.status === 'fulfilled' ? productRowsR.value : [];
+
   try {
-    const [sources, products, cells, recommendations, runs, families, productRows] = await Promise.all([
-      api.sources(), api.summary(), api.matrix(), api.recommendations(), api.lastRun(), api.families(), api.products(),
-    ]);
     data = { sources, products, cells, recommendations, segmentLabels: segmentLabels(families, productRows) };
 
-    const run = runs[0];
     clear(statusEl);
+    const run = runsR.status === 'fulfilled' ? runsR.value[0] : undefined;
     if (run) {
       const sourceCount = new Set(cells.map((c) => c.source_code)).size;
       statusEl.append(
@@ -270,9 +324,10 @@ async function load() {
           T.main.status(run.collected, run.attempted, products.length, sourceCount),
         ]),
       );
-    } else {
+    } else if (runsR.status === 'fulfilled') {
       statusEl.append(T.main.noRun);
     }
+    // Si la vue des collectes n'a pas répondu, pas de ligne de statut du tout : mieux vaut rien qu'une contrevérité.
 
     // La case « masquer les vendeurs tiers » n'a de sens que si une offre de marketplace existe.
     const marketplaceLabel = hideMarketplace.closest<HTMLElement>('.pi-check');
@@ -288,18 +343,7 @@ async function load() {
     drawMatrix();
     drawSummary();
   } catch (error) {
-    statusEl.textContent = '';
-    errorEl.hidden = false;
-    clear(errorEl);
-    errorEl.append(
-      el('p', {}, [
-        el('strong', { text: T.main.unavailable }),
-        T.main.apiSaid((error as Error).message),
-        T.main.stillOn,
-        el('a', { href: REPO_URL, target: '_blank', rel: 'noopener', text: 'GitHub' }),
-        '.',
-      ]),
-    );
+    showLoadError(error);
   }
 }
 

@@ -155,9 +155,11 @@ export class ApiError extends Error {
   }
 }
 
-async function get<T>(view: string, query: string): Promise<T[]> {
+/** `signal` permet d'abandonner une requête devenue inutile (voir l'ouverture de la fenêtre de détail). */
+async function get<T>(view: string, query: string, signal?: AbortSignal): Promise<T[]> {
   const response = await fetch(`${API_URL}/${view}?${query}`, {
     headers: { apikey: API_KEY, 'Accept-Profile': 'api' },
+    signal,
   });
   if (!response.ok) throw new ApiError(view, response.status);
   return (await response.json()) as T[];
@@ -183,19 +185,22 @@ export const api = {
     get<RecommendationRow>('recommendations', `select=${RECOMMENDATION_SELECT}&order=product_id,scope,profile_key`),
   lastRun: () =>
     get<CollectionRun>('collection_runs', 'select=started_at,finished_at,attempted,collected,failed&order=started_at.desc&limit=1'),
-  history: (productId: number) =>
+  history: (productId: number, signal?: AbortSignal) =>
     get<HistoryPoint>(
       'price_history',
       `select=listing_code,source_code,observed_date,price,availability,quarantine&product_id=eq.${productId}&order=observed_date,source_code`,
+      signal,
     ),
-  ourPriceHistory: (productId: number) =>
+  ourPriceHistory: (productId: number, signal?: AbortSignal) =>
     get<OurPriceDecision>(
       'our_price_history',
       `select=product_id,decision_date,old_price,new_price,profile_key,strategy,changed&product_id=eq.${productId}&order=decision_date`,
+      signal,
     ),
-  failures: (productId: number) =>
+  failures: (productId: number, signal?: AbortSignal) =>
     get<Failure>(
       'collection_failures',
       `select=listing_code,source_code,occurred_at,reason&product_id=eq.${productId}&order=occurred_at.desc&limit=30`,
+      signal,
     ),
 };

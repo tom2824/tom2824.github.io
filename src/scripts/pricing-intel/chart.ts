@@ -1,5 +1,5 @@
 import type { HistoryPoint, OurPriceDecision } from './api';
-import { el, fmt, isoDate, money, profileLabel } from './format';
+import { el, fmt, isoDate, money, moneyWhole, profileLabel } from './format';
 import { T } from './i18n';
 
 const SVG = 'http://www.w3.org/2000/svg';
@@ -132,7 +132,7 @@ function drawChart(allPoints: HistoryPoint[], series: Series[], options: ChartOp
     const yy = y(tick);
     root.append(svg('line', { x1: margin.left, x2: width - margin.right, y1: yy, y2: yy, class: 'pi-chart-grid' }));
     const label = svg('text', { x: margin.left - 8, y: yy + 4, class: 'pi-chart-axis', 'text-anchor': 'end' });
-    label.textContent = money(tick).replace(/,00/, '');
+    label.textContent = moneyWhole(tick);
     root.append(label);
   }
   // Axe des dates : au plus ~8 étiquettes.
