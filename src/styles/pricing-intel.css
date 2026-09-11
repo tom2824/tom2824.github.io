@@ -28,9 +28,10 @@
     color: var(--text-dim);
 }
 
-.pi-disclaimer {
-    font-size: 0.82rem !important;
-    color: var(--text-dim) !important;
+/* Plus spécifique que .pi-intro p, qui fixe déjà la taille et la couleur : pas besoin de !important. */
+.pi-intro p.pi-disclaimer {
+    font-size: 0.82rem;
+    color: var(--text-dim);
     font-style: italic;
 }
 
@@ -196,7 +197,7 @@
 
 .pi-table thead th {
     position: sticky;
-    top: 64px; /* hauteur de la barre de navigation fixe */
+    top: var(--nav-height); /* se colle juste sous la barre de navigation fixe */
     z-index: 2;
     background: var(--bg-card-hover);
     box-shadow: 0 1px 0 var(--border);
@@ -274,7 +275,6 @@
     color: var(--text-muted);
 }
 
-.pi-cell.is-strong,
 .pi-ours .pi-amount,
 .pi-reco .pi-amount {
     color: var(--text);
@@ -525,12 +525,6 @@
     font-weight: 400;
 }
 
-.pi-footnote {
-    margin-top: 0.9rem;
-    font-size: 0.78rem;
-    color: var(--text-dim);
-}
-
 /* Fenêtre d'historique */
 .pi-dialog {
     border: 1px solid var(--border);
@@ -614,10 +608,6 @@
     fill: var(--bg-dark);
     stroke: var(--text-muted);
     stroke-width: 1.5;
-}
-
-.pi-decision {
-    color: var(--text-dim);
 }
 
 .pi-chart-ours-label {

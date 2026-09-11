@@ -16,6 +16,8 @@
     --text-muted: #9a8e82;
     --text-dim: #6b6058;
     --border: #2e2924;
+    /* Hauteur de la barre de navigation fixe : ce qui se colle sous elle s'y réfère. */
+    --nav-height: 64px;
     --font-body: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
     --font-display: 'Playfair Display', Georgia, serif;
     --featured-bg: linear-gradient(135deg, rgba(200, 149, 108, 0.06) 0%, transparent 60%), var(--bg-card);
@@ -61,7 +63,7 @@ img {
     align-items: center;
     justify-content: space-between;
     padding: 0 2rem;
-    height: 64px;
+    height: var(--nav-height);
     background: rgba(18, 16, 16, 0.85);
     backdrop-filter: blur(12px);
     -webkit-backdrop-filter: blur(12px);
@@ -1100,7 +1102,7 @@ footer p {
 @media (max-width: 768px) {
     .nav-links {
         position: fixed;
-        top: 64px;
+        top: var(--nav-height);
         left: 0;
         right: 0;
         background: rgba(18, 16, 16, 0.97);
