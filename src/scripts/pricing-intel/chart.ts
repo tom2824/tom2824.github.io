@@ -240,7 +240,7 @@ function drawChart(allPoints: HistoryPoint[], series: Series[], options: ChartOp
       guide.setAttribute('x1', String(x(i)));
       guide.setAttribute('x2', String(x(i)));
       guide.setAttribute('visibility', 'visible');
-      tooltip.replaceChildren(
+      const rows: Node[] = [
         el('div', { class: 'pi-chart-tooltip-date', text: fmt.long(day) }),
         ...series.map((s) => {
           const p = byDayAndSource.get(`${day}|${s.code}`);
@@ -252,20 +252,20 @@ function drawChart(allPoints: HistoryPoint[], series: Series[], options: ChartOp
             p && p.quarantine !== 'none' ? el('span', { class: 'pi-chart-tooltip-note', text: T.chart.quarantine }) : null,
           ]);
         }),
-        ourPriceOn(day) !== null
-          ? el('div', { class: 'pi-chart-tooltip-row is-ours' }, [
-            el('span', { class: 'pi-swatch is-dashed' }),
-            el('span', { class: 'pi-chart-tooltip-label', text: T.chart.ourPrice }),
-            el('span', { class: 'pi-chart-tooltip-price', text: money(ourPriceOn(day)) }),
-            (() => {
-              const decision = decisions.find((d) => d.decision_date === day);
-              return decision
-                ? el('span', { class: 'pi-chart-tooltip-note', text: decision.changed ? profileLabel(decision.profile_key) : T.chart.unchanged })
-                : null;
-            })(),
-          ])
-          : null,
-      );
+      ];
+      const oursOnDay = ourPriceOn(day);
+      if (oursOnDay !== null) {
+        const decision = decisions.find((d) => d.decision_date === day);
+        rows.push(el('div', { class: 'pi-chart-tooltip-row is-ours' }, [
+          el('span', { class: 'pi-swatch is-dashed' }),
+          el('span', { class: 'pi-chart-tooltip-label', text: T.chart.ourPrice }),
+          el('span', { class: 'pi-chart-tooltip-price', text: money(oursOnDay) }),
+          decision
+            ? el('span', { class: 'pi-chart-tooltip-note', text: decision.changed ? profileLabel(decision.profile_key) : T.chart.unchanged })
+            : null,
+        ]));
+      }
+      tooltip.replaceChildren(...rows);
       tooltip.hidden = false;
       // Position en pourcentage de la largeur : le SVG est mis à l'échelle par le conteneur.
       const ratio = x(i) / width;
