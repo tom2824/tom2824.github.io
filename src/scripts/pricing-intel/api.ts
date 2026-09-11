@@ -48,12 +48,6 @@ export interface SummaryRow {
   equivalence_key: string;
   current_price: number | null;
   purchase_price: number | null;
-  currency: string;
-  /** Décision tarifaire la plus récente (ADR 0023). */
-  decision_profile_key: string | null;
-  decision_changed: boolean | null;
-  decision_old_price: number | null;
-  decision_date: string | null;
 }
 
 /** Une décision quotidienne sur notre prix : la règle tirée au sort et le prix qui en résulte. */
@@ -67,28 +61,19 @@ export interface OurPriceDecision {
   changed: boolean;
 }
 
+/** Les colonnes de la vue price_matrix réellement lues par le client : le select les reprend une à une. */
 export interface MatrixCell {
   product_id: number;
   product_name: string;
-  family_code: string;
-  brand: string;
-  equivalence_key: string;
-  current_price: number | null;
-  listing_code: string;
   source_code: string;
   source_label: string;
   url: string;
   price: number;
-  list_price: number | null;
-  currency: string;
   availability: Availability;
   item_condition: string;
-  seller_type: string;
   quarantine: Quarantine;
-  observed_at: string;
   observed_date: string;
   is_marketplace: boolean;
-  min_in_stock: number | null;
 }
 
 export interface HistoryPoint {
@@ -165,6 +150,16 @@ async function get<T>(view: string, query: string, signal?: AbortSignal): Promis
   return (await response.json()) as T[];
 }
 
+const SUMMARY_SELECT = [
+  'product_id', 'product_name', 'family_code', 'family_label', 'brand', 'equivalence_key',
+  'current_price', 'purchase_price',
+].join(',');
+
+const MATRIX_SELECT = [
+  'product_id', 'product_name', 'source_code', 'source_label', 'url', 'price',
+  'availability', 'item_condition', 'quarantine', 'observed_date', 'is_marketplace',
+].join(',');
+
 const RECOMMENDATION_SELECT = [
   'product_id', 'scope', 'profile_key', 'is_default', 'strategy', 'fell_back', 'price', 'index_vs_median',
   'profile', 'min:market->>min', 'median:market->>median', 'mean:market->>mean', 'max:market->>max',
@@ -175,12 +170,8 @@ export const api = {
   sources: () => get<Source>('sources', 'select=code,label,kind,homepage'),
   families: () => get<Family>('families', 'select=code,label,attribute_schema'),
   products: () => get<ProductRow>('products', 'select=id,family_code,attributes&status=eq.active'),
-  summary: () =>
-    get<SummaryRow>(
-      'summary',
-      'select=product_id,product_name,family_code,family_label,brand,equivalence_key,current_price,purchase_price,currency,decision_profile_key,decision_changed,decision_old_price,decision_date&order=family_code,product_name',
-    ),
-  matrix: () => get<MatrixCell>('price_matrix', 'select=*&order=product_id,source_code'),
+  summary: () => get<SummaryRow>('summary', `select=${SUMMARY_SELECT}&order=family_code,product_name`),
+  matrix: () => get<MatrixCell>('price_matrix', `select=${MATRIX_SELECT}&order=product_id,source_code`),
   recommendations: () =>
     get<RecommendationRow>('recommendations', `select=${RECOMMENDATION_SELECT}&order=product_id,scope,profile_key`),
   lastRun: () =>
