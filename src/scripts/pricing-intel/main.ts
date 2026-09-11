@@ -267,7 +267,7 @@ async function openDetail(productId: number, sourceCode: string) {
         ' ',
         el('span', { class: 'pi-failure-source', text: data?.sources.find((s) => s.code === f.source_code)?.label ?? f.source_code ?? '' }),
         ' — ',
-        el('span', { class: 'pi-failure-reason', text: f.reason.length > 140 ? `${f.reason.slice(0, 140)}…` : f.reason }),
+        el('span', { class: 'pi-failure-reason', text: T.main.failureReason(f.reason.length > 140 ? `${f.reason.slice(0, 140)}…` : f.reason) }),
       ])));
       dialogBody.append(el('details', { class: 'pi-failures-box' }, [
         el('summary', { text: T.main.failures(`${failures.length}${failures.length >= 30 ? '+' : ''}`) }),

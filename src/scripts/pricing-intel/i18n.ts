@@ -103,6 +103,21 @@ const STRINGS = {
       decisions: (n: number) => `Notre prix : la règle appliquée chaque jour (${n})`,
       unchangedAt: (price: string) => `inchangé à ${price}`,
       failures: (n: string) => `Échecs de collecte récents (${n})`,
+      // Codes courts de la vue api.collection_failures (V12) ; un texte inconnu est affiché tel quel.
+      failureReason: (code: string) => {
+        const http = /^http-(\d{3})$/.exec(code);
+        if (http) return `HTTP ${http[1]}`;
+        return ({
+          timeout: 'délai dépassé',
+          unreachable: 'site injoignable',
+          'no-price': 'prix introuvable dans la page',
+          'invalid-offer': 'offre extraite invalide',
+          'no-source': 'aucune source pour cette annonce',
+          storage: 'stockage indisponible',
+          internal: 'erreur interne',
+          other: 'échec de collecte',
+        } as Record<string, string>)[code] ?? code;
+      },
       historyError: (message: string) => `Impossible de charger l’historique (${message}).`,
       unavailable: 'Les données ne sont pas accessibles pour le moment. ',
       apiSaid: (message: string) => `L’API a répondu : ${message}. `,
@@ -204,6 +219,20 @@ const STRINGS = {
       decisions: (n: number) => `Our price: the rule applied each day (${n})`,
       unchangedAt: (price: string) => `unchanged at ${price}`,
       failures: (n: string) => `Recent collection failures (${n})`,
+      failureReason: (code: string) => {
+        const http = /^http-(\d{3})$/.exec(code);
+        if (http) return `HTTP ${http[1]}`;
+        return ({
+          timeout: 'timed out',
+          unreachable: 'site unreachable',
+          'no-price': 'no price found on the page',
+          'invalid-offer': 'extracted offer invalid',
+          'no-source': 'no source for this listing',
+          storage: 'storage unavailable',
+          internal: 'internal error',
+          other: 'collection failure',
+        } as Record<string, string>)[code] ?? code;
+      },
       historyError: (message: string) => `Could not load the history (${message}).`,
       unavailable: 'The data is not reachable right now. ',
       apiSaid: (message: string) => `The API answered: ${message}. `,
