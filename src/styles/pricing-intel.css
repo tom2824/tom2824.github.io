@@ -424,10 +424,21 @@
     cursor: pointer;
 }
 
-.pi-row.is-expandable:focus-visible th,
-.pi-row.is-expandable:focus-visible td {
-    background: var(--bg-card-hover);
-    outline: none;
+/* Le chevron est un vrai bouton : c'est lui qui porte le focus et l'état déplié. */
+.pi-toggle {
+    display: inline-block;
+    padding: 0;
+    border: 0;
+    background: transparent;
+    color: inherit;
+    font: inherit;
+    cursor: pointer;
+}
+
+.pi-toggle:focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 4px;
+    border-radius: 2px;
 }
 
 .pi-chevron {

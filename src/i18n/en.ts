@@ -248,7 +248,12 @@ export const en: Dictionary = {
     disclaimer:
       'A personal, educational project: "our price" and the purchase price are fictitious values, updated daily by the engine itself, and the strategies are textbook pricing strategies. The prices shown are those publicly listed on the retailers\' websites on the indicated date.',
     loading: 'Loading data…',
-    tabs: { matrix: 'Product × retailer matrix', summary: 'Summary and recommended price', how: 'How it works' },
+    tabs: {
+      label: 'Demo views',
+      matrix: 'Product × retailer matrix',
+      summary: 'Summary and recommended price',
+      how: 'How it works',
+    },
     matrix: {
       rows: 'Rows',
       strict: 'One product per row',

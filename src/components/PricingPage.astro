@@ -36,16 +36,18 @@ const repo = 'https://github.com/tom2824/pricing-intel';
 
         <div id="pi-status" class="pi-status reveal">{p.loading}</div>
         <div id="pi-error" class="pi-error" hidden></div>
+        <!-- Résumé lu par les lecteurs d'écran après chaque rendu : le tableau lui-même n'est pas une région live. -->
+        <p id="pi-announce" class="sr-only" role="status"></p>
 
         <hr class="pi-sep reveal" />
 
-        <div class="pi-tabs reveal" role="tablist">
-            <button type="button" class="pi-tab active" role="tab" data-view="matrix" aria-selected="true">{p.tabs.matrix}</button>
-            <button type="button" class="pi-tab" role="tab" data-view="summary" aria-selected="false">{p.tabs.summary}</button>
-            <button type="button" class="pi-tab" role="tab" data-view="how" aria-selected="false">{p.tabs.how}</button>
+        <div class="pi-tabs reveal" role="tablist" aria-label={p.tabs.label}>
+            <button type="button" class="pi-tab active" role="tab" id="pi-tab-matrix" aria-controls="pi-panel-matrix" data-view="matrix" aria-selected="true" tabindex="0">{p.tabs.matrix}</button>
+            <button type="button" class="pi-tab" role="tab" id="pi-tab-summary" aria-controls="pi-panel-summary" data-view="summary" aria-selected="false" tabindex="-1">{p.tabs.summary}</button>
+            <button type="button" class="pi-tab" role="tab" id="pi-tab-how" aria-controls="pi-panel-how" data-view="how" aria-selected="false" tabindex="-1">{p.tabs.how}</button>
         </div>
 
-        <div class="pi-view pi-how" data-view="how" role="tabpanel" hidden>
+        <div class="pi-view pi-how" data-view="how" role="tabpanel" id="pi-panel-how" aria-labelledby="pi-tab-how" tabindex="0" hidden>
             <svg class="pi-diagram" viewBox="0 0 1000 360" role="img" aria-labelledby="pi-diagram-title">
                 <title id="pi-diagram-title">{how.diagramTitle}</title>
                 <defs>
@@ -123,7 +125,7 @@ const repo = 'https://github.com/tom2824/pricing-intel';
             </p>
         </div>
 
-        <div class="pi-view" data-view="matrix" role="tabpanel">
+        <div class="pi-view" data-view="matrix" role="tabpanel" id="pi-panel-matrix" aria-labelledby="pi-tab-matrix" tabindex="0">
             <div class="pi-toolbar">
                 <fieldset class="pi-scope">
                     <legend>{p.matrix.rows}</legend>
@@ -135,10 +137,10 @@ const repo = 'https://github.com/tom2824/pricing-intel';
                     {p.matrix.hideMarketplace}
                 </label>
             </div>
-            <div id="pi-matrix" class="pi-table-wrap" aria-live="polite"></div>
+            <div id="pi-matrix" class="pi-table-wrap"></div>
         </div>
 
-        <div class="pi-view" data-view="summary" role="tabpanel" hidden>
+        <div class="pi-view" data-view="summary" role="tabpanel" id="pi-panel-summary" aria-labelledby="pi-tab-summary" tabindex="0" hidden>
             <div class="pi-toolbar">
                 <label class="pi-select">
                     <span>{p.summary.rules}</span>
@@ -150,7 +152,7 @@ const repo = 'https://github.com/tom2824/pricing-intel';
                     <label><input type="radio" name="pi-scope" value="segment"> {p.summary.segment}</label>
                 </fieldset>
             </div>
-            <div id="pi-summary" class="pi-table-wrap" aria-live="polite"></div>
+            <div id="pi-summary" class="pi-table-wrap"></div>
         </div>
 
         <dialog id="pi-dialog" class="pi-dialog" aria-labelledby="pi-dialog-title">

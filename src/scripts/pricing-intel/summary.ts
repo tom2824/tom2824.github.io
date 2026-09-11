@@ -81,7 +81,17 @@ export function renderSummary(
 
       // En marché segment, la ligne parle du segment (« RTX 5070 · 12 Go ») et le produit passe en sous-titre.
       const segment = scope === 'segment' ? segmentLabels.get(product.product_id) : undefined;
-      const row = el('tr', { class: 'pi-row is-expandable', tabindex: '0', 'aria-expanded': 'false' }, [
+      const detailId = `pi-detail-${product.product_id}`;
+      // Le seul élément focusable de la ligne : le reste de la ligne n'est qu'un raccourci à la souris.
+      const toggleButton = el('button', {
+        type: 'button',
+        class: 'pi-toggle',
+        'aria-expanded': 'false',
+        'aria-controls': detailId,
+        'aria-label': T.summary.toggle(product.product_name),
+      }, [el('span', { class: 'pi-chevron', 'aria-hidden': 'true' })]);
+
+      const row = el('tr', { class: 'pi-row is-expandable' }, [
         el('th', { scope: 'row', class: 'pi-col-product' }, segment
           ? [
             el('span', { class: 'pi-product-name', text: segment }),
@@ -123,12 +133,10 @@ export function renderSummary(
             ])
             : el('span', { class: 'pi-sub', text: T.summary.noProfile }),
         ]),
-        el('td', { class: 'pi-cell pi-col-toggle' }, [
-          el('span', { class: 'pi-chevron', 'aria-hidden': 'true' }),
-        ]),
+        el('td', { class: 'pi-cell pi-col-toggle' }, [toggleButton]),
       ]);
 
-      const detail = el('tr', { class: 'pi-detail', hidden: true }, [
+      const detail = el('tr', { class: 'pi-detail', id: detailId, hidden: true }, [
         el('td', { colspan: String(columnCount) }, [
           rec ? explanationPanel(rec, product) : el('p', { class: 'pi-muted', text: T.summary.none }),
         ]),
@@ -138,14 +146,14 @@ export function renderSummary(
         const open = detail.hidden;
         detail.hidden = !open;
         row.classList.toggle('is-open', open);
-        row.setAttribute('aria-expanded', String(open));
+        toggleButton.setAttribute('aria-expanded', String(open));
       };
-      row.addEventListener('click', toggle);
-      row.addEventListener('keydown', (event) => {
-        if (event.key === 'Enter' || event.key === ' ') {
-          event.preventDefault();
-          toggle();
-        }
+      toggleButton.addEventListener('click', toggle);
+      row.addEventListener('click', (event) => {
+        // Le bouton gère son propre clic ; sélectionner du texte dans une cellule ne doit pas déplier la ligne.
+        if (event.target instanceof Element && event.target.closest('button, a')) return;
+        if (window.getSelection()?.toString()) return;
+        toggle();
       });
       body.append(row, detail);
     }

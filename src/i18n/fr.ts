@@ -246,7 +246,12 @@ export const fr = {
     disclaimer:
       "Projet personnel à but pédagogique : « notre prix » et le prix d'achat sont des valeurs fictives, mises à jour chaque jour par le moteur lui-même, et les stratégies sont celles des manuels de pricing. Les prix affichés sont ceux relevés publiquement sur les sites des enseignes, à la date indiquée.",
     loading: 'Chargement des données…',
-    tabs: { matrix: 'Matrice produit × enseigne', summary: 'Synthèse et prix conseillé', how: 'Comment ça marche' },
+    tabs: {
+      label: 'Vues de la démo',
+      matrix: 'Matrice produit × enseigne',
+      summary: 'Synthèse et prix conseillé',
+      how: 'Comment ça marche',
+    },
     matrix: {
       rows: 'Lignes',
       strict: 'Un produit par ligne',

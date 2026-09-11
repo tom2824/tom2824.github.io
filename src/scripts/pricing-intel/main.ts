@@ -28,6 +28,8 @@ const profileSelect = byId<HTMLSelectElement>('pi-profile');
 const dialog = byId<HTMLDialogElement>('pi-dialog');
 const dialogTitle = byId<HTMLElement>('pi-dialog-title');
 const dialogBody = byId<HTMLDivElement>('pi-dialog-body');
+const announceEl = byId<HTMLParagraphElement>('pi-announce');
+const tablist = document.querySelector<HTMLElement>('.pi-tabs');
 const tabs = Array.from(document.querySelectorAll<HTMLButtonElement>('.pi-tab'));
 const views = Array.from(document.querySelectorAll<HTMLElement>('.pi-view'));
 
@@ -47,17 +49,38 @@ let data: Data | undefined;
 // ---------------------------------------------------------------------------------------------------------
 // Onglets
 // ---------------------------------------------------------------------------------------------------------
-function showView(name: string) {
+/**
+ * Affiche l'onglet demandé : sélection ARIA, panneaux, et tabindex roving (seul l'onglet actif est
+ * atteignable au Tab, les autres se rejoignent aux flèches). `focusTab` sert la navigation au clavier.
+ */
+function showView(name: string, focusTab = false) {
   tabs.forEach((tab) => {
     const active = tab.dataset.view === name;
     tab.classList.toggle('active', active);
     tab.setAttribute('aria-selected', String(active));
+    tab.tabIndex = active ? 0 : -1;
+    if (active && focusTab) tab.focus();
   });
   views.forEach((view) => { view.hidden = view.dataset.view !== name; });
   const hashes: Record<string, string> = { matrix: 'matrice', summary: 'synthese', how: 'fonctionnement' };
   if (history.replaceState) history.replaceState(null, '', `#${hashes[name] ?? 'matrice'}`);
 }
 tabs.forEach((tab) => tab.addEventListener('click', () => showView(tab.dataset.view ?? 'matrix')));
+
+// Pattern ARIA Tabs : flèches (avec bouclage), Début et Fin ; activation automatique, le focus suit.
+tablist?.addEventListener('keydown', (event) => {
+  const current = tabs.findIndex((tab) => tab === document.activeElement);
+  if (current === -1) return;
+  const target = event.key === 'ArrowRight' ? (current + 1) % tabs.length
+    : event.key === 'ArrowLeft' ? (current - 1 + tabs.length) % tabs.length
+      : event.key === 'Home' ? 0
+        : event.key === 'End' ? tabs.length - 1
+          : -1;
+  if (target === -1) return;
+  event.preventDefault();
+  showView(tabs[target].dataset.view ?? 'matrix', true);
+});
+
 showView(location.hash === '#synthese' ? 'summary' : location.hash === '#fonctionnement' ? 'how' : 'matrix');
 
 // ---------------------------------------------------------------------------------------------------------
@@ -67,6 +90,15 @@ showView(location.hash === '#synthese' ? 'summary' : location.hash === '#fonctio
 function scopeOf(radioName: string): Scope {
   const checked = document.querySelector<HTMLInputElement>(`input[name="${radioName}"]:checked`);
   return checked?.value === 'segment' ? 'segment' : 'strict';
+}
+
+/**
+ * Le résumé lu par les lecteurs d'écran après un rendu. Les tableaux ne sont pas des régions live : les
+ * relire en entier à chaque changement de filtre serait illisible, une phrase suffit. La vue masquée se tait.
+ */
+function announce(host: HTMLElement, text: string): void {
+  if (host.closest<HTMLElement>('.pi-view')?.hidden) return;
+  announceEl.textContent = text;
 }
 
 function drawMatrix() {
@@ -80,6 +112,12 @@ function drawMatrix() {
     onSelect: openDetail,
   }));
   fitTable(matrixEl);
+  // Deux colonnes ne sont pas des enseignes : le produit et notre prix.
+  const sourceCount = Math.max(0, matrixEl.querySelectorAll('thead th').length - 2);
+  const rowCount = matrixEl.querySelectorAll('tbody tr.pi-row').length;
+  // En mode segment une ligne est un segment, pas un produit : le résumé le dit avec le bon mot.
+  const rows = scopeOf('pi-matrix-scope') === 'segment' ? T.matrix.segments(rowCount) : T.matrix.products(rowCount);
+  announce(matrixEl, T.main.announceMatrix(rows, sourceCount));
 }
 document.querySelectorAll<HTMLInputElement>('input[name="pi-matrix-scope"]').forEach((radio) => radio.addEventListener('change', drawMatrix));
 
@@ -88,6 +126,7 @@ function drawSummary() {
   clear(summaryEl);
   summaryEl.append(renderSummary(data.products, data.recommendations, scopeOf('pi-scope'), profileSelect.value, data.segmentLabels));
   fitTable(summaryEl);
+  announce(summaryEl, T.main.announceSummary(summaryEl.querySelectorAll('tbody tr.pi-row').length, profileLabel(profileSelect.value)));
 }
 
 // Un tableau plus large que son cadre défile horizontalement (au prix de l'en-tête collant) ;

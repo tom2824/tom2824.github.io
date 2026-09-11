@@ -193,6 +193,10 @@ function drawChart(allPoints: HistoryPoint[], series: Series[], options: ChartOp
   tooltip.className = 'pi-chart-tooltip';
   tooltip.hidden = true;
   wrapper.append(tooltip);
+  const hide = () => {
+    guide.setAttribute('visibility', 'hidden');
+    tooltip.hidden = true;
+  };
 
   const byDayAndSource = new Map<string, HistoryPoint>();
   for (const p of points) byDayAndSource.set(`${p.observed_date}|${p.source_code}`, p);
@@ -204,7 +208,7 @@ function drawChart(allPoints: HistoryPoint[], series: Series[], options: ChartOp
     const zone = svg('rect', {
       x: x(i) - halfStep, y: margin.top, width: halfStep * 2, height: innerH, fill: 'transparent', class: 'pi-chart-zone',
     });
-    zone.addEventListener('mouseenter', () => {
+    const show = () => {
       guide.setAttribute('x1', String(x(i)));
       guide.setAttribute('x2', String(x(i)));
       guide.setAttribute('visibility', 'visible');
@@ -239,12 +243,24 @@ function drawChart(allPoints: HistoryPoint[], series: Series[], options: ChartOp
       const ratio = x(i) / width;
       tooltip.style.left = `${ratio * 100}%`;
       tooltip.classList.toggle('is-left', ratio > 0.6);
-    });
-    zone.addEventListener('mouseleave', () => {
-      guide.setAttribute('visibility', 'hidden');
-      tooltip.hidden = true;
-    });
+    };
+    zone.addEventListener('mouseenter', show);
+    // Au doigt il n'y a pas de survol : un appui sur la colonne ouvre l'infobulle du jour.
+    zone.addEventListener('pointerdown', show);
+    zone.addEventListener('mouseleave', hide);
     root.append(zone);
   });
+
+  // Un appui hors du graphe referme l'infobulle ouverte au doigt. Le graphe précédent, détaché par un
+  // changement de fenêtre, se désabonne de lui-même au premier appui qui suit.
+  const closeOnOutside = (event: PointerEvent) => {
+    if (!wrapper.isConnected) {
+      document.removeEventListener('pointerdown', closeOnOutside);
+      return;
+    }
+    if (event.target instanceof Node && root.contains(event.target)) return;
+    hide();
+  };
+  document.addEventListener('pointerdown', closeOnOutside);
   return root;
 }

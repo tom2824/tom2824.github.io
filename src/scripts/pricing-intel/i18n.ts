@@ -62,6 +62,7 @@ const STRINGS = {
       ourPrice: 'Notre prix',
       recommended: 'Prix conseillé',
       explanation: 'Explication',
+      toggle: (product: string) => `Voir l'explication de ${product}`,
       mean: 'moy.',
       index: 'index',
       hold: 'maintien',
@@ -89,6 +90,10 @@ const STRINGS = {
       status: (collected: number, attempted: number, products: number, sources: number) =>
         ` · ${collected}/${attempted} annonces relevées · ${products} produits · ${sources} enseignes · données lues en direct`,
       noRun: 'Aucune collecte enregistrée pour l’instant.',
+      announceMatrix: (rows: string, sources: number) =>
+        `Matrice : ${rows}, ${sources} enseigne${sources > 1 ? 's' : ''}`,
+      announceSummary: (products: number, profile: string) =>
+        `Synthèse : ${products} produit${products > 1 ? 's' : ''}, profil ${profile}`,
       loadingHistory: 'Chargement de l’historique…',
       product: (id: number) => `Produit ${id}`,
       ranges: { d7: '7 jours', d30: '30 jours', d90: '90 jours', all: 'Tout' },
@@ -158,6 +163,7 @@ const STRINGS = {
       ourPrice: 'Our price',
       recommended: 'Recommended price',
       explanation: 'Explanation',
+      toggle: (product: string) => `Show the explanation for ${product}`,
       mean: 'mean',
       index: 'index',
       hold: 'hold',
@@ -185,6 +191,10 @@ const STRINGS = {
       status: (collected: number, attempted: number, products: number, sources: number) =>
         ` · ${collected}/${attempted} listings read · ${products} products · ${sources} retailers · live data`,
       noRun: 'No collection recorded yet.',
+      announceMatrix: (rows: string, sources: number) =>
+        `Matrix: ${rows}, ${sources} retailer${sources > 1 ? 's' : ''}`,
+      announceSummary: (products: number, profile: string) =>
+        `Summary: ${products} product${products > 1 ? 's' : ''}, profile ${profile}`,
       loadingHistory: 'Loading history…',
       product: (id: number) => `Product ${id}`,
       ranges: { d7: '7 days', d30: '30 days', d90: '90 days', all: 'All' },
