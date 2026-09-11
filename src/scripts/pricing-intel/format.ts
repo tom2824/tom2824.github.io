@@ -1,4 +1,5 @@
 import { lang, locale, T } from './i18n';
+import { isoDate } from './logic';
 
 const eur = new Intl.NumberFormat(locale, { style: 'currency', currency: 'EUR' });
 const eurWhole = new Intl.NumberFormat(locale, {
@@ -36,12 +37,6 @@ export function index(value: number | null | undefined): string {
   return value.toFixed(1).replace('.', decimal);
 }
 
-/** Une date ISO « AAAA-MM-JJ » lue sans passer par le fuseau local. Une entrée douteuse donne une date invalide. */
-export function isoDate(date: string): Date {
-  const [y, m, d] = date.split('-').map(Number);
-  return new Date(Date.UTC(y, m - 1, d));
-}
-
 /** Intl jette un RangeError sur une date invalide : mieux vaut un tiret qu'un rendu qui s'arrête. */
 function safe(format: Intl.DateTimeFormat, date: Date): string {
   return Number.isNaN(date.getTime()) ? '—' : format.format(date);
@@ -56,22 +51,6 @@ export const fmt = {
 export const AVAILABILITY_LABEL: Record<string, string> = T.availability;
 
 export const QUARANTINE_LABEL: Record<string, string> = T.quarantine;
-
-/** Un libellé lisible pour une clé de profil précalculé (« index-98 », « undercut-1 », « align »…). */
-export function profileLabel(key: string, description?: string): string {
-  const match = key.match(/^(.*?)(?:-(\d+))?$/);
-  const strategy = match?.[1] ?? key;
-  const param = match?.[2] ?? '';
-  switch (strategy) {
-    case 'index': return T.profile.index(param);
-    case 'undercut': return T.profile.undercut(param);
-    case 'cost-plus': return T.profile.costPlus(param);
-    case 'align': return T.profile.align;
-    case 'follow': return T.profile.follow;
-    case 'hold': return T.profile.hold;
-    default: return description ?? key;
-  }
-}
 
 type Attrs = Record<string, string | number | boolean | null | undefined>;
 type Child = Node | string | null | undefined | false;

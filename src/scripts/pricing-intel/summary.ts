@@ -1,6 +1,7 @@
 import type { RecommendationRow, Scope, SummaryRow } from './api';
-import { el, index, money, percent, profileLabel } from './format';
+import { el, index, money, percent } from './format';
 import { T } from './i18n';
+import { profileLabel } from './logic';
 import { groupByFamily } from './matrix';
 
 function num(value: string | null): number | null {
@@ -152,28 +153,4 @@ export function renderSummary(
 
   const table = el('table', { class: 'pi-table pi-summary' }, [el('thead', {}, [head]), body]);
   return el('div', {}, [table]);
-}
-
-const STRATEGY_ORDER = ['index', 'align', 'undercut', 'cost-plus', 'follow', 'hold'];
-
-function profileRank(key: string): [number, number] {
-  const match = key.match(/^(.*?)(?:-(\d+))?$/);
-  const strategy = match?.[1] ?? key;
-  const order = STRATEGY_ORDER.indexOf(strategy);
-  return [order === -1 ? STRATEGY_ORDER.length : order, Number(match?.[2] ?? 0)];
-}
-
-/** Les profils disponibles, regroupés par famille de stratégie puis par paramètre croissant. */
-export function availableProfiles(recommendations: RecommendationRow[]): Array<{ key: string; label: string; isDefault: boolean }> {
-  const seen = new Map<string, { key: string; label: string; isDefault: boolean }>();
-  for (const r of recommendations) {
-    if (!seen.has(r.profile_key)) {
-      seen.set(r.profile_key, { key: r.profile_key, label: profileLabel(r.profile_key, r.profile.description), isDefault: r.is_default });
-    }
-  }
-  return [...seen.values()].sort((a, b) => {
-    const [sa, pa] = profileRank(a.key);
-    const [sb, pb] = profileRank(b.key);
-    return sa - sb || pa - pb;
-  });
 }

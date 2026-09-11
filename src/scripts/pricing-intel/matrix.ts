@@ -1,6 +1,7 @@
 import type { MatrixCell, Scope, Source, SummaryRow } from './api';
 import { AVAILABILITY_LABEL, QUARANTINE_LABEL, el, fmt, money } from './format';
 import { T } from './i18n';
+import { distinctiveNames, pick, priceLadder, rankLabel, rankOf, rankTone, usable } from './logic';
 
 export interface MatrixOptions {
   hideMarketplace: boolean;
@@ -58,51 +59,40 @@ function rowsOf(group: Group, scope: Scope, segmentLabels: Map<number, string>):
   return [...segments.values()];
 }
 
-/** Une offre compte dans le classement si elle est en stock et que son prix n'est pas en quarantaine. */
-function usable(cell: MatrixCell): boolean {
-  return cell.availability === 'IN_STOCK' && (cell.quarantine === 'none' || cell.quarantine === 'confirmed');
+interface PriceButton {
+  /** Suffixe de la classe : les états de l'offre, ou « pi-price-ours » pour notre prix. */
+  className: string;
+  title: string;
+  ariaLabel: string;
+  price: number | null;
+  marketplace?: boolean;
+  suspect?: boolean;
+  /** La ligne sous le montant : rang, disponibilité, date du relevé. */
+  note?: string;
+  noteTone?: string;
+  /** En mode segment, le produit du segment qui porte ce prix. */
+  which?: string;
+  onClick: () => void;
 }
 
-/**
- * Une seule cellule par ligne et enseigne. Parmi les annonces candidates (plusieurs produits en mode segment) :
- * les offres en stock d'abord, puis le relevé le plus récent, puis le moins cher.
- */
-function pick(cells: MatrixCell[]): MatrixCell | undefined {
-  const byRecencyThenPrice = (a: MatrixCell, b: MatrixCell) =>
-    b.observed_date.localeCompare(a.observed_date) || a.price - b.price;
-  const inStock = cells.filter(usable).sort(byRecencyThenPrice);
-  return inStock[0] ?? [...cells].sort(byRecencyThenPrice)[0];
-}
-
-/**
- * Ce qui distingue un produit des autres de sa ligne : son nom sans les mots communs à tous
- * (« GeForce RTX 5070 » sur une ligne de RTX 5070, « 32 Go DDR5 6000 MHz CL30 » sur une ligne de kits).
- */
-function distinctiveNames(products: SummaryRow[]): Map<number, string> {
-  const tokens = products.map((p) => p.product_name.split(/\s+/));
-  const common = new Set(tokens.length > 1
-    ? tokens[0].filter((t) => tokens.every((list) => list.includes(t)))
-    : []);
-  return new Map(products.map((p, i) => {
-    const kept = tokens[i].filter((t) => !common.has(t)).join(' ').trim() || p.brand;
-    return [p.product_id, kept.length > 30 ? `${kept.slice(0, 29).trimEnd()}…` : kept];
-  }));
-}
-
-/** Vert pour le moins cher, rouge pour le plus cher, dès qu'il y a au moins deux prix distincts. */
-function rankTone(rank: number | null, lastRank: number): string {
-  if (rank === null || lastRank < 2) return '';
-  if (rank === 1) return ' is-good';
-  if (rank === lastRank) return ' is-bad';
-  return '';
-}
-
-/** « #1 · moins cher », « #4 · plus cher », « #2 » : le rang se lit sans légende. */
-function rankLabel(rank: number, lastRank: number): string {
-  if (lastRank < 2) return `#${rank}`;
-  if (rank === 1) return T.matrix.cheapest;
-  if (rank === lastRank) return T.matrix.dearest(rank);
-  return `#${rank}`;
+/** Le bouton-prix, seul contenu cliquable d'une cellule : notre prix et ceux des enseignes le partagent. */
+function priceButton(spec: PriceButton): HTMLButtonElement {
+  const button = el('button', {
+    type: 'button',
+    class: `pi-price${spec.className}`,
+    title: spec.title,
+    'aria-label': spec.ariaLabel,
+  }, [
+    el('span', { class: 'pi-amount' }, [
+      money(spec.price),
+      spec.marketplace ? el('span', { class: 'pi-badge', text: 'MP' }) : null,
+      spec.suspect ? el('span', { class: 'pi-badge is-warn', text: '?' }) : null,
+    ]),
+    spec.note ? el('span', { class: `pi-sub${spec.noteTone ?? ''}`, text: spec.note }) : null,
+    spec.which ? el('span', { class: 'pi-sub pi-which', text: spec.which }) : null,
+  ]);
+  button.addEventListener('click', spec.onClick);
+  return button;
 }
 
 function priceCell(cell: MatrixCell, rank: number | null, lastRank: number, which: string | undefined, options: MatrixOptions): HTMLTableCellElement {
@@ -124,22 +114,18 @@ function priceCell(cell: MatrixCell, rank: number | null, lastRank: number, whic
     notes.push(T.matrix.observedOn(fmt.dayMonth(cell.observed_date)));
   }
 
-  const button = el('button', {
-    type: 'button',
-    class: `pi-price${inStock ? '' : ' is-oos'}${rank === 1 ? ' is-first' : ''}${cell.quarantine === 'suspect' || cell.quarantine === 'rejected' ? ' is-quarantined' : ''}`,
+  const button = priceButton({
+    className: `${inStock ? '' : ' is-oos'}${rank === 1 ? ' is-first' : ''}${cell.quarantine === 'suspect' || cell.quarantine === 'rejected' ? ' is-quarantined' : ''}`,
     title: tooltip,
-    'aria-label': `${money(cell.price)} ${T.matrix.at} ${cell.source_label}, ${availability}${rank !== null ? `, ${rank === 1 ? T.matrix.cheapestAria : T.matrix.nthAria(rank)}` : ''}. ${T.matrix.seeHistory}`,
-  }, [
-    el('span', { class: 'pi-amount' }, [
-      money(cell.price),
-      cell.is_marketplace ? el('span', { class: 'pi-badge', text: 'MP' }) : null,
-      cell.quarantine === 'suspect' ? el('span', { class: 'pi-badge is-warn', text: '?' }) : null,
-    ]),
-    notes.length ? el('span', { class: `pi-sub${rankTone(rank, lastRank)}`, text: notes.join(' · ') }) : null,
-    // En mode segment, dire quel produit du segment porte ce prix.
-    which ? el('span', { class: 'pi-sub pi-which', text: which }) : null,
-  ]);
-  button.addEventListener('click', () => options.onSelect(cell.product_id, cell.source_code));
+    ariaLabel: `${money(cell.price)} ${T.matrix.at} ${cell.source_label}, ${availability}${rank !== null ? `, ${rank === 1 ? T.matrix.cheapestAria : T.matrix.nthAria(rank)}` : ''}. ${T.matrix.seeHistory}`,
+    price: cell.price,
+    marketplace: cell.is_marketplace,
+    suspect: cell.quarantine === 'suspect',
+    note: notes.length ? notes.join(' · ') : undefined,
+    noteTone: rankTone(rank, lastRank),
+    which,
+    onClick: () => options.onSelect(cell.product_id, cell.source_code),
+  });
   return el('td', { class: 'pi-cell' }, [button]);
 }
 
@@ -196,9 +182,9 @@ export function renderMatrix(
 
       // Classement recalculé sur les cellules affichées, notre prix compris ; à prix égal, même rang.
       const marketPrices = shown.filter((c): c is MatrixCell => c !== undefined && usable(c)).map((c) => c.price);
-      const ladder = [...new Set(ourPrice !== null && marketPrices.length ? [...marketPrices, ourPrice] : marketPrices)]
-        .sort((a, b) => a - b);
-      const rankOf = (price: number) => ladder.indexOf(price) + 1;
+      const ladder = priceLadder(marketPrices, ourPrice);
+      // Notre prix n'est classé que s'il existe et qu'il y a un marché en face.
+      const ourRank = ourPrice !== null && marketPrices.length > 0 ? rankOf(ladder, ourPrice) : null;
 
       body.append(el('tr', { class: 'pi-row' }, [
         el('th', { scope: 'row', class: 'pi-col-product' }, [
@@ -208,24 +194,20 @@ export function renderMatrix(
         // Notre prix se clique comme les autres : l'historique montre ses décisions quotidiennes (ADR 0023).
         el('td', { class: 'pi-cell pi-ours' }, [
           ours
-            ? (() => {
-              const button = el('button', {
-                type: 'button', class: 'pi-price pi-price-ours', title: `${ours.product_name}\n${T.matrix.ourTooltip}`,
-                'aria-label': T.matrix.ourAria(money(ourPrice)),
-              }, [
-                el('span', { class: 'pi-amount', text: money(ourPrice) }),
-                ourPrice !== null && marketPrices.length
-                  ? el('span', { class: `pi-sub${rankTone(rankOf(ourPrice), ladder.length)}`, text: rankLabel(rankOf(ourPrice), ladder.length) })
-                  : null,
-                multi ? el('span', { class: 'pi-sub pi-which', text: names.get(ours.product_id) }) : null,
-              ]);
-              button.addEventListener('click', () => options.onSelect(ours.product_id, ''));
-              return button;
-            })()
+            ? priceButton({
+              className: ' pi-price-ours',
+              title: `${ours.product_name}\n${T.matrix.ourTooltip}`,
+              ariaLabel: T.matrix.ourAria(money(ourPrice)),
+              price: ourPrice,
+              note: ourRank !== null ? rankLabel(ourRank, ladder.length) : undefined,
+              noteTone: rankTone(ourRank, ladder.length),
+              which: multi ? names.get(ours.product_id) : undefined,
+              onClick: () => options.onSelect(ours.product_id, ''),
+            })
             : el('span', { class: 'pi-amount', text: '—' }),
         ]),
         ...shown.map((cell) => cell
-          ? priceCell(cell, usable(cell) ? rankOf(cell.price) : null, ladder.length, names.get(cell.product_id), options)
+          ? priceCell(cell, usable(cell) ? rankOf(ladder, cell.price) : null, ladder.length, names.get(cell.product_id), options)
           : el('td', { class: 'pi-cell pi-empty', title: T.matrix.noListing }, ['—'])),
       ]));
     }

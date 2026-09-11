@@ -1,6 +1,7 @@
 import type { HistoryPoint, OurPriceDecision } from './api';
-import { el, fmt, isoDate, money, moneyWhole, profileLabel } from './format';
+import { el, fmt, money, moneyWhole } from './format';
 import { T } from './i18n';
+import { eachDay, niceStep, ourPriceByDay, profileLabel, shiftDay, sortDecisions } from './logic';
 
 const SVG = 'http://www.w3.org/2000/svg';
 
@@ -17,26 +18,6 @@ function svg<K extends keyof SVGElementTagNameMap>(tag: K, attrs: Record<string,
   const node = document.createElementNS(SVG, tag);
   for (const [name, value] of Object.entries(attrs)) node.setAttribute(name, String(value));
   return node;
-}
-
-function eachDay(from: string, to: string): string[] {
-  const days: string[] = [];
-  const cursor = isoDate(from);
-  const end = isoDate(to).getTime();
-  while (cursor.getTime() <= end) {
-    days.push(cursor.toISOString().slice(0, 10));
-    cursor.setUTCDate(cursor.getUTCDate() + 1);
-  }
-  return days;
-}
-
-function niceStep(range: number): number {
-  const rough = range / 4;
-  const magnitude = 10 ** Math.floor(Math.log10(Math.max(rough, 0.01)));
-  for (const candidate of [1, 2, 2.5, 5, 10]) {
-    if (candidate * magnitude >= rough) return candidate * magnitude;
-  }
-  return 10 * magnitude;
 }
 
 /**
@@ -61,26 +42,10 @@ export function historyChart(allPoints: HistoryPoint[], series: Series[], option
   return wrapper;
 }
 
-function shiftDay(date: string, delta: number): string {
-  const d = isoDate(date);
-  d.setUTCDate(d.getUTCDate() + delta);
-  return d.toISOString().slice(0, 10);
-}
-
 function drawChart(allPoints: HistoryPoint[], series: Series[], options: ChartOptions, wrapper: HTMLElement): SVGSVGElement {
   const { highlight, ourPrice = null, windowDays } = options;
-  const decisions = [...(options.ourPriceHistory ?? [])].sort((a, b) => a.decision_date.localeCompare(b.decision_date));
+  const decisions = sortDecisions(options.ourPriceHistory ?? []);
 
-  /** Notre prix un jour donné : la dernière décision à cette date, ou l'ancien prix de la première avant elle. */
-  const ourPriceOn = (day: string): number | null => {
-    if (decisions.length === 0) return ourPrice;
-    let price: number | null = decisions[0].old_price ?? decisions[0].new_price;
-    for (const d of decisions) {
-      if (d.decision_date > day) break;
-      if (d.new_price !== null) price = d.new_price;
-    }
-    return price;
-  };
   const width = 680;
   const height = 280;
   const margin = { top: 16, right: 16, bottom: 34, left: 64 };
@@ -103,6 +68,9 @@ function drawChart(allPoints: HistoryPoint[], series: Series[], options: ChartOp
   const end = dates[dates.length - 1];
   const start = windowDays ? shiftDay(end, -(windowDays - 1)) : dates[0] < shiftDay(end, -6) ? dates[0] : shiftDay(end, -6);
   const days = eachDay(start, end);
+  // Notre prix jour par jour, calculé en une passe plutôt qu'en reparcourant les décisions à chaque lecture.
+  const oursByDay = ourPriceByDay(decisions, days, ourPrice);
+  const ourPriceOn = (day: string): number | null => oursByDay.get(day) ?? null;
   const points = allPoints.filter((p) => p.observed_date >= start);
 
   if (points.length === 0) {

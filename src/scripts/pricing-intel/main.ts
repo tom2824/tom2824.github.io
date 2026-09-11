@@ -1,11 +1,12 @@
 import {
-  api, REPO_URL, type Family, type MatrixCell, type ProductRow, type RecommendationRow, type Scope, type Source, type SummaryRow,
+  api, REPO_URL, type MatrixCell, type RecommendationRow, type Scope, type Source, type SummaryRow,
 } from './api';
 import { historyChart, SERIES_COLORS, type Series } from './chart';
-import { AVAILABILITY_LABEL, clear, el, fmt, money, profileLabel } from './format';
+import { AVAILABILITY_LABEL, clear, el, fmt, money } from './format';
 import { T } from './i18n';
+import { availableProfiles, profileLabel, segmentLabels } from './logic';
 import { renderMatrix } from './matrix';
-import { availableProfiles, renderSummary } from './summary';
+import { renderSummary } from './summary';
 
 function byId<E extends HTMLElement>(id: string): E {
   const node = document.getElementById(id);
@@ -37,29 +38,8 @@ interface Data {
   recommendations: RecommendationRow[];
   /** Libellé lisible du segment de chaque produit : les caractéristiques d'équivalence de sa famille. */
   segmentLabels: Map<number, string>;
-}
-
-/** « RTX 5070 · 12 Go », « 850 W · 80+ Gold · modulaire » : la clé d'équivalence, mais pour un humain. */
-function segmentLabels(families: Family[], products: ProductRow[]): Map<number, string> {
-  const schemas = new Map(families.map((f) => [f.code, f.attribute_schema]));
-  const labels = new Map<number, string>();
-  for (const p of products) {
-    const parts: string[] = [];
-    for (const attribute of schemas.get(p.family_code) ?? []) {
-      if (!attribute.roles.includes('equivalence')) continue;
-      const value = p.attributes[attribute.code];
-      if (value === undefined || value === null || value === '') continue;
-      if (attribute.type === 'boolean') {
-        if (value === true) parts.push(attribute.label);
-      } else if (attribute.type === 'number') {
-        parts.push(attribute.unit ? `${value} ${attribute.unit}` : `${attribute.label} ${value}`);
-      } else {
-        parts.push(String(value));
-      }
-    }
-    if (parts.length) labels.set(p.id, parts.join(' · '));
-  }
-  return labels;
+  /** Date du relevé le plus récent de la matrice, calculée une fois au chargement. */
+  latestDate: string | undefined;
 }
 
 let data: Data | undefined;
@@ -83,19 +63,19 @@ showView(location.hash === '#synthese' ? 'summary' : location.hash === '#fonctio
 // ---------------------------------------------------------------------------------------------------------
 // Rendu des vues
 // ---------------------------------------------------------------------------------------------------------
-function currentScope(): Scope {
-  const checked = document.querySelector<HTMLInputElement>('input[name="pi-scope"]:checked');
+/** L'étendue de marché cochée dans un groupe de boutons radio (la matrice et la synthèse ont chacun le sien). */
+function scopeOf(radioName: string): Scope {
+  const checked = document.querySelector<HTMLInputElement>(`input[name="${radioName}"]:checked`);
   return checked?.value === 'segment' ? 'segment' : 'strict';
 }
 
 function drawMatrix() {
   if (!data) return;
   clear(matrixEl);
-  const scope = document.querySelector<HTMLInputElement>('input[name="pi-matrix-scope"]:checked')?.value === 'segment' ? 'segment' : 'strict';
   matrixEl.append(renderMatrix(data.products, data.cells, data.sources, {
     hideMarketplace: hideMarketplace.checked,
-    latestDate: data.cells.map((c) => c.observed_date).sort().at(-1),
-    scope,
+    latestDate: data.latestDate,
+    scope: scopeOf('pi-matrix-scope'),
     segmentLabels: data.segmentLabels,
     onSelect: openDetail,
   }));
@@ -106,7 +86,7 @@ document.querySelectorAll<HTMLInputElement>('input[name="pi-matrix-scope"]').for
 function drawSummary() {
   if (!data) return;
   clear(summaryEl);
-  summaryEl.append(renderSummary(data.products, data.recommendations, currentScope(), profileSelect.value, data.segmentLabels));
+  summaryEl.append(renderSummary(data.products, data.recommendations, scopeOf('pi-scope'), profileSelect.value, data.segmentLabels));
   fitTable(summaryEl);
 }
 
@@ -310,7 +290,14 @@ async function load() {
   const productRows = productRowsR.status === 'fulfilled' ? productRowsR.value : [];
 
   try {
-    data = { sources, products, cells, recommendations, segmentLabels: segmentLabels(families, productRows) };
+    data = {
+      sources,
+      products,
+      cells,
+      recommendations,
+      segmentLabels: segmentLabels(families, productRows),
+      latestDate: cells.map((c) => c.observed_date).sort().at(-1),
+    };
 
     clear(statusEl);
     const run = runsR.status === 'fulfilled' ? runsR.value[0] : undefined;
@@ -334,10 +321,10 @@ async function load() {
     if (marketplaceLabel) marketplaceLabel.hidden = !cells.some((c) => c.is_marketplace);
 
     const profiles = availableProfiles(recommendations);
+    const reference = profiles.find((p) => p.isDefault);
     for (const profile of profiles) {
       profileSelect.append(el('option', { value: profile.key, text: profile.isDefault ? `${profile.label} ${T.profile.reference}` : profile.label }));
     }
-    const reference = profiles.find((p) => p.isDefault);
     if (reference) profileSelect.value = reference.key;
 
     drawMatrix();
