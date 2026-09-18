@@ -131,15 +131,21 @@ function drawSummary() {
 
 // Un tableau plus large que son cadre défile horizontalement (au prix de l'en-tête collant) ;
 // sinon le cadre reste clippé, ce qui garde l'en-tête collant au défilement vertical de la page.
+const tableObservers = new Map<HTMLElement, ResizeObserver>();
 function fitTable(wrap: HTMLElement) {
   const table = wrap.querySelector('table');
   wrap.classList.toggle('pi-scroll', table !== null && table.scrollWidth > wrap.clientWidth + 1);
+  // Les polices web ne se chargent qu'une fois le texte rendu, et élargissent le tableau après coup :
+  // on remesure à chaque changement de taille du tableau, pas seulement au rendu.
+  tableObservers.get(wrap)?.disconnect();
+  if (table !== null && typeof ResizeObserver !== 'undefined') {
+    const observer = new ResizeObserver(() => {
+      wrap.classList.toggle('pi-scroll', table.scrollWidth > wrap.clientWidth + 1);
+    });
+    observer.observe(table);
+    tableObservers.set(wrap, observer);
+  }
 }
-// Les polices web arrivent après le premier rendu et changent les largeurs : on remesure.
-document.fonts?.ready.then(() => {
-  fitTable(matrixEl);
-  fitTable(summaryEl);
-});
 let fitPending = false;
 window.addEventListener('resize', () => {
   if (fitPending) return;

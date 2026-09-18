@@ -859,6 +859,13 @@
     white-space: nowrap;
 }
 
+/* Sept colonnes de prix : marges horizontales réduites pour tenir dans le cadre de 1200px sans défilement. */
+.pi-matrix thead th,
+.pi-matrix tbody td {
+    padding-left: 0.65rem;
+    padding-right: 0.65rem;
+}
+
 /* Mode segment : sept colonnes de prix avec le nom du produit sous chacune, cellules resserrées pour tenir en 1200px. */
 .pi-matrix.is-segment thead th,
 .pi-matrix.is-segment tbody td,
