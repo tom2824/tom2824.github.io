@@ -67,9 +67,11 @@ interface PriceButton {
   price: number | null;
   marketplace?: boolean;
   suspect?: boolean;
-  /** La ligne sous le montant : rang, disponibilité, date du relevé. */
+  /** La ligne sous le montant : rang et disponibilité. */
   note?: string;
   noteTone?: string;
+  /** Date d'un relevé plus ancien que le reste de la matrice, sur sa propre ligne pour ne pas élargir la colonne. */
+  stale?: string;
   /** En mode segment, le produit du segment qui porte ce prix. */
   which?: string;
   onClick: () => void;
@@ -89,6 +91,7 @@ function priceButton(spec: PriceButton): HTMLButtonElement {
       spec.suspect ? el('span', { class: 'pi-badge is-warn', text: '?' }) : null,
     ]),
     spec.note ? el('span', { class: `pi-sub${spec.noteTone ?? ''}`, text: spec.note }) : null,
+    spec.stale ? el('span', { class: 'pi-sub', text: spec.stale }) : null,
     spec.which ? el('span', { class: 'pi-sub pi-which', text: spec.which }) : null,
   ]);
   button.addEventListener('click', spec.onClick);
@@ -110,9 +113,9 @@ function priceCell(cell: MatrixCell, rank: number | null, lastRank: number, whic
   const notes: string[] = [];
   if (rank !== null) notes.push(rankLabel(rank, lastRank));
   if (!inStock) notes.push(availability.toLowerCase());
-  if (options.latestDate !== undefined && cell.observed_date < options.latestDate) {
-    notes.push(T.matrix.observedOn(fmt.dayMonth(cell.observed_date)));
-  }
+  const stale = options.latestDate !== undefined && cell.observed_date < options.latestDate
+    ? T.matrix.observedOn(fmt.dayMonth(cell.observed_date))
+    : undefined;
 
   const button = priceButton({
     className: `${inStock ? '' : ' is-oos'}${rank === 1 ? ' is-first' : ''}${cell.quarantine === 'suspect' || cell.quarantine === 'rejected' ? ' is-quarantined' : ''}`,
@@ -123,6 +126,7 @@ function priceCell(cell: MatrixCell, rank: number | null, lastRank: number, whic
     suspect: cell.quarantine === 'suspect',
     note: notes.length ? notes.join(' · ') : undefined,
     noteTone: rankTone(rank, lastRank),
+    stale,
     which,
     onClick: () => options.onSelect(cell.product_id, cell.source_code),
   });

@@ -135,6 +135,11 @@ function fitTable(wrap: HTMLElement) {
   const table = wrap.querySelector('table');
   wrap.classList.toggle('pi-scroll', table !== null && table.scrollWidth > wrap.clientWidth + 1);
 }
+// Les polices web arrivent après le premier rendu et changent les largeurs : on remesure.
+document.fonts?.ready.then(() => {
+  fitTable(matrixEl);
+  fitTable(summaryEl);
+});
 let fitPending = false;
 window.addEventListener('resize', () => {
   if (fitPending) return;
