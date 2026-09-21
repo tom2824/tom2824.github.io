@@ -56,7 +56,7 @@
   [
     #text(size: 24pt, weight: "bold", tracking: 0.02em)[Tom NGUYEN]
     #v(-6pt)
-    #text(size: 12pt, fill: accent, weight: "semibold")[Junior developer · Computer science graduate (BUT Informatique)]
+    #text(size: 12pt, fill: accent, weight: "semibold")[MIAGE master's student · Computer science graduate (BUT Informatique)]
     #v(-3pt)
     #text(fill: muted)[22 years old · Ronchin, Lille metropolitan area, France]
     #v(2pt)
@@ -73,8 +73,8 @@
 
 // ================= PROFILE =================
 #section("Profile")
-Computer science graduate (BUT Informatique, a three-year degree from the IUT de Lille, 2026) after one year as a work-study developer in the Pricing team at Norauto International: web scraping pipelines in C\#, data processing on SQL Server and Snowflake, collection automation.
-Looking for a first *back-end, full-stack or data developer* position in the Lille area (France), permanent or fixed-term, to keep learning within a team and gain experience on real projects. *Available immediately.*
+*MIAGE master's student* at the University of Lille (2026 – 2028), computer science graduate (BUT Informatique, a three-year degree) after one year as a work-study developer in the Pricing team at Norauto International: web scraping pipelines in C\#, data processing on SQL Server and Snowflake, collection automation.
+Focused on *back end, data and automation*, I also build Pricing Intel, a price intelligence tool in Java that runs in production every day.
 
 // ================= EXPERIENCE =================
 #section("Professional experience")
@@ -126,9 +126,8 @@ Looking for a first *back-end, full-stack or data developer* position in the Lil
 // ================= EDUCATION =================
 #section("Education")
 
-#entry("BUT Informatique, application development track (3-year computer science degree)", "IUT de Lille – Université de Lille", "2023 – 2026")[
-  Software design, development and maintenance. Third year as a work-study developer at Norauto International.
-]
+#entry("MIAGE master's degree (computer science applied to business management), in progress", "University of Lille", "2026 – 2028")[]
+#entry("BUT Informatique (3-year computer science degree), application development, final year work-study", "IUT de Lille", "2023 – 2026")[]
 #entry("BUT GEII (electrical engineering), first year completed, then switch to computer science", "IUT de Lille", "2022 – 2023")[]
 #entry("French Baccalauréat with highest honours, computer science and mathematics majors, European section in English", "Lycée Faidherbe, Lille", "2019 – 2022")[]
 

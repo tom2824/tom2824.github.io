@@ -7,6 +7,10 @@ sous les yeux, regarde le nom du fichier ou le pied de page.
 
 Nouvelle version : `npm run cv:bump "ce qui a changé"` (puis commit).
 
+## v1.4 — 2026-09-21
+- Master MIAGE (Université de Lille, 2026 – 2028) ajouté à la formation
+- profil et titre passés de la recherche d'un premier poste au statut d'étudiant en master
+
 ## v1.3 — 2026-09-09
 - Version anglaise du CV (CV_Tom_NGUYEN_EN), même numéro de version que la française
 - Projet Pricing Intel ajouté aux projets, application de messagerie retirée pour tenir sur une page

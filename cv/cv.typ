@@ -56,7 +56,7 @@
   [
     #text(size: 24pt, weight: "bold", tracking: 0.02em)[Tom NGUYEN]
     #v(-6pt)
-    #text(size: 12pt, fill: accent, weight: "semibold")[Développeur junior · Diplômé BUT Informatique]
+    #text(size: 12pt, fill: accent, weight: "semibold")[Étudiant en master MIAGE · Diplômé BUT Informatique]
     #v(-3pt)
     #text(fill: muted)[22 ans · Ronchin, métropole lilloise]
     #v(2pt)
@@ -73,8 +73,8 @@
 
 // ================= PROFIL =================
 #section("Profil")
-Diplômé du BUT Informatique (IUT de Lille, 2026) après un an d'alternance dans l'équipe Pricing de Norauto International : pipelines de web scraping en C\#, traitement de données sur SQL Server et Snowflake, automatisation de la collecte.
-Je recherche un premier poste de *développeur back-end, full-stack ou data* sur la métropole lilloise, en CDI ou CDD, pour continuer à apprendre au sein d'une équipe et gagner en expérience sur des projets concrets. *Disponible immédiatement.*
+Étudiant en *master MIAGE* à l'Université de Lille (2026 – 2028), diplômé du BUT Informatique après un an d'alternance dans l'équipe Pricing de Norauto International : pipelines de web scraping en C\#, traitement de données sur SQL Server et Snowflake, automatisation de la collecte.
+Orienté *back-end, données et automatisation*, je développe en parallèle Pricing Intel, un outil de veille tarifaire en Java qui tourne chaque jour en production.
 
 // ================= EXPÉRIENCE =================
 #section("Expérience professionnelle")
@@ -127,9 +127,8 @@ Je recherche un premier poste de *développeur back-end, full-stack ou data* sur
 // ================= FORMATION =================
 #section("Formation")
 
-#entry("BUT Informatique, parcours réalisation d'applications", "IUT de Lille – Université de Lille", "2023 – 2026")[
-  Conception, développement et maintenance de logiciels. Troisième année en alternance chez Norauto International.
-]
+#entry("Master MIAGE, informatique appliquée à la gestion, en cours", "Université de Lille", "2026 – 2028")[]
+#entry("BUT Informatique, parcours réalisation d'applications, 3e année en alternance", "IUT de Lille", "2023 – 2026")[]
 #entry("BUT GEII, première année validée puis réorientation vers l'informatique", "IUT de Lille", "2022 – 2023")[]
 #entry("Bac général, mention Très Bien, spécialités NSI et Maths, section euro anglais", "Lycée Faidherbe, Lille", "2019 – 2022")[]
 
