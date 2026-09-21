@@ -6,7 +6,7 @@ export const fr = {
     cvTitle: 'Tom NGUYEN — CV',
     pricingTitle: 'Tom NGUYEN — Pricing Intel',
     description:
-      "Tom Nguyen, développeur junior diplômé du BUT Informatique (IUT de Lille), un an d'alternance chez Norauto International. En recherche d'un premier poste de développeur back-end, full-stack ou data sur Lille.",
+      "Tom Nguyen, étudiant en master MIAGE à l'Université de Lille, diplômé du BUT Informatique après un an d'alternance dans l'équipe Pricing de Norauto International. Développement back-end, données et automatisation.",
   },
   nav: {
     about: 'À propos',
@@ -24,10 +24,9 @@ export const fr = {
   },
   hero: {
     greeting: "Salut ! Moi c'est",
-    subtitle: 'ans · Développeur junior · Diplômé BUT Informatique',
-    status: 'Disponible immédiatement',
+    subtitle: 'ans · Étudiant en master MIAGE · Diplômé BUT Informatique',
     description:
-      "Diplômé du BUT Informatique et fort d'un an d'alternance dans l'équipe Pricing de Norauto International, je cherche aujourd'hui un premier poste de développeur pour continuer à apprendre au contact d'une équipe et gagner en expérience sur des projets concrets. Attiré par la data et l'automatisation, je suis à l'aise aussi bien sur le back-end (C#, Java, SQL) que sur le traitement de données (SQL Server, Snowflake).",
+      "Diplômé du BUT Informatique après un an d'alternance dans l'équipe Pricing de Norauto International, je poursuis en master MIAGE à l'Université de Lille pour relier ce que je sais construire aux systèmes d'information et au métier qu'ils servent. Attiré par la data et l'automatisation, je suis à l'aise aussi bien sur le back-end (C#, Java, SQL) que sur le traitement de données (SQL Server, Snowflake).",
     projects: 'Voir mes projets',
     contact: 'Me contacter',
     cv: 'Voir mon CV',
@@ -36,14 +35,7 @@ export const fr = {
   about: {
     title: 'À propos',
     text1:
-      "Diplômé du BUT Informatique de l'IUT de Lille en 2026, j'ai effectué ma dernière année en alternance au sein de l'équipe Pricing de Norauto International, où j'ai travaillé sur la collecte et le traitement de données à grande échelle. Aujourd'hui, je souhaite rejoindre une entreprise en tant que développeur pour me former au contact de professionnels expérimentés, monter en compétences sur des projets réels et construire une vraie expérience terrain. Je suis convaincu que l'informatique est un domaine où l'on ne cesse jamais d'apprendre — et c'est ce qui me motive.",
-    seekingTitle: 'Ce que je recherche',
-    seeking: [
-      { label: 'Poste', value: 'Développeur junior — back-end, full-stack ou data' },
-      { label: 'Contrat', value: 'CDI ou CDD' },
-      { label: 'Lieu', value: 'Lille et sa métropole' },
-      { label: 'Disponibilité', value: 'Immédiate' },
-    ],
+      "Diplômé du BUT Informatique de l'IUT de Lille en 2026, j'ai effectué ma dernière année en alternance au sein de l'équipe Pricing de Norauto International, où j'ai travaillé sur la collecte et le traitement de données à grande échelle. J'ai choisi de poursuivre en master MIAGE à l'Université de Lille (2026 – 2028), à la croisée de l'informatique et de la gestion, pour approfondir l'ingénierie logicielle et les systèmes d'information. En parallèle, je continue à construire : Pricing Intel, mon outil de veille tarifaire, tourne chaque jour en production. Je suis convaincu que l'informatique est un domaine où l'on ne cesse jamais d'apprendre — et c'est ce qui me motive.",
     text2:
       "En dehors du code, la musculation m'a enseigné la discipline et la régularité, les jeux vidéo nourrissent ma créativité et mon esprit compétitif, et la philosophie m'apporte du recul et nourrit mon esprit critique.",
     interestsTitle: "Centres d'intérêt",
@@ -215,6 +207,12 @@ export const fr = {
   education: {
     title: 'Formation',
     entries: [
+      {
+        badge: 'En cours',
+        title: 'Master MIAGE — Université de Lille',
+        date: '2026 — 2028',
+        text: "Méthodes informatiques appliquées à la gestion des entreprises : ingénierie logicielle, systèmes d'information, données et conduite de projet. Formation initiale en deux ans.",
+      },
       {
         badge: 'Diplômé 2026',
         title: 'BUT Informatique — IUT de Lille',

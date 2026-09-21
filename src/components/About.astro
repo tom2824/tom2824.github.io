@@ -15,12 +15,6 @@ const dict = t(lang).about;
     <div class="about-grid">
         <div class="about-content reveal">
             <p class="about-text">{dict.text1}</p>
-            <div class="about-seeking">
-                <h3>{dict.seekingTitle}</h3>
-                <ul>
-                    {dict.seeking.map((item) => <li><strong>{item.label}</strong>{item.value}</li>)}
-                </ul>
-            </div>
             <p class="about-text">{dict.text2}</p>
             <h3 class="about-interests-title">{dict.interestsTitle}</h3>
             <div class="interest-tags">

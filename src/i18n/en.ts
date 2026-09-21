@@ -8,7 +8,7 @@ export const en: Dictionary = {
     cvTitle: 'Tom NGUYEN — Resume',
     pricingTitle: 'Tom NGUYEN — Pricing Intel',
     description:
-      'Tom Nguyen, junior developer with a French computer science degree (BUT Informatique, IUT de Lille) and one year as a work-study developer at Norauto International. Looking for a first back-end, full-stack or data developer position in Lille, France.',
+      'Tom Nguyen, MIAGE master\'s student at the University of Lille, computer science graduate (BUT Informatique) after one year as a work-study developer in the Pricing team at Norauto International. Back-end development, data and automation.',
   },
   nav: {
     about: 'About',
@@ -26,10 +26,9 @@ export const en: Dictionary = {
   },
   hero: {
     greeting: "Hi! I'm",
-    subtitle: 'years old · Junior developer · Computer science graduate (BUT)',
-    status: 'Available now',
+    subtitle: 'years old · MIAGE master\'s student · Computer science graduate (BUT)',
     description:
-      'A computer science graduate (BUT Informatique) with one year as a work-study developer in the Pricing team at Norauto International, I am looking for a first developer position where I can keep learning alongside a team and build experience on real projects. Drawn to data and automation, I am equally at ease on the back end (C#, Java, SQL) and in data processing (SQL Server, Snowflake).',
+      'A computer science graduate (BUT Informatique) with one year as a work-study developer in the Pricing team at Norauto International, I am now studying for a MIAGE master\'s degree at the University of Lille, to connect what I know how to build with the information systems and the business they serve. Drawn to data and automation, I am equally at ease on the back end (C#, Java, SQL) and in data processing (SQL Server, Snowflake).',
     projects: 'See my projects',
     contact: 'Get in touch',
     cv: 'See my resume',
@@ -38,14 +37,7 @@ export const en: Dictionary = {
   about: {
     title: 'About',
     text1:
-      'I graduated in 2026 with a BUT Informatique, a three-year computer science degree from the IUT de Lille, and spent my final year as a work-study developer in the Pricing team at Norauto International, working on large-scale data collection and processing. I now want to join a company as a developer to learn from experienced professionals, grow my skills on real projects and build genuine hands-on experience. I am convinced that software is a field where you never stop learning, and that is exactly what motivates me.',
-    seekingTitle: 'What I am looking for',
-    seeking: [
-      { label: 'Role', value: 'Junior developer — back-end, full-stack or data' },
-      { label: 'Contract', value: 'Permanent or fixed-term' },
-      { label: 'Location', value: 'Lille and its metropolitan area, France' },
-      { label: 'Availability', value: 'Immediate' },
-    ],
+      'I graduated in 2026 with a BUT Informatique, a three-year computer science degree from the IUT de Lille, and spent my final year as a work-study developer in the Pricing team at Norauto International, working on large-scale data collection and processing. I chose to continue with a MIAGE master\'s degree at the University of Lille (2026 – 2028), a two-year programme at the crossroads of computer science and management, to go deeper into software engineering and information systems. Alongside my studies I keep building: Pricing Intel, my price intelligence tool, runs in production every day. I am convinced that software is a field where you never stop learning, and that is exactly what motivates me.',
     text2:
       'Outside of code, weight training taught me discipline and consistency, video games feed my creativity and competitive spirit, and philosophy gives me perspective and sharpens my critical thinking.',
     interestsTitle: 'Interests',
@@ -217,6 +209,12 @@ export const en: Dictionary = {
   education: {
     title: 'Education',
     entries: [
+      {
+        badge: 'In progress',
+        title: 'MIAGE master\'s degree — University of Lille',
+        date: '2026 — 2028',
+        text: 'Computer science applied to business management: software engineering, information systems, data and project management. Two-year full-time programme.',
+      },
       {
         badge: 'Graduated 2026',
         title: 'BUT Informatique (three-year computer science degree) — IUT de Lille',
